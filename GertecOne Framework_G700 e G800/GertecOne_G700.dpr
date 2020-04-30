@@ -93,8 +93,7 @@ uses
   uNFCId in 'uNFCId.pas' {frmNFCid},
   G700NFC in 'Imports NFC700\G700NFC.pas',
   JavaInterfaces in 'Imports NFC700\JavaInterfaces.pas',
-  ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG},
-  QrCode in 'QrCode.pas' {Form1};
+  ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG};
 
 {$R *.res}
 
@@ -105,7 +104,6 @@ begin
   Application.CreateForm(TfrmImpressao, frmImpressao);
   Application.CreateForm(TfrmNFCid, frmNFCid);
   Application.CreateForm(TfrmImpressaoG, frmImpressaoG);
-  Application.CreateForm(TForm1, Form1);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.

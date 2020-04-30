@@ -72,13 +72,14 @@ type
     cmdImpressaoG: TButton;
     cmdBarCode: TButton;
 
-    procedure FormCreate(Sender: TObject);
+
     procedure cmdImpressaoGClick(Sender: TObject);
     procedure cmdBarCodeClick(Sender: TObject);
-    procedure cmdTextoClick(Sender: TObject);
+
     procedure cmdImageClick(Sender: TObject);
-    procedure Label1Click(Sender: TObject);
-    procedure lbTituloClick(Sender: TObject);
+    procedure cmdTextoClick(Sender: TObject);
+
+
   private
     { Private declarations }
   public
@@ -233,4 +234,17 @@ except
 end;
 end;
 
+procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);
+var
+TxtInput: String;
+begin
+  TxtInput := Edit1.Text;
+  //=========
+  GertecPrinter.FlagBold := True;
+  GertecPrinter.textSize := 30;
+  GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+  GertecPrinter.printBlankLine(150);
+  GertecPrinter.printOutput;
+end;
 
+end.

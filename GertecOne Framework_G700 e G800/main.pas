@@ -31,7 +31,7 @@ uses
 
   //Units do projeto
   BarCode,
-  Impressao,
+  //Impressao,
   ImpressaoG,
   {$IFDEF __G800__}
   uNFC
@@ -57,7 +57,7 @@ uses
   ZXing.BarcodeFormat,
   ZXing.ReadResult,
   ZXing.ScanManager,
-  FMX.Barcode.DROID, FMX.Objects, FMX.Edit, IPPeerClient, IPPeerServer
+  FMX.Barcode.DROID, FMX.Edit, IPPeerClient, IPPeerServer
 
 
   {$ENDIF}
@@ -210,51 +210,7 @@ begin
   scanBitmap.Assign(imgCamera.Bitmap);
   ReadResult := nil;
 
-  TTask.Run(
-    procedure
-    begin
-      try
-        fScanInProgress := True;
-        try
-          ReadResult := fScanManager.Scan(scanBitmap);
-        except
-          on E: Exception do
-          begin
-            TThread.Synchronize(nil,
-              procedure
-              begin
-                lblResultadoLeitura.Text := E.Message;
-              end);
-
-            exit;
-          end;
-        end;
-
-        TThread.Synchronize(nil,
-          procedure
-          var
-            Codigo:string;
-          begin
-            if (ReadResult <> nil) then
-            begin
-            //So registra mesmo codigo depois de 3 segundos
-              if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
-                UltimoCodigo := Codigo;
-                UltimaHora:=Time;
-                lblResultadoLeitura.Text := '('+inttostr(iCount)+') '+ReadResult.text;
-                inc(iCount);
-                Toast('Leitura com sucesso.');
-                //FinalizaLeitura;
-              end;
-            end;
-          end);
-      finally
-        ReadResult.Free;
-        scanBitmap.Free;
-        fScanInProgress := False;
-      end;
-
-    end);
+  
 end;
 
 

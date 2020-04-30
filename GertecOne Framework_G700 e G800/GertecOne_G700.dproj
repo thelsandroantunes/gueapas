@@ -300,10 +300,6 @@
             <Form>frmImpressaoG</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="QrCode.pas">
-            <Form>Form1</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <JavaReference Include="libs\payment-1.14.13.190425.jar">
             <Disabled/>
         </JavaReference>
