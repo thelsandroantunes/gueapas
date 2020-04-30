@@ -1,28 +1,16 @@
-unit ImpressaoG;
+unit Impressao;
 
 interface
 
 uses
   System.SysUtils,
-  System.Types,
   System.UITypes,
   System.Classes,
   System.Variants,
-
-  FMX.Types,
-  FMX.Controls,
-  FMX.Forms,
-  FMX.Graphics,
-  FMX.Dialogs,
-  FMX.StdCtrls,
-  FMX.Edit,
-  FMX.Controls.Presentation,
-  FMX.Layouts,
-  FMX.TreeView,
-  FMX.ListView.Types,
-  FMX.ListView.Appearances,
-  FMX.ListView.Adapters.Base,
-  FMX.ListView,
+  System.IOUtils,
+  System.Character,
+  System.Generics.Collections,
+  System.UIConsts,
 
   GEDIPrinter,    //Esta unit inicializa o Modulo de impressao para G800 e G700
   {$IFDEF __G800__}
@@ -31,54 +19,26 @@ uses
   G700Interface,
   {$ENDIF}
 
-  Data.Bind.GenData,
-  Data.Bind.EngExt,
-  Fmx.Bind.DBEngExt,
-  System.Rtti,
-  System.Bindings.Outputs,
-  Fmx.Bind.Editors,
-  Data.Bind.Components,
-  Data.Bind.ObjectScope;
+  FMX.Dialogs, FMX.Media,
+  FMX.Platform, FMX.Objects, FMX.Layouts,
+
+  FMX.Forms,
+  FMX.Edit,
+  FMX.Types,
+  FMX.Controls,
+  FMX.StdCtrls,
+
+  Androidapi.Helpers,
+  AndroidAPI.JNIBridge,
+  FMX.Controls.Presentation;
 
 type
-  TfrmImpressaoG = class(TForm)
-    lbTitulo: TLabel;
-    Button4: TButton;
-    BindingsList1: TBindingsList;
-    LinkFillControlToField1: TLinkFillControlToField;
-    PrototypeBindSource1: TPrototypeBindSource;
+  TfrmImpressao = class(TForm)
+    cmdTesteImpressao: TButton;
     ImageControl1: TImageControl;
-    ListView1: TListView;
-    Button5: TButton;
-    Button3: TButton;
-    TreeView5: TTreeView;
-    TreeView4: TTreeView;
-    TreeView3: TTreeView;
-    Label4: TLabel;
-    Label3: TLabel;
-    Label1: TLabel;
-    cmdImage: TButton;
-    cmdTexto: TButton;
-    Size: TLabel;
-    TreeView1: TTreeView;
-    Font: TLabel;
-    RdDir: TRadioButton;
-    RdCentro: TRadioButton;
-    RadioButton1: TRadioButton;
-    lbTitulo2: TLabel;
-    lblMensagem: TLabel;
     Edit1: TEdit;
-    STATUS: TButton;
-    cmdImpressaoG: TButton;
-    cmdBarCode: TButton;
-
+    procedure cmdTesteImpressaoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure cmdImpressaoGClick(Sender: TObject);
-    procedure cmdBarCodeClick(Sender: TObject);
-    procedure cmdTextoClick(Sender: TObject);
-    procedure cmdImageClick(Sender: TObject);
-    procedure Label1Click(Sender: TObject);
-    procedure lbTituloClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,13 +46,15 @@ type
   end;
 
 var
-  frmImpressaoG: TfrmImpressaoG;
+  frmImpressao: TfrmImpressao;
   iCount:integer;
 
-  const N_COLUNAS=32;
+const N_COLUNAS=32;
+
 implementation
 
 {$R *.fmx}
+
 //==========================================
 function CentralizaTraco(strTitulo:string;NColunas:integer):string;
 var
@@ -112,48 +74,9 @@ begin
       strAux:=strAux+'=';
   end;
   result:=strAux;
-
 end;
-
-
 //==========================================
-procedure TfrmImpressaoG.cmdBarCodeClick(Sender: TObject);
-var
-qrCode2:string;
-i:integer;
-begin
-
-  //========= QRCODE
-  GertecPrinter.printBlankLine(20);
-  GertecPrinter.printString(CentralizaTraco('[Codigo QRCode]',N_COLUNAS));
-  GertecPrinter.printBlankLine(20);
-  qrCode2:='';
-  for i := 1 to 5 do qrCode2:=qrCode2+'12345678901234567890';
-  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.QR_CODE,240,240,qrCode2);
-  GertecPrinter.printBlankLine(150);
-  GertecPrinter.printOutput;
-end;
-
-
-//==========================================
-procedure TfrmImpressaoG.cmdImageClick(Sender: TObject);
-begin
-//========= IMAGE
-  try
-  GertecPrinter.printString(CentralizaTraco('[Iniciando Impressao Imagem]',N_COLUNAS));
-  GertecPrinter.printOutput;
-  GertecPrinter.printImage( ImageControl1.Bitmap);
-  GertecPrinter.printBlankLine(50);
-  GertecPrinter.printString(CentralizaTraco('[Fim Impressao Imagem]',N_COLUNAS));
-  finally
-
-  end;
-
-end;
-
-
-//==========================================
-procedure TfrmImpressaoG.cmdImpressaoGClick(Sender: TObject);
+procedure TfrmImpressao.cmdTesteImpressaoClick(Sender: TObject);
 var
 i:integer;
 qrCode:string;
@@ -231,6 +154,19 @@ except
 
   end;
 end;
+
+end;
+//==========================================
+procedure TfrmImpressao.FormCreate(Sender: TObject);
+
+begin
+  iCount:=0;
+  {$IFDEF __G800__}
+  cmdTesteImpressao.Text:='Teste Impressao - TSG800';
+  {$ELSE}
+  cmdTesteImpressao.Text:='Teste Impressao - GPOS700';
+  {$ENDIF}
+
 end;
 
-
+end.

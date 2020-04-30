@@ -1,0 +1,13 @@
+﻿[lblMensagem]
+Coordinates=102,10,91,58
+
+[btnIdCartao]
+Coordinates=10,10,82,58
+
+[Timer1]
+Coordinates=91,77,55,36
+Visible=True
+
+[]
+Coordinates=230,1,91,36
+

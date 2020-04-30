@@ -43,42 +43,40 @@ uses
 type
   TfrmImpressaoG = class(TForm)
     lbTitulo: TLabel;
+    STATUS: TButton;
+    Edit1: TEdit;
+    lblMensagem: TLabel;
+    lbTitulo2: TLabel;
+    RadioButton1: TRadioButton;
+    RdCentro: TRadioButton;
+    RdDir: TRadioButton;
+    Font: TLabel;
+    TreeView1: TTreeView;
+    Size: TLabel;
+    cmdTexto: TButton;
+    cmdImage: TButton;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    TreeView3: TTreeView;
+    TreeView4: TTreeView;
+    TreeView5: TTreeView;
+    cmdBarCode: TButton;
+    cmdImpressaoG: TButton;
+    Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    ListView1: TListView;
+    PrototypeBindSource1: TPrototypeBindSource;
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
-    PrototypeBindSource1: TPrototypeBindSource;
     ImageControl1: TImageControl;
-    ListView1: TListView;
-    Button5: TButton;
-    Button3: TButton;
-    TreeView5: TTreeView;
-    TreeView4: TTreeView;
-    TreeView3: TTreeView;
-    Label4: TLabel;
-    Label3: TLabel;
-    Label1: TLabel;
-    cmdImage: TButton;
-    cmdTexto: TButton;
-    Size: TLabel;
-    TreeView1: TTreeView;
-    Font: TLabel;
-    RdDir: TRadioButton;
-    RdCentro: TRadioButton;
-    RadioButton1: TRadioButton;
-    lbTitulo2: TLabel;
-    lblMensagem: TLabel;
-    Edit1: TEdit;
-    STATUS: TButton;
-    cmdImpressaoG: TButton;
-    cmdBarCode: TButton;
 
     procedure FormCreate(Sender: TObject);
     procedure cmdImpressaoGClick(Sender: TObject);
     procedure cmdBarCodeClick(Sender: TObject);
     procedure cmdTextoClick(Sender: TObject);
     procedure cmdImageClick(Sender: TObject);
-    procedure Label1Click(Sender: TObject);
-    procedure lbTituloClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,12 +85,16 @@ type
 
 var
   frmImpressaoG: TfrmImpressaoG;
+
   iCount:integer;
 
-  const N_COLUNAS=32;
+const N_COLUNAS=32;
+
 implementation
 
+
 {$R *.fmx}
+
 //==========================================
 function CentralizaTraco(strTitulo:string;NColunas:integer):string;
 var
@@ -112,7 +114,6 @@ begin
       strAux:=strAux+'=';
   end;
   result:=strAux;
-
 end;
 
 
@@ -231,6 +232,30 @@ except
 
   end;
 end;
+
 end;
+procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);
+
+begin
+
+
+
+end;
+
+//==========================================
+procedure TfrmImpressaoG.FormCreate(Sender: TObject);
+
+begin
+  iCount:=0;
+  {$IFDEF __G800__}
+  cmdImpressaoG.Text:='Teste Impressao - TSG800';
+  {$ELSE}
+  cmdImpressaoG.Text:='Teste Impressao - GPOS700';
+  {$ENDIF}
+
+end;
+
+
+end.
 
 
