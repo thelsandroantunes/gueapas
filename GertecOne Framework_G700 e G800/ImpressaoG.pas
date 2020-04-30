@@ -62,9 +62,9 @@ type
     Size: TLabel;
     TreeView1: TTreeView;
     Font: TLabel;
-    RdDir: TRadioButton;
+    RdDireita: TRadioButton;
     RdCentro: TRadioButton;
-    RadioButton1: TRadioButton;
+    RdEsquerda: TRadioButton;
     lbTitulo2: TLabel;
     lblMensagem: TLabel;
     Edit1: TEdit;
@@ -78,6 +78,9 @@ type
 
     procedure cmdImageClick(Sender: TObject);
     procedure cmdTextoClick(Sender: TObject);
+    procedure RdEsquerdaChange(Sender: TObject);
+    procedure RdCentroChange(Sender: TObject);
+    procedure RdDireitaChange(Sender: TObject);
 
 
   private
@@ -89,6 +92,7 @@ type
 var
   frmImpressaoG: TfrmImpressaoG;
   iCount:integer;
+  pos: integer;
 
   const N_COLUNAS=32;
 implementation
@@ -237,14 +241,69 @@ end;
 procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);
 var
 TxtInput: String;
+
 begin
+
   TxtInput := Edit1.Text;
-  //=========
   GertecPrinter.FlagBold := True;
   GertecPrinter.textSize := 30;
-  GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+
+  if pos = 0 then
+    begin
+
+      GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+
+  end
+
+  else if pos = -1 then
+    begin
+
+      GertecPrinter.PrintString(ESQUERDA,TxtInput);
+
+  end
+
+  else if pos = 1 then
+    begin
+
+      GertecPrinter.PrintString(DIREITA,TxtInput);
+
+  end else
+    begin
+      GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+  end;
+
   GertecPrinter.printBlankLine(150);
   GertecPrinter.printOutput;
+
+end;
+
+procedure TfrmImpressaoG.RdCentroChange(Sender: TObject);
+begin
+     if RdCentro.Text = 'Centralizado' then
+    begin
+    pos:=0;
+
+  end;
+end;
+
+procedure TfrmImpressaoG.RdDireitaChange(Sender: TObject);
+begin
+ if RdDireita.Text = 'Direita' then
+    begin
+    pos:=1;
+
+  end;
+end;
+
+procedure TfrmImpressaoG.RdEsquerdaChange(Sender: TObject);
+begin
+
+  if RdEsquerda.Text = 'Esquerda' then
+    begin
+    pos:=-1;
+
+  end;
+
 end;
 
 end.
