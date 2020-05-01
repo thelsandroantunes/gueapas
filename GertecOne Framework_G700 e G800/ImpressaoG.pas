@@ -38,19 +38,19 @@ uses
   System.Bindings.Outputs,
   Fmx.Bind.Editors,
   Data.Bind.Components,
-  Data.Bind.ObjectScope;
+  Data.Bind.ObjectScope, FMX.Colors;
 
 type
   TfrmImpressaoG = class(TForm)
     lbTitulo: TLabel;
-    Button4: TButton;
+    BtnItalico: TButton;
     BindingsList1: TBindingsList;
     LinkFillControlToField1: TLinkFillControlToField;
     PrototypeBindSource1: TPrototypeBindSource;
     ImageControl1: TImageControl;
     ListView1: TListView;
-    Button5: TButton;
-    Button3: TButton;
+    BtnSublinhado: TButton;
+    BtnNegrito: TButton;
     TreeView5: TTreeView;
     TreeView4: TTreeView;
     TreeView3: TTreeView;
@@ -71,6 +71,9 @@ type
     STATUS: TButton;
     cmdImpressaoG: TButton;
     cmdBarCode: TButton;
+    CbtnNegrito: TColorButton;
+    CbtnItalico: TColorButton;
+    CbtnSublinhado: TColorButton;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);
@@ -81,6 +84,9 @@ type
     procedure RdEsquerdaChange(Sender: TObject);
     procedure RdCentroChange(Sender: TObject);
     procedure RdDireitaChange(Sender: TObject);
+    procedure BtnNegritoClick(Sender: TObject);
+    procedure BtnItalicoClick(Sender: TObject);
+    procedure BtnSublinhadoClick(Sender: TObject);
 
 
   private
@@ -93,6 +99,9 @@ var
   frmImpressaoG: TfrmImpressaoG;
   iCount:integer;
   pos: integer;
+  neg: Boolean;
+  ita: Boolean;
+  sub: Boolean;
 
   const N_COLUNAS=32;
 implementation
@@ -122,6 +131,47 @@ end;
 
 
 //==========================================
+procedure TfrmImpressaoG.BtnItalicoClick(Sender: TObject);
+begin
+  if CbtnItalico.Color = $FF000000 then
+  begin
+      CbtnItalico.Color:= $FF0000FF;
+      ita:= True;
+  end else begin
+     CbtnItalico.Color := $FF000000;
+     ita:= False;
+  end;
+
+end;
+
+procedure TfrmImpressaoG.BtnNegritoClick(Sender: TObject);
+
+begin
+
+  if CbtnNegrito.Color = $FF000000 then
+     begin
+        CbtnNegrito.Color := $FF0000FF;
+        neg:=True;
+  end else begin
+     CbtnNegrito.Color := $FF000000;
+     neg:=False;
+  end;
+
+end;
+
+procedure TfrmImpressaoG.BtnSublinhadoClick(Sender: TObject);
+begin
+  if CbtnSublinhado.Color = $FF000000 then
+    begin
+        CbtnSublinhado.Color := $FF0000FF;
+        sub:=True;
+  end else begin
+     CbtnSublinhado.Color := $FF000000;
+     sub:=False;
+  end;
+
+end;
+
 procedure TfrmImpressaoG.cmdBarCodeClick(Sender: TObject);
 var
 qrCode2:string;
@@ -245,8 +295,29 @@ TxtInput: String;
 begin
 
   TxtInput := Edit1.Text;
-  GertecPrinter.FlagBold := True;
+
   GertecPrinter.textSize := 30;
+
+  if neg then
+    begin
+      GertecPrinter.FlagBold := True;
+  end else begin
+      GertecPrinter.FlagBold := False;
+  end;
+
+  if ita then
+    begin
+      GertecPrinter.FlagItalico := True;
+  end else begin
+      GertecPrinter.FlagItalico := False;
+  end;
+
+  if sub then
+  begin
+        GertecPrinter.FlagSublinhado := True;
+  end else begin
+       GertecPrinter.FlagSublinhado := False;
+  end;
 
   if pos = 0 then
     begin

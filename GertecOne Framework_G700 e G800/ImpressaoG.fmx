@@ -21,7 +21,7 @@ object frmImpressaoG: TfrmImpressaoG
     Text = 'Fun'#231#245'es Impress'#227'o G700/G800'
     TabOrder = 0
   end
-  object Button4: TButton
+  object BtnItalico: TButton
     StyledSettings = [Family, FontColor]
     Position.X = 104.000000000000000000
     Position.Y = 232.000000000000000000
@@ -31,6 +31,7 @@ object frmImpressaoG: TfrmImpressaoG
     TabOrder = 23
     Text = 'IT'#193'LICO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
+    OnClick = BtnItalicoClick
   end
   object ImageControl1: TImageControl
     Bitmap.PNG = {
@@ -1695,13 +1696,13 @@ object frmImpressaoG: TfrmImpressaoG
     HeaderAppearanceClassName = 'TListHeaderObjects'
     FooterAppearanceClassName = 'TListHeaderObjects'
     Position.X = 224.000000000000000000
-    Position.Y = 288.000000000000000000
+    Position.Y = 304.000000000000000000
     Size.Width = 105.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 26
   end
-  object Button5: TButton
+  object BtnSublinhado: TButton
     StyledSettings = [Family, FontColor]
     Position.X = 200.000000000000000000
     Position.Y = 232.000000000000000000
@@ -1711,17 +1712,20 @@ object frmImpressaoG: TfrmImpressaoG
     TabOrder = 24
     Text = 'SUBLINHADO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
+    OnClick = BtnSublinhadoClick
   end
-  object Button3: TButton
+  object BtnNegrito: TButton
     StyledSettings = [Family, FontColor]
     Position.X = 8.000000000000000000
     Position.Y = 232.000000000000000000
     Size.Width = 81.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'buttonstyle'
     TabOrder = 22
     Text = 'NEGRITO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
+    OnClick = BtnNegritoClick
   end
   object TreeView5: TTreeView
     Position.X = 248.000000000000000000
@@ -1817,7 +1821,7 @@ object frmImpressaoG: TfrmImpressaoG
   object Size: TLabel
     StyledSettings = [Family]
     Position.X = 176.000000000000000000
-    Position.Y = 288.000000000000000000
+    Position.Y = 304.000000000000000000
     Size.Width = 57.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
@@ -1829,7 +1833,7 @@ object frmImpressaoG: TfrmImpressaoG
   end
   object TreeView1: TTreeView
     Position.X = 64.000000000000000000
-    Position.Y = 288.000000000000000000
+    Position.Y = 304.000000000000000000
     Size.Width = 41.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
@@ -1840,7 +1844,7 @@ object frmImpressaoG: TfrmImpressaoG
   object Font: TLabel
     StyledSettings = [Family]
     Position.X = 8.000000000000000000
-    Position.Y = 288.000000000000000000
+    Position.Y = 304.000000000000000000
     Size.Width = 49.000000000000000000
     Size.Height = 25.000000000000000000
     Size.PlatformDefault = False
@@ -1948,6 +1952,36 @@ object frmImpressaoG: TfrmImpressaoG
     Text = 'IMPRIMIR BARCODE'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = cmdBarCodeClick
+  end
+  object CbtnNegrito: TColorButton
+    Color = claBlack
+    Enabled = False
+    Position.X = 8.000000000000000000
+    Position.Y = 272.000000000000000000
+    Size.Width = 81.000000000000000000
+    Size.Height = 14.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 35
+  end
+  object CbtnItalico: TColorButton
+    Color = claBlack
+    Enabled = False
+    Position.X = 104.000000000000000000
+    Position.Y = 272.000000000000000000
+    Size.Width = 81.000000000000000000
+    Size.Height = 14.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 34
+  end
+  object CbtnSublinhado: TColorButton
+    Color = claBlack
+    Enabled = False
+    Position.X = 200.000000000000000000
+    Position.Y = 272.000000000000000000
+    Size.Width = 137.000000000000000000
+    Size.Height = 14.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 33
   end
   object BindingsList1: TBindingsList
     Methods = <>
