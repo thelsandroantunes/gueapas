@@ -294,9 +294,28 @@ end;
 //==========================================
 procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);
 var
-TxtInput: String;
+TxtInput: string;
 
 begin
+
+  if CbFont.ItemIndex = 0 then
+    begin
+
+  end else if CbFont.ItemIndex = 1 then
+    begin
+    Edit1.TextSettings.Font.Family := 'Monospace';
+  end else if CbFont.ItemIndex = 2 then
+    begin
+    Edit1.TextSettings.Font.Family := 'Sans Serif';
+  end else if CbFont.ItemIndex = 3 then
+    begin
+    Edit1.TextSettings.Font.Family := 'Serif';
+  end else if CbFont.ItemIndex = 4 then
+    begin
+    Edit1.TextSettings.Font.Family := 'Vectra.otf';
+  end;
+
+
 
   TxtInput := Edit1.Text;
 
