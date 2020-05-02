@@ -38,7 +38,8 @@ uses
   System.Bindings.Outputs,
   Fmx.Bind.Editors,
   Data.Bind.Components,
-  Data.Bind.ObjectScope, FMX.Colors;
+  Data.Bind.ObjectScope, FMX.Colors, FMX.ListBox, FMX.EditBox, FMX.NumberBox,
+  FMX.ComboTrackBar;
 
 type
   TfrmImpressaoG = class(TForm)
@@ -48,7 +49,6 @@ type
     LinkFillControlToField1: TLinkFillControlToField;
     PrototypeBindSource1: TPrototypeBindSource;
     ImageControl1: TImageControl;
-    ListView1: TListView;
     BtnSublinhado: TButton;
     BtnNegrito: TButton;
     TreeView5: TTreeView;
@@ -60,7 +60,6 @@ type
     cmdImage: TButton;
     cmdTexto: TButton;
     Size: TLabel;
-    TreeView1: TTreeView;
     Font: TLabel;
     RdDireita: TRadioButton;
     RdCentro: TRadioButton;
@@ -74,6 +73,8 @@ type
     CbtnNegrito: TColorButton;
     CbtnItalico: TColorButton;
     CbtnSublinhado: TColorButton;
+    CbSize: TComboBox;
+    CbFont: TComboBox;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);
@@ -102,6 +103,7 @@ var
   neg: Boolean;
   ita: Boolean;
   sub: Boolean;
+  textSize: Integer;
 
   const N_COLUNAS=32;
 implementation
@@ -288,6 +290,8 @@ except
 end;
 end;
 
+
+//==========================================
 procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);
 var
 TxtInput: String;
@@ -296,7 +300,36 @@ begin
 
   TxtInput := Edit1.Text;
 
-  GertecPrinter.textSize := 30;
+  if CbSize.ItemIndex = 0 then
+    begin
+    textSize:=60;
+  end else if CbSize.ItemIndex = 1 then
+    begin
+    textSize:=20;
+  end else if CbSize.ItemIndex = 2 then
+    begin
+    textSize:=30;
+  end else if CbSize.ItemIndex = 3 then
+    begin
+    textSize:=40;
+  end else if CbSize.ItemIndex = 4 then
+    begin
+    textSize:=50;
+  end else if CbSize.ItemIndex = 5 then
+    begin
+    textSize:=70;
+  end else if CbSize.ItemIndex = 6 then
+    begin
+    textSize:=80;
+  end else if CbSize.ItemIndex = 7 then
+    begin
+    textSize:=90;
+  end else if CbSize.ItemIndex = 8 then
+    begin
+    textSize:=100;
+  end;
+
+  GertecPrinter.textSize := textSize;
 
   if neg then
     begin

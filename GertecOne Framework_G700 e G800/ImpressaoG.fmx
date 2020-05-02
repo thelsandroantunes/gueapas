@@ -28,7 +28,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 81.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 23
+    TabOrder = 22
     Text = 'IT'#193'LICO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = BtnItalicoClick
@@ -1688,19 +1688,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 193.000000000000000000
     Size.Height = 145.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 30
-  end
-  object ListView1: TListView
-    ItemAppearanceClassName = 'TListItemAppearance'
-    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
-    HeaderAppearanceClassName = 'TListHeaderObjects'
-    FooterAppearanceClassName = 'TListHeaderObjects'
-    Position.X = 224.000000000000000000
-    Position.Y = 304.000000000000000000
-    Size.Width = 105.000000000000000000
-    Size.Height = 41.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 26
+    TabOrder = 28
   end
   object BtnSublinhado: TButton
     StyledSettings = [Family, FontColor]
@@ -1709,7 +1697,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 137.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 24
+    TabOrder = 23
     Text = 'SUBLINHADO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = BtnSublinhadoClick
@@ -1722,7 +1710,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'buttonstyle'
-    TabOrder = 22
+    TabOrder = 21
     Text = 'NEGRITO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = BtnNegritoClick
@@ -1733,7 +1721,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 100.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 19
+    TabOrder = 18
     Viewport.Width = 96.000000000000000000
     Viewport.Height = 37.000000000000000000
   end
@@ -1743,7 +1731,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 100.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 17
+    TabOrder = 16
     Viewport.Width = 96.000000000000000000
     Viewport.Height = 37.000000000000000000
   end
@@ -1753,7 +1741,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 100.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 16
+    TabOrder = 15
     Viewport.Width = 96.000000000000000000
     Viewport.Height = 37.000000000000000000
   end
@@ -1768,7 +1756,7 @@ object frmImpressaoG: TfrmImpressaoG
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.FontColor = claDarkgray
     Text = 'BarCodes'
-    TabOrder = 15
+    TabOrder = 14
   end
   object Label3: TLabel
     StyledSettings = [Family]
@@ -1781,7 +1769,7 @@ object frmImpressaoG: TfrmImpressaoG
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.FontColor = claDarkgray
     Text = 'Bar Code Width'
-    TabOrder = 14
+    TabOrder = 13
   end
   object Label1: TLabel
     StyledSettings = [Family]
@@ -1793,7 +1781,7 @@ object frmImpressaoG: TfrmImpressaoG
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.FontColor = claDarkgray
     Text = 'Bar Code Height'
-    TabOrder = 13
+    TabOrder = 12
   end
   object cmdImage: TButton
     StyledSettings = [Family, FontColor]
@@ -1802,7 +1790,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 135.000000000000000000
     Size.Height = 45.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 12
+    TabOrder = 11
     Text = 'IMPRIMIR IMAGEM'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
   end
@@ -1813,14 +1801,14 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 135.000000000000000000
     Size.Height = 45.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 11
+    TabOrder = 10
     Text = 'IMPRIMIR TEXTO'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = cmdTextoClick
   end
   object Size: TLabel
     StyledSettings = [Family]
-    Position.X = 176.000000000000000000
+    Position.X = 208.000000000000000000
     Position.Y = 304.000000000000000000
     Size.Width = 57.000000000000000000
     Size.Height = 25.000000000000000000
@@ -1829,17 +1817,7 @@ object frmImpressaoG: TfrmImpressaoG
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.FontColor = claDarkgray
     Text = 'Size'
-    TabOrder = 10
-  end
-  object TreeView1: TTreeView
-    Position.X = 64.000000000000000000
-    Position.Y = 304.000000000000000000
-    Size.Width = 41.000000000000000000
-    Size.Height = 25.000000000000000000
-    Size.PlatformDefault = False
     TabOrder = 9
-    Viewport.Width = 37.000000000000000000
-    Viewport.Height = 21.000000000000000000
   end
   object Font: TLabel
     StyledSettings = [Family]
@@ -1936,7 +1914,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 321.000000000000000000
     Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 20
+    TabOrder = 19
     Text = 'IMPRIMIR TODAS AS FUN'#199#213'ES'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = cmdImpressaoGClick
@@ -1948,7 +1926,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 321.000000000000000000
     Size.Height = 49.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 18
+    TabOrder = 17
     Text = 'IMPRIMIR BARCODE'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = cmdBarCodeClick
@@ -1961,7 +1939,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 81.000000000000000000
     Size.Height = 14.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 35
+    TabOrder = 33
   end
   object CbtnItalico: TColorButton
     Color = claBlack
@@ -1971,7 +1949,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 81.000000000000000000
     Size.Height = 14.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 34
+    TabOrder = 32
   end
   object CbtnSublinhado: TColorButton
     Color = claBlack
@@ -1981,7 +1959,41 @@ object frmImpressaoG: TfrmImpressaoG
     Size.Width = 137.000000000000000000
     Size.Height = 14.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 33
+    TabOrder = 31
+  end
+  object CbSize: TComboBox
+    Items.Strings = (
+      '60'
+      '20'
+      '30'
+      '40'
+      '50'
+      '70'
+      '80'
+      '90'
+      '100')
+    ItemIndex = 0
+    Position.X = 248.000000000000000000
+    Position.Y = 296.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 34
+  end
+  object CbFont: TComboBox
+    Items.Strings = (
+      'DEFAULT'
+      'MONOSPACE'
+      'SANS SERIF'
+      'SERIF'
+      'VECTRA.otf')
+    ItemIndex = 0
+    Position.X = 56.000000000000000000
+    Position.Y = 296.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 37
   end
   object BindingsList1: TBindingsList
     Methods = <>
@@ -1990,7 +2002,6 @@ object frmImpressaoG: TfrmImpressaoG
     Top = 37
     object LinkFillControlToField1: TLinkFillControlToField
       Category = 'Quick Bindings'
-      Control = ListView1
       Track = True
       FillDataSource = PrototypeBindSource1
       FillDisplayFieldName = 'IntField1'
