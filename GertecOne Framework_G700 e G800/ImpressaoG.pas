@@ -51,9 +51,6 @@ type
     ImageControl1: TImageControl;
     BtnSublinhado: TButton;
     BtnNegrito: TButton;
-    TreeView5: TTreeView;
-    TreeView4: TTreeView;
-    TreeView3: TTreeView;
     Label4: TLabel;
     Label3: TLabel;
     Label1: TLabel;
@@ -75,6 +72,9 @@ type
     CbtnSublinhado: TColorButton;
     CbSize: TComboBox;
     CbFont: TComboBox;
+    CbQrCode: TComboBox;
+    CbBarCodeW: TComboBox;
+    CbBarCodeH: TComboBox;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);
@@ -104,6 +104,9 @@ var
   ita: Boolean;
   sub: Boolean;
   textSize: Integer;
+  bcHeight:integer;
+  bcWidth:integer;
+
 
   const N_COLUNAS=32;
 implementation
@@ -177,16 +180,106 @@ end;
 procedure TfrmImpressaoG.cmdBarCodeClick(Sender: TObject);
 var
 qrCode2:string;
+
+code128:string;
+ean8:string;
+ean13:string;
+pdf417:string;
+
 i:integer;
 begin
 
+  if CbBarCodeH.ItemIndex =0then
+    begin
+    bcHeight:=280;
+  end else if CbBarCodeH.ItemIndex = 1 then
+  begin
+    bcHeight:=10;
+  end else if CbBarCodeH.ItemIndex = 2 then
+    begin
+        bcHeight:=40;
+  end else if CbBarCodeH.ItemIndex = 3 then
+    begin
+        bcHeight:=80;
+  end else if CbBarCodeH.ItemIndex = 4 then
+    begin
+        bcHeight:=120;
+  end else if CbBarCodeH.ItemIndex = 5 then
+    begin
+        bcHeight:=160;
+  end else if CbBarCodeH.ItemIndex = 6 then
+    begin
+        bcHeight:=200;
+  end else if CbBarCodeH.ItemIndex = 7 then
+    begin
+        bcHeight:=240;
+  end else if CbBarCodeH.ItemIndex = 8 then
+    begin
+        bcHeight:=320;
+  end else if CbBarCodeH.ItemIndex = 9 then
+    begin
+        bcHeight:=380;
+  end;
+
+if CbBarCodeW.ItemIndex = 0 then
+    begin
+    bcWidth:=280;
+  end else if CbBarCodeW.ItemIndex= 1 then
+  begin
+    bcWidth:=10;
+  end else if CbBarCodeW.ItemIndex= 2 then
+    begin
+        bcWidth:=40;
+  end else if CbBarCodeW.ItemIndex= 3 then
+    begin
+        bcWidth:=80;
+  end else if CbBarCodeW.ItemIndex= 4 then
+    begin
+        bcWidth:=120;
+  end else if CbBarCodeW.ItemIndex= 5 then
+    begin
+        bcWidth:=160;
+  end else if CbBarCodeW.ItemIndex = 6 then
+    begin
+        bcWidth:=200;
+  end else if CbBarCodeW.ItemIndex =7 then
+    begin
+        bcWidth:=240;
+  end else if CbBarCodeW.ItemIndex= 8 then
+    begin
+        bcWidth:=320;
+  end else if CbBarCodeW.ItemIndex= 9 then
+    begin
+        bcWidth:=380;
+  end;
   //========= QRCODE
-  GertecPrinter.printBlankLine(20);
-  GertecPrinter.printString(CentralizaTraco('[Codigo QRCode]',N_COLUNAS));
-  GertecPrinter.printBlankLine(20);
   qrCode2:='';
   for i := 1 to 5 do qrCode2:=qrCode2+'12345678901234567890';
-  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.QR_CODE,240,240,qrCode2);
+
+  code128:='12345678901234567890';
+  ean8:='0123456';
+  ean13:='7891234567895';
+  pdf417:='000311111136511111125211111155';
+
+  if CbQrCode.ItemIndex = 0 then
+    begin
+    GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.QR_CODE,bcHeight, bcWidth, qrCode2);
+  end else if CbQrCode.ItemIndex = 1 then
+    begin
+    GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.CODE_128,bcHeight, bcWidth, code128);
+  end else if CbQrCode.ItemIndex = 2 then
+    begin
+    GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.EAN_8,bcHeight, bcWidth, ean8);
+  end else if CbQrCode.ItemIndex = 3 then
+    begin
+    GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.EAN_13,bcHeight, bcWidth, ean13);
+  end else if CbQrCode.ItemIndex = 4 then
+    begin
+    GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.PDF_417,bcHeight, bcWidth, pdf417);
+  end;
+
+
+
   GertecPrinter.printBlankLine(150);
   GertecPrinter.printOutput;
 end;
@@ -270,6 +363,18 @@ try
   //=========
   GertecPrinter.printString(CentralizaTraco('[Codigo Barras EAN13]',N_COLUNAS));
   GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.EAN_13,120,120,'7891234567895');
+
+
+   //=========
+  GertecPrinter.printBlankLine(20);
+  GertecPrinter.printString(CentralizaTraco('[Codigo Barras EAN8]',N_COLUNAS));
+  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.EAN_8,120,120,'0123456');
+   //=========
+  GertecPrinter.printBlankLine(20);
+  GertecPrinter.printString(CentralizaTraco('[Codigo Barras PDF417]',N_COLUNAS));
+  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.PDF_417,280,280,'003311112355111122421111254');
+
+
   //========= QRCODE
   GertecPrinter.printBlankLine(20);
   GertecPrinter.printString(CentralizaTraco('[Codigo QRCode]',N_COLUNAS));
@@ -298,21 +403,23 @@ TxtInput: string;
 
 begin
 
+
+
   if CbFont.ItemIndex = 0 then
     begin
-
+    GertecPrinter.TextFamily := 0;
   end else if CbFont.ItemIndex = 1 then
     begin
-    Edit1.TextSettings.Font.Family := 'Monospace';
+    GertecPrinter.TextFamily := 1;
   end else if CbFont.ItemIndex = 2 then
     begin
-    Edit1.TextSettings.Font.Family := 'Sans Serif';
+    GertecPrinter.TextFamily := 2;
   end else if CbFont.ItemIndex = 3 then
     begin
-    Edit1.TextSettings.Font.Family := 'Serif';
+    GertecPrinter.TextFamily := 3;
   end else if CbFont.ItemIndex = 4 then
     begin
-    Edit1.TextSettings.Font.Family := 'Vectra.otf';
+    GertecPrinter.TextFamily := 4;
   end;
 
 

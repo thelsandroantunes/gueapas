@@ -55,6 +55,8 @@ type
 
     textSize:Single;
 
+    textFamily:integer; //new
+
 
     procedure PrintString(strPrint:string); overload;
     procedure PrintString(Alinhamento:T_ALINHAMENTO;strPrint:string);overload;
@@ -113,6 +115,8 @@ begin
     lineSpace := 10;
     textSize:=20;
 
+    TextFamily:=0; //new
+
 end;
 //****************************************************
 procedure TGEDIPrinter.PrintString(strPrint:string);
@@ -120,6 +124,7 @@ var
   Config: JGEDI_PRNTR_st_StringConfig;
   spaint : JPaint;
   style:Integer;
+  family:JTypeface;
 
 begin
 
@@ -154,7 +159,27 @@ begin
   if(FlagSublinhado)then
     spaint.setFlags(TJPaint.JavaClass.UNDERLINE_TEXT_FLAG);
 
-  spaint.setTypeface(TJTypeface.JavaClass.create(TJTypeface.JavaClass.MONOSPACE,style));
+  //new Font Family Text
+  //********************************************
+  if (TextFamily = 0) then
+    begin
+    family := TJTypeface.JavaClass.MONOSPACE;
+  end else if(TextFamily = 1) then
+    begin
+    family := TJTypeface.JavaClass.MONOSPACE;
+  end else if(TextFamily = 2) then
+    begin
+    family := TJTypeface.JavaClass.SANS_SERIF;
+  end else if(TextFamily = 3) then
+    begin
+    family := TJTypeface.JavaClass.SERIF;
+  end else if(TextFamily = 1) then
+    begin
+    family := TJTypeface.JavaClass.MONOSPACE;
+  end;
+  //********************************************
+
+  spaint.setTypeface(TJTypeface.JavaClass.create(family,style));
 
   printInit;
   iPRNTR.DrawStringExt(Config,StringToJString(strPrint));
