@@ -1877,6 +1877,7 @@ object frmImpressaoG: TfrmImpressaoG
     Text = 'STATUS IMPRESSORA'
     TextSettings.Font.Size = 14.000000000000000000
     TextSettings.Font.StyleExt = {00070000000000000004000000}
+    OnClick = STATUSClick
   end
   object cmdImpressaoG: TButton
     StyledSettings = [Family, Size, FontColor]

@@ -30,7 +30,8 @@ uses
 
 
   //Units do projeto
-  BarCode,
+  //BarCode,
+  CodigoDeBarras,
   //Impressao,
   ImpressaoG,
   {$IFDEF __G800__}
@@ -218,7 +219,8 @@ end;
 procedure TfrmMain.cmdCodigoBarrasClick(Sender: TObject);
 begin
 DesligaNFC;
-frmBarCode.Show;
+ //frmBarCode.Show;
+ frmCodBarra.Show;
 end;
 
 procedure TfrmMain.DesligaNFC;
@@ -243,7 +245,6 @@ begin
 frmNFC.Show;
 {$ENDIF}
 end;
-
 
 procedure TfrmMain.cmdNFCIdClick(Sender: TObject);
 begin

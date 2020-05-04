@@ -1,0 +1,157 @@
+object frmCodBarra: TfrmCodBarra
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 591
+  ClientWidth = 516
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  DesignerMasterStyle = 0
+  object Label1: TLabel
+    StyledSettings = [Family, FontColor]
+    Position.X = 8.000000000000000000
+    Position.Y = 13.000000000000000000
+    Size.Width = 337.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 25.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.HorzAlign = Center
+    Text = 'Ler c'#243'digo de Barras'
+    TabOrder = 8
+  end
+  object btnEan13: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 92.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 69.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = 'EAN13'
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    OnClick = btnEan13Click
+  end
+  object btnEan8: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 8.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'EAN8'
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    OnClick = btnEan8Click
+  end
+  object btnEan14: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 172.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 69.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Text = 'EAN14'
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    OnClick = btnEan14Click
+  end
+  object btnQrCode: TButton
+    StyledSettings = [Family, Size]
+    Position.X = 256.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 11
+    Text = 'QrCode'
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    OnClick = btnQrCodeClick
+  end
+  object ListView1: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemDeleteAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    AllowSelection = False
+    ClipChildren = False
+    Position.X = -8.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 521.000000000000000000
+    Size.Height = 473.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 14
+    ItemAppearanceObjects.ItemObjects.Text.Font.StyleExt = {00070000000000000004000000}
+    ItemAppearanceObjects.ItemObjects.Text.TextColor = claLightgray
+  end
+  object imgCamera: TImage
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ClipParent = True
+    Position.X = 16.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 449.000000000000000000
+    Size.Height = 265.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+    ParentShowHint = False
+    ShowHint = False
+  end
+  object lblResultadoLeitura: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 7
+    Position.X = 16.000000000000000000
+    Position.Y = 362.000000000000000000
+    Enabled = False
+    Size.Width = 329.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+  end
+  object Camera: TCameraComponent
+    Kind = BackCamera
+    OnSampleBufferReady = CameraSampleBufferReady
+    Left = 112
+    Top = 224
+  end
+  object txtLeitura: TLabel
+    AutoTranslate = False
+    StyledSettings = [Family, FontColor]
+    Position.X = 16.000000000000000000
+    Position.Y = 338.000000000000000000
+    Size.Width = 345.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    Text = 'Leitura'
+    Visible = False
+    TabOrder = 16
+  end
+  object ActionList1: TActionList
+    Left = 48
+    Top = 224
+    object ShowShareSheetAction1: TShowShareSheetAction
+      Category = 'Media Library'
+    end
+  end
+  object TetheringAppProfile1: TTetheringAppProfile
+    Text = 'TetheringAppProfile1'
+    Actions = <>
+    Resources = <
+      item
+        IsPublic = True
+      end>
+    Left = 288
+    Top = 248
+  end
+end
