@@ -1,52 +1,13 @@
-object frmBarCode: TfrmBarCode
+object frmBarCodeV2: TfrmBarCodeV2
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 619
-  ClientWidth = 454
+  ClientHeight = 621
+  ClientWidth = 444
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
-  OnCreate = FormCreate
-  OnCloseQuery = FormCloseQuery
-  OnDestroy = FormDestroy
-  DesignerMasterStyle = 3
-  object btnEan8: TButton
-    Position.X = 496.000000000000000000
-    Position.Y = 34.000000000000000000
-    Size.Width = 97.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 3
-    Text = 'EAN8'
-    OnClick = btnEan8Click
-  end
-  object imgCamera: TImage
-    MultiResBitmap.LoadSize = 2
-    MultiResBitmap = <
-      item
-      end>
-    Anchors = [akLeft, akTop, akRight, akBottom]
-    ClipParent = True
-    Position.X = 12.000000000000000000
-    Position.Y = 170.000000000000000000
-    Size.Width = 418.000000000000000000
-    Size.Height = 221.000000000000000000
-    Size.PlatformDefault = False
-    WrapMode = Stretch
-    ParentShowHint = False
-    ShowHint = False
-  end
-  object lblResultadoLeitura: TEdit
-    Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 7
-    Position.X = 16.000000000000000000
-    Position.Y = 362.000000000000000000
-    Enabled = False
-    Size.Width = 329.000000000000000000
-    Size.Height = 32.000000000000000000
-    Size.PlatformDefault = False
-  end
+  DesignerMasterStyle = 0
   object Label1: TLabel
     StyledSettings = [Family, FontColor]
     Position.X = 16.000000000000000000
@@ -60,54 +21,15 @@ object frmBarCode: TfrmBarCode
     Text = 'Ler c'#243'digo de Barras'
     TabOrder = 8
   end
-  object btnEan13: TButton
-    Position.X = 500.000000000000000000
-    Position.Y = 90.000000000000000000
-    Size.Width = 85.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 9
-    Text = 'EAN13'
-    OnClick = btnEan13Click
-  end
-  object btnQrCode: TButton
-    Position.X = 152.000000000000000000
-    Position.Y = 114.000000000000000000
-    Size.Width = 90.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 10
-    Text = 'QrCode'
-    OnClick = btnQrCodeClick
-  end
-  object btnAuto: TButton
-    Position.X = 464.000000000000000000
-    Position.Y = 136.000000000000000000
+  object btnFlash: TButton
+    Position.X = 184.000000000000000000
+    Position.Y = 120.000000000000000000
     Size.Width = 161.000000000000000000
     Size.Height = 44.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 11
-    Text = 'Auto'
-    OnClick = btnAutoClick
-  end
-  object Camera: TCameraComponent
-    Kind = BackCamera
-    OnSampleBufferReady = CameraSampleBufferReady
-    Left = 112
-    Top = 224
-  end
-  object txtLeitura: TLabel
-    AutoTranslate = False
-    StyledSettings = [Family, FontColor]
-    Position.X = 16.000000000000000000
-    Position.Y = 338.000000000000000000
-    Size.Width = 345.000000000000000000
-    Size.Height = 23.000000000000000000
-    Size.PlatformDefault = False
-    TextSettings.Font.Size = 20.000000000000000000
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-    Text = 'Leitura'
-    TabOrder = 17
+    TabOrder = 22
+    Text = 'Ligar Flash'
+    OnClick = btnFlashClick
   end
   object ImageControl1: TImageControl
     Bitmap.PNG = {
@@ -1759,29 +1681,96 @@ object frmBarCode: TfrmBarCode
       53630FDB2EB744C61065E0F2253AE4A2F0AA98C934A46778CEBBC34987EB3AA7
       8E26EC391115C473DCA39CE9E2C018C99141C1B690CC73F7886599BB298D4186
       30483946B06264F60718F32DA8F46C4DD10000000049454E44AE426082}
-    Position.X = 456.000000000000000000
-    Position.Y = 416.000000000000000000
+    Position.X = 16.000000000000000000
+    Position.Y = 408.000000000000000000
     Size.Width = 329.000000000000000000
     Size.Height = 100.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 22
+    TabOrder = 21
   end
-  object btnFlash: TButton
-    Position.X = 8.000000000000000000
-    Position.Y = 56.000000000000000000
-    Size.Width = 369.000000000000000000
+  object txtLeitura: TLabel
+    AutoTranslate = False
+    StyledSettings = [Family, FontColor]
+    Position.X = 16.000000000000000000
+    Position.Y = 338.000000000000000000
+    Size.Width = 345.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 20.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    Text = 'Leitura'
+    TabOrder = 16
+  end
+  object Camera: TCameraComponent
+    Kind = BackCamera
+    Left = 112
+    Top = 224
+  end
+  object btnAuto: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 120.000000000000000000
+    Size.Width = 161.000000000000000000
     Size.Height = 44.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 23
-    Text = 'Flash - Desligado'
-    OnClick = btnFlashClick
+    TabOrder = 11
+    Text = 'Auto'
+    OnClick = btnAutoClick
   end
-  object ActionList1: TActionList
-    Left = 48
-    Top = 224
-    object ShowShareSheetAction1: TShowShareSheetAction
-      Category = 'Media Library'
-    end
+  object btnQrCode: TButton
+    Position.X = 256.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 90.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+    Text = 'QrCode'
+    OnClick = btnQrCodeClick
+  end
+  object btnEan13: TButton
+    Position.X = 140.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 85.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    Text = 'EAN13'
+    OnClick = btnEan13Click
+  end
+  object lblResultadoLeitura: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 7
+    Position.X = 16.000000000000000000
+    Position.Y = 362.000000000000000000
+    Enabled = False
+    Size.Width = 329.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object imgCamera: TImage
+    MultiResBitmap.LoadSize = 2
+    MultiResBitmap = <
+      item
+      end>
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    ClipParent = True
+    Position.X = -8.000000000000000000
+    Position.Y = 170.000000000000000000
+    Size.Width = 452.000000000000000000
+    Size.Height = 221.000000000000000000
+    Size.PlatformDefault = False
+    WrapMode = Stretch
+    ParentShowHint = False
+    ShowHint = False
+  end
+  object btnEan8: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 66.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 46.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    Text = 'EAN8'
+    OnClick = btnEan8Click
   end
   object TetheringAppProfile1: TTetheringAppProfile
     Text = 'TetheringAppProfile1'
@@ -1792,5 +1781,12 @@ object frmBarCode: TfrmBarCode
       end>
     Left = 288
     Top = 248
+  end
+  object ActionList1: TActionList
+    Left = 48
+    Top = 224
+    object ShowShareSheetAction1: TShowShareSheetAction
+      Category = 'Media Library'
+    end
   end
 end

@@ -1,8 +1,4 @@
-﻿[cmdQrCode]
-Coordinates=421,258,83,36
-Visible=True
-
-[cmdNFC]
+﻿[cmdNFC]
 Coordinates=346,258,65,36
 
 [ImageControl1]
@@ -70,4 +66,8 @@ Coordinates=255,10,53,58
 
 [frmImpressaoG.PrototypeBindSource1]
 Coordinates=10,10,235,102
+
+[cmdQrCode]
+Coordinates=421,258,83,36
+Visible=True
 

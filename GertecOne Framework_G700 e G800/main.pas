@@ -30,7 +30,8 @@ uses
 
 
   //Units do projeto
-  //BarCode,
+  BarCode,
+  //BarCodeV2,
   CodigoDeBarras,
   //Impressao,
   ImpressaoG,
@@ -94,37 +95,19 @@ TBarCodes = (QRCODE);
     ImageViewer1: TImageViewer;
     BitmapAnimation1: TBitmapAnimation;
     ImageViewer2: TImageViewer;
-    imgCamera: TImage;
-    Camera: TCameraComponent;
-    ActionList1: TActionList;
-    ShowShareSheetAction1: TShowShareSheetAction;
-    txtLeitura: TLabel;
-    TetheringAppProfile1: TTetheringAppProfile;
-    lblResultadoLeitura: TEdit;
 
     procedure cmdCodigoBarrasClick(Sender: TObject);
     procedure cmdImpressaoClick(Sender: TObject);
     procedure cmdNFCClick(Sender: TObject);
+    procedure cmdQrCodeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cmdNFCIdClick(Sender: TObject);
     procedure DesligaNFC;
-    procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
+
+
   private
     { Private declarations }
 
-    // for the external library
-    fFMXBarcode: TFMXBarcode;
-
-    // for the native zxing.delphi library
-    fScanManager: TScanManager;
-    fScanInProgress: Boolean;
-    fFrameTake: Integer;
-
-    procedure GetImage();
-    function AppEvent(AAppEvent: TApplicationEvent; AContext: TObject): Boolean;
-
-    procedure AtivaLeitura(tipo : TBarcodeFormat);
-    procedure FinalizaLeitura;
   public
     { Public declarations }
   end;
@@ -136,91 +119,19 @@ implementation
 
 {$R *.fmx}
 
-function TfrmMain.AppEvent(AAppEvent: TApplicationEvent;
-  AContext: TObject): Boolean;
-begin
-  Result := False;
-  case AAppEvent of
-    TApplicationEvent.WillBecomeInactive, TApplicationEvent.EnteredBackground,
-      TApplicationEvent.WillTerminate:
-      begin
-        Camera.Active := False;
-        Result := True;
-      end;
-  end;
-end;
-
-procedure TfrmMain.AtivaLeitura(tipo : TBarcodeFormat);
-begin
-
-  if Assigned(fScanManager) then
-    fScanManager.Free;
-
-  fScanManager := TScanManager.Create(tipo,nil);
-
-  Camera.Active := False;
-  Camera.Kind := FMX.Media.TCameraKind.BackCamera;
-  Camera.FocusMode := FMX.Media.TFocusMode.ContinuousAutoFocus;
-  Camera.Quality := FMX.Media.TVideoCaptureQuality.HighQuality;
-
-  //Ajuste empírico - TCameraComponent quality change when reactivated!
-  Camera.FocusMode := FMX.Media.TFocusMode.ContinuousAutoFocus;
-  Camera.Quality := FMX.Media.TVideoCaptureQuality.MediumQuality;
-  Camera.Active := True;
-
-end;
-
-procedure TfrmMain.FinalizaLeitura;
-begin
-  Camera.Active := False;
-  fScanManager.Free;
-  fFMXBarcode.Free;
-  fScanInProgress := False;
-  Toast('Leitura feita com sucesso.');
-end;
-
-
-procedure TfrmMain.CameraSampleBufferReady(Sender: TObject;
-  const ATime: TMediaTime);
-begin
-  TThread.Synchronize(TThread.CurrentThread, GetImage);
-end;
-
-
-procedure TfrmMain.GetImage;
-var
-  scanBitmap: TBitmap;
-  ReadResult: TReadResult;
-
-begin
-  Camera.SampleBufferToBitmap(imgCamera.Bitmap, True);
-
-  if (fScanInProgress) then
-  begin
-    exit;
-  end;
-
-  { This code will take every 2 frame. }
-  inc(fFrameTake);
-  if (fFrameTake mod 2 <> 0) then
-  begin
-    exit;
-  end;
-
-  scanBitmap := TBitmap.Create();
-  scanBitmap.Assign(imgCamera.Bitmap);
-  ReadResult := nil;
-
-  
-end;
-
-
 
 procedure TfrmMain.cmdCodigoBarrasClick(Sender: TObject);
 begin
 DesligaNFC;
- //frmBarCode.Show;
  frmCodBarra.Show;
+end;
+
+procedure TfrmMain.cmdQrCodeClick(Sender: TObject);
+begin
+DesligaNFC;
+frmBarCode.Show;
+//frmBarCodeV2.Show;
+
 end;
 
 procedure TfrmMain.DesligaNFC;

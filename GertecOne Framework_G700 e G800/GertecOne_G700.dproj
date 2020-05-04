@@ -304,6 +304,10 @@
             <Form>frmCodBarra</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="BarcodeV2.pas">
+            <Form>frmBarCodeV2</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <JavaReference Include="libs\payment-1.14.13.190425.jar">
             <Disabled/>
         </JavaReference>
