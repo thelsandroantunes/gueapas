@@ -54,12 +54,17 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     txtLeitura: TLabel;
     btnFlash: TButton;
     ListView1: TListView;
+    PanelMessage: TPanel;
+    btnOK: TButton;
+    lblMsg: TLabel;
+    lblMsgCode: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 
     procedure btnFlashClick(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
   private
      { Private declarations }
 
@@ -77,10 +82,11 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
     procedure AtivaLeitura(tipo : TBarcodeFormat);
     procedure FinalizaLeitura;
-    procedure MessageV2(typeBar: string; codBar: string);
+
 
   public
     { Public declarations }
+
   end;
 
 var
@@ -112,25 +118,6 @@ begin
         Result := True;
       end;
   end;
-end;
-
-procedure TfrmCodigoBarraV2.MessageV2(typeBar: string; codBar: string);
-var
-Popup: TPopup;
-begin
-  Popup := TPopup.Create(nil);
-  try
-     Popup.Parent := Self;
-     Popup.Placement := TPlacement.plAbsolute;
-     Popup.BoundsRect := RectF(0, 0, 300, 300);
-
-     Popup.Visible := True;
-     Popup.Popup;
-   finally
-
-   end;
-   ShowMessage('Código '+typeBar+#13#10#10+typeBar+ ': '+codBar);
-
 end;
 
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
@@ -175,6 +162,17 @@ begin
 
 end;
 
+procedure TfrmCodigoBarraV2.btnOKClick(Sender: TObject);
+begin
+
+  PanelMessage.Visible:=False;
+  btnOK.Visible:=False;
+  lblMsg.Visible:= False;
+  lblMsgCode.Visible:=False;
+
+
+end;
+
 procedure TfrmCodigoBarraV2.FinalizaLeitura;
 begin
   Camera.Active := False;
@@ -199,6 +197,12 @@ procedure TfrmCodigoBarraV2.FormCreate(Sender: TObject);
 var
   AppEventSvc: IFMXApplicationEventService;
 begin
+
+
+  PanelMessage.Visible:=False;
+  btnOK.Visible:=False;
+  lblMsg.Visible:= False;
+  lblMsgCode.Visible:=False;
 
   AtivaLeitura(TBarcodeFormat.Auto);
   txtLeitura.Text := 'Leitura de Tudo';
@@ -278,6 +282,7 @@ begin
           begin
             if (ReadResult <> nil) then
             begin
+
             //So registra mesmo codigo depois de 3 segundos
               if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
                 UltimoCodigo := Codigo;
@@ -290,14 +295,18 @@ begin
                   ItemAdd.Text := 'TESTE' + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
 
+                //
+                  PanelMessage.Visible:=True;
+                  btnOK.Visible:=True;
+
+                  lblMsg.Visible:= True;
+                  lblMsg.Text:= 'Código TESTE';
+                  lblMsgCode.Visible:=True;
+                  lblMsgCode.Text:= 'TESTE: '+ReadResult.text;
 
                 //
+                  inc(iCount);
 
-
-                inc(iCount);
-
-                MessageV2('TESTE',ReadResult.text);
-                FinalizaLeitura;
                 //Toast('Leitura com sucesso.');
                 //FinalizaLeitura;
               end;

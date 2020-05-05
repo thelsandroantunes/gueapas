@@ -3,7 +3,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   Top = 0
   Caption = 'Form1'
   ClientHeight = 621
-  ClientWidth = 415
+  ClientWidth = 387
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -18,7 +18,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     ClipParent = True
     Position.X = 12.000000000000000000
     Position.Y = 120.000000000000000000
-    Size.Width = 381.000000000000000000
+    Size.Width = 353.000000000000000000
     Size.Height = 271.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
@@ -28,7 +28,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   object btnFlash: TButton
     Position.X = 8.000000000000000000
     Position.Y = 56.000000000000000000
-    Size.Width = 369.000000000000000000
+    Size.Width = 353.000000000000000000
     Size.Height = 44.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 19
@@ -46,6 +46,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     TextSettings.Font.Size = 20.000000000000000000
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     Text = 'Leitura'
+    Visible = False
     TabOrder = 14
   end
   object Camera: TCameraComponent
@@ -76,6 +77,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     Size.Width = 329.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
   end
   object ListView1: TListView
     ItemAppearanceClassName = 'TListItemAppearance'
@@ -92,6 +94,49 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     TabOrder = 13
     ItemAppearanceObjects.ItemObjects.Text.Font.StyleExt = {00070000000000000004000000}
     ItemAppearanceObjects.ItemObjects.Text.TextColor = claLightgray
+  end
+  object PanelMessage: TPanel
+    Position.X = 32.000000000000000000
+    Position.Y = 240.000000000000000000
+    Size.Width = 297.000000000000000000
+    Size.Height = 137.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 23
+    object btnOK: TButton
+      StyledSettings = [Family, Size, Style]
+      Position.X = 48.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'OK'
+      TextSettings.FontColor = claGreen
+      OnClick = btnOKClick
+    end
+    object lblMsg: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 40.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 17.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'lblMsg'
+      TabOrder = 1
+    end
+    object lblMsgCode: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 40.000000000000000000
+      Position.Y = 40.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 15.000000000000000000
+      Text = 'lblMsgCode'
+      TabOrder = 2
+    end
   end
   object TetheringAppProfile1: TTetheringAppProfile
     Text = 'TetheringAppProfile1'
