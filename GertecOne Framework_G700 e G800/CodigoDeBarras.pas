@@ -159,7 +159,7 @@ end;
 
 procedure TfrmCodBarra.btnEan14Click(Sender: TObject);
 begin
-  AtivaLeitura(TBarcodeFormat.CODE_128);
+  AtivaLeitura(TBarcodeFormat.ALL_1D);
   barCodeTitle:='EAN_14';
   txtLeitura.Text := 'Leitura de EAN14';
 

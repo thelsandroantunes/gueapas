@@ -80,7 +80,10 @@ type
     MSI = 131072,
 
     /// <summary>Plessey</summary>
-    PLESSEY = 262144
+    PLESSEY = 262144,
+
+    ///<summary>All_1D</summary>
+    ALL_1D = UPC_A or UPC_E or EAN_13 or EAN_8 or CODABAR or CODE_39 or CODE_93 or CODE_128 or ITF or RSS_14 or RSS_EXPANDED
 
     );
 
