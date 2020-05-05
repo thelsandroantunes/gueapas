@@ -67,7 +67,7 @@ Coordinates=255,10,53,58
 [frmImpressaoG.PrototypeBindSource1]
 Coordinates=10,10,235,102
 
-[cmdQrCode]
+[cmdCodBarraV2]
 Coordinates=421,258,83,36
 Visible=True
 

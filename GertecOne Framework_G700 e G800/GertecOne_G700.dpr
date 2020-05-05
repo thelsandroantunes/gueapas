@@ -95,7 +95,7 @@ uses
   JavaInterfaces in 'Imports NFC700\JavaInterfaces.pas',
   ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG},
   CodigoDeBarras in 'CodigoDeBarras.pas' {frmCodBarra},
-  BarcodeV2 in 'BarcodeV2.pas' {frmBarCodeV2};
+  CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2};
 
 {$R *.res}
 
@@ -107,7 +107,7 @@ begin
   Application.CreateForm(TfrmNFCid, frmNFCid);
   Application.CreateForm(TfrmImpressaoG, frmImpressaoG);
   Application.CreateForm(TfrmCodBarra, frmCodBarra);
-  Application.CreateForm(TfrmBarCodeV2, frmBarCodeV2);
+  Application.CreateForm(TfrmCodigoBarraV2, frmCodigoBarraV2);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.

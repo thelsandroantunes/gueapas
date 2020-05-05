@@ -1,4 +1,4 @@
-unit BarcodeV2;
+unit CodigoDeBarraV2;
 
 interface
 
@@ -33,7 +33,8 @@ uses
   ZXing.BarcodeFormat,
   ZXing.ReadResult,
   ZXing.ScanManager,
-  FMX.Barcode.DROID, FMX.Objects, FMX.Edit;
+  FMX.Barcode.DROID, FMX.Objects, FMX.Edit, FMX.ListView.Types,
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
 
 const
   SECOND = 1/86400;
@@ -42,34 +43,25 @@ type
 
 TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
-  TfrmBarCodeV2 = class(TForm)
-    Label1: TLabel;
-    TetheringAppProfile1: TTetheringAppProfile;
+  TfrmCodigoBarraV2 = class(TForm)
     ActionList1: TActionList;
-    ShowShareSheetAction1: TShowShareSheetAction;
-    btnFlash: TButton;
-    ImageControl1: TImageControl;
-    txtLeitura: TLabel;
     Camera: TCameraComponent;
-    btnAuto: TButton;
-    btnQrCode: TButton;
-    btnEan13: TButton;
-    lblResultadoLeitura: TEdit;
+    ShowShareSheetAction1: TShowShareSheetAction;
+    TetheringAppProfile1: TTetheringAppProfile;
     imgCamera: TImage;
-    btnEan8: TButton;
+    lblResultadoLeitura: TEdit;
+    Label1: TLabel;
+    txtLeitura: TLabel;
+    btnFlash: TButton;
+    ListView1: TListView;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 
-    procedure btnQrCodeClick(Sender: TObject);
-
     procedure btnFlashClick(Sender: TObject);
-    procedure btnEan8Click(Sender: TObject);
-    procedure btnEan13Click(Sender: TObject);
-    procedure btnAutoClick(Sender: TObject);
   private
-    { Private declarations }
+     { Private declarations }
 
     // for the external library
     fInProgress: boolean;
@@ -86,17 +78,18 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     procedure AtivaLeitura(tipo : TBarcodeFormat);
     procedure FinalizaLeitura;
 
-
   public
     { Public declarations }
   end;
 
 var
-  frmBarCodeV2: TfrmBarCodeV2;
+  frmCodigoBarraV2: TfrmCodigoBarraV2;
+  barCodeTitle: string;
 
 implementation
 
 {$R *.fmx}
+
 
 uses System.Threading;
 
@@ -106,8 +99,7 @@ var lFlash : Boolean;
     UltimaHora:TDateTime;
 
 
-
-function TfrmBarCodeV2.AppEvent(AAppEvent: TApplicationEvent;
+function TfrmCodigoBarraV2.AppEvent(AAppEvent: TApplicationEvent;
   AContext: TObject): Boolean;
 begin
   Result := False;
@@ -121,7 +113,7 @@ begin
   end;
 end;
 
-procedure TfrmBarCodeV2.AtivaLeitura(tipo : TBarcodeFormat);
+procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
 begin
 
   if Assigned(fScanManager) then
@@ -141,7 +133,7 @@ begin
 
 end;
 
-procedure TfrmBarCodeV2.btnFlashClick(Sender: TObject);
+procedure TfrmCodigoBarraV2.btnFlashClick(Sender: TObject);
 begin
   if Camera.HasTorch then
     begin
@@ -163,31 +155,7 @@ begin
 
 end;
 
-procedure TfrmBarCodeV2.btnEan8Click(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.EAN_8);
-  txtLeitura.Text := 'Leitura de EAN8';
-end;
-
-procedure TfrmBarCodeV2.btnEan13Click(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.EAN_13);
-  txtLeitura.Text := 'Leitura de EAN13';
-end;
-
-procedure TfrmBarCodeV2.btnQrCodeClick(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.QR_CODE);
-  txtLeitura.Text := 'Leitura de QrCode';
-end;
-
-procedure TfrmBarCodeV2.btnAutoClick(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.Auto);
-  txtLeitura.Text := 'Leitura de todos os tipos';
-end;
-
-procedure TfrmBarCodeV2.FinalizaLeitura;
+procedure TfrmCodigoBarraV2.FinalizaLeitura;
 begin
   Camera.Active := False;
   fScanManager.Free;
@@ -196,21 +164,24 @@ begin
   Toast('Leitura feita com sucesso.');
 end;
 
-procedure TfrmBarCodeV2.CameraSampleBufferReady(Sender: TObject;
+procedure TfrmCodigoBarraV2.CameraSampleBufferReady(Sender: TObject;
   const ATime: TMediaTime);
 begin
   TThread.Synchronize(TThread.CurrentThread, GetImage);
 end;
 
-procedure TfrmBarCodeV2.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+procedure TfrmCodigoBarraV2.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose := not fInProgress;
 end;
 
-procedure TfrmBarCodeV2.FormCreate(Sender: TObject);
+procedure TfrmCodigoBarraV2.FormCreate(Sender: TObject);
 var
   AppEventSvc: IFMXApplicationEventService;
 begin
+
+  AtivaLeitura(TBarcodeFormat.CODABAR);
+  txtLeitura.Text := 'Leitura de Tudo';
 
   lFlash := False;
   iCount:=1;
@@ -229,16 +200,17 @@ begin
 
 end;
 
-procedure TfrmBarCodeV2.FormDestroy(Sender: TObject);
+procedure TfrmCodigoBarraV2.FormDestroy(Sender: TObject);
 begin
   fScanManager.Free;
   fFMXBarcode.Free;
 end;
 
-procedure TfrmBarCodeV2.GetImage;
+procedure TfrmCodigoBarraV2.GetImage;
 var
   scanBitmap: TBitmap;
   ReadResult: TReadResult;
+  ItemAdd : TListViewItem;
 
 begin
   Camera.SampleBufferToBitmap(imgCamera.Bitmap, True);
@@ -291,9 +263,20 @@ begin
                 UltimoCodigo := Codigo;
                 UltimaHora:=Time;
                 lblResultadoLeitura.Text := '('+inttostr(iCount)+') '+ReadResult.text;
+
+                //Lista de Leitura
+                  ListView1.BeginUpdate;
+                  ItemAdd := ListView1.Items.Add;
+                  ItemAdd.Text := BarCodeTitle + ': ' + ReadResult.text;
+                  ListView1.EndUpdate;
+
+
+                //
+
+
                 inc(iCount);
-                Toast('Leitura com sucesso.');
-                //FinalizaLeitura;
+                //Toast('Leitura com sucesso.');
+                FinalizaLeitura;
               end;
             end;
           end);

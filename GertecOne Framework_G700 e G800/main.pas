@@ -30,8 +30,8 @@ uses
 
 
   //Units do projeto
-  BarCode,
-  //BarCodeV2,
+  //BarCode,
+  CodigoDeBarraV2,
   CodigoDeBarras,
   //Impressao,
   ImpressaoG,
@@ -86,7 +86,7 @@ TBarCodes = (QRCODE);
     Image4: TImage;
     ImageControl1: TImageControl;
     Label5: TLabel;
-    cmdQrCode: TColorButton;
+    cmdCodBarraV2: TColorButton;
     Label6: TLabel;
     Image5: TImage;
     ColorButton2: TColorButton;
@@ -99,7 +99,7 @@ TBarCodes = (QRCODE);
     procedure cmdCodigoBarrasClick(Sender: TObject);
     procedure cmdImpressaoClick(Sender: TObject);
     procedure cmdNFCClick(Sender: TObject);
-    procedure cmdQrCodeClick(Sender: TObject);
+    procedure cmdCodBarraV2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure cmdNFCIdClick(Sender: TObject);
     procedure DesligaNFC;
@@ -123,15 +123,14 @@ implementation
 procedure TfrmMain.cmdCodigoBarrasClick(Sender: TObject);
 begin
 DesligaNFC;
- frmCodBarra.Show;
+frmCodBarra.Show;
 end;
 
-procedure TfrmMain.cmdQrCodeClick(Sender: TObject);
+procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
 begin
 DesligaNFC;
-frmBarCode.Show;
-//frmBarCodeV2.Show;
-
+//frmBarCode.Show;
+frmCodigoBarraV2.Show;
 end;
 
 procedure TfrmMain.DesligaNFC;
