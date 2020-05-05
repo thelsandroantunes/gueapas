@@ -77,6 +77,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
     procedure AtivaLeitura(tipo : TBarcodeFormat);
     procedure FinalizaLeitura;
+    procedure MessageV2(typeBar: string; codBar: string);
 
   public
     { Public declarations }
@@ -111,6 +112,25 @@ begin
         Result := True;
       end;
   end;
+end;
+
+procedure TfrmCodigoBarraV2.MessageV2(typeBar: string; codBar: string);
+var
+Popup: TPopup;
+begin
+  Popup := TPopup.Create(nil);
+  try
+     Popup.Parent := Self;
+     Popup.Placement := TPlacement.plAbsolute;
+     Popup.BoundsRect := RectF(0, 0, 300, 300);
+
+     Popup.Visible := True;
+     Popup.Popup;
+   finally
+
+   end;
+   ShowMessage('Código '+typeBar+#13#10#10+typeBar+ ': '+codBar);
+
 end;
 
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
@@ -180,7 +200,7 @@ var
   AppEventSvc: IFMXApplicationEventService;
 begin
 
-  AtivaLeitura(TBarcodeFormat.CODABAR);
+  AtivaLeitura(TBarcodeFormat.Auto);
   txtLeitura.Text := 'Leitura de Tudo';
 
   lFlash := False;
@@ -267,7 +287,7 @@ begin
                 //Lista de Leitura
                   ListView1.BeginUpdate;
                   ItemAdd := ListView1.Items.Add;
-                  ItemAdd.Text := BarCodeTitle + ': ' + ReadResult.text;
+                  ItemAdd.Text := 'TESTE' + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
 
 
@@ -275,8 +295,11 @@ begin
 
 
                 inc(iCount);
-                //Toast('Leitura com sucesso.');
+
+                MessageV2('TESTE',ReadResult.text);
                 FinalizaLeitura;
+                //Toast('Leitura com sucesso.');
+                //FinalizaLeitura;
               end;
             end;
           end);
