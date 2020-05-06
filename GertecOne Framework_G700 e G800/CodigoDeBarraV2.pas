@@ -297,7 +297,7 @@ begin
                   ListView1.EndUpdate;
 
                 //
-
+                   tipoBarCode:='TESTE';
                    PanelMessage.Visible:=True;
                    btnOK.Visible:=True;
                    lblMsg.Visible:= True;
