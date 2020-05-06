@@ -160,6 +160,7 @@ procedure TfrmMain.cmdNFCIdClick(Sender: TObject);
 begin
 {$IFNDEF __G800__}
 frmNFCid.Show;
+
 {$ENDIF}
 end;
 

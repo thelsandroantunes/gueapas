@@ -98,6 +98,7 @@ type
 
   private
     { Private declarations }
+    function traduzStatusImpressora(statusImpressora: JGEDI_PRNTR_e_Status): string;
   public
     { Public declarations }
   end;
@@ -112,6 +113,7 @@ var
   textSize: Integer;
   bcHeight:integer;
   bcWidth:integer;
+
 
 
   const N_COLUNAS=32;
@@ -621,12 +623,35 @@ begin
 end;
 
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
+
 begin
+
+
+
   lblMsg.Visible := True;
+//  lblMsg.Text:=GertecPrinter.statusImpressora;
   lblMsgCode.Visible := True;
   PanelMessage.Visible := True;
   btnOK.Visible := True;
 
+end;
+
+function TfrmImpressaoG.traduzStatusImpressora(statusImpressora: JGEDI_PRNTR_e_Status): string;
+var
+teste :    JGEDI_PRNTR_e_Status;
+
+begin
+
+  teste := TJGEDI_PRNTR_e_Status.Create;
+
+  case statusImpressora of
+     TJGEDI_PRNTR_e_Status.JavaClass.OK: result:= 'IMPRESSORA OK' ;
+     TJGEDI_PRNTR_e_Status.JavaClass.OUT_OF_PAPER: result:= 'SEM PAPEL' ;
+     TJGEDI_PRNTR_e_Status.JavaClass.OVERHEAT: result:= 'SUPER AQUECIMENTO' ;
+     TJGEDI_PRNTR_e_Status.JavaClass.UNKNOWN_ERROR: result:= 'ERRO DESCONHECIDO' ;
+  end;
+
+  Result:= result;
 end;
 
 end.

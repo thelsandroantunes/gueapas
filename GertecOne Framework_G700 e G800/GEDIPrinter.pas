@@ -45,6 +45,7 @@ type
     { protected declarations }
   public
     { public declarations }
+
     Alignment:T_ALINHAMENTO;
 
     FlagBold:boolean;
@@ -68,7 +69,9 @@ type
     procedure printOutput;
     procedure printReInit;
     procedure printImage(Imagem:TBitmap);
+    
     constructor Create;
+
 
   end;
 
@@ -262,8 +265,14 @@ except
       ShowMessage('Erro printImage=>'+e.Message);
   end;
 end;
+
+
+//****************************************************
+
 end;
 //****************************************************
+
+
 initialization
 
   GertecPrinter:=TGEDIPrinter.Create;
