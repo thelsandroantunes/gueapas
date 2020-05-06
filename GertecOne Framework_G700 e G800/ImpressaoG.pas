@@ -75,6 +75,10 @@ type
     CbQrCode: TComboBox;
     CbBarCodeW: TComboBox;
     CbBarCodeH: TComboBox;
+    PanelMessage: TPanel;
+    btnOK: TButton;
+    lblMsg: TLabel;
+    lblMsgCode: TLabel;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);
@@ -89,6 +93,7 @@ type
     procedure BtnItalicoClick(Sender: TObject);
     procedure BtnSublinhadoClick(Sender: TObject);
     procedure STATUSClick(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
 
 
   private
@@ -163,6 +168,14 @@ begin
      neg:=False;
   end;
 
+end;
+
+procedure TfrmImpressaoG.btnOKClick(Sender: TObject);
+begin
+lblMsg.Visible := False;
+  lblMsgCode.Visible := False;
+  PanelMessage.Visible := False;
+  btnOK.Visible := False;
 end;
 
 procedure TfrmImpressaoG.BtnSublinhadoClick(Sender: TObject);
@@ -608,22 +621,11 @@ begin
 end;
 
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
-var
-Popup: TPopup;
-
 begin
-     Popup := TPopup.Create(nil);
-  try
-     Popup.Parent := Self;
-     Popup.Placement := TPlacement.plAbsolute;
-     Popup.BoundsRect := RectF(0, 0, 300, 300);
-
-     Popup.Visible := True;
-     Popup.Popup;
-   finally
-
-   end;
-   ShowMessage('Status Impressora'+#13#10#10+'IMPRESSORA OK');
+  lblMsg.Visible := True;
+  lblMsgCode.Visible := True;
+  PanelMessage.Visible := True;
+  btnOK.Visible := True;
 
 end;
 
