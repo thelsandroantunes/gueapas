@@ -1703,7 +1703,7 @@ object frmImpressaoG: TfrmImpressaoG
     OnClick = BtnSublinhadoClick
   end
   object BtnNegrito: TButton
-    StyledSettings = [Family, FontColor]
+    StyledSettings = [FontColor]
     Position.X = 8.000000000000000000
     Position.Y = 232.000000000000000000
     Size.Width = 81.000000000000000000
@@ -1712,6 +1712,7 @@ object frmImpressaoG: TfrmImpressaoG
     StyleLookup = 'buttonstyle'
     TabOrder = 18
     Text = 'NEGRITO'
+    TextSettings.Font.Family = 'default'
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = BtnNegritoClick
   end
@@ -1867,7 +1868,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.PlatformDefault = False
   end
   object STATUS: TButton
-    StyledSettings = [Family, FontColor]
+    StyledSettings = [FontColor]
     Position.X = 8.000000000000000000
     Position.Y = 40.000000000000000000
     Size.Width = 329.000000000000000000
@@ -1875,6 +1876,7 @@ object frmImpressaoG: TfrmImpressaoG
     Size.PlatformDefault = False
     TabOrder = 1
     Text = 'STATUS IMPRESSORA'
+    TextSettings.Font.Family = 'Arial'
     TextSettings.Font.Size = 14.000000000000000000
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     OnClick = STATUSClick

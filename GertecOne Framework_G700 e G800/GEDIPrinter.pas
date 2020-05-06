@@ -125,7 +125,9 @@ var
   spaint : JPaint;
   style:Integer;
   family:JTypeface;
-
+  TypefaceFlag: Integer;
+  Typeface: JTypeface;
+  NomeFonte:string;
 begin
 
   spaint:= TJPaint.Create;
@@ -161,6 +163,9 @@ begin
 
   //new Font Family Text
   //********************************************
+    NomeFonte:=  TPath.Combine( TPath.GetDocumentsPath , 'Antro Vectra.otf');
+
+
   if (TextFamily = 0) then
     begin
     family := TJTypeface.JavaClass.MONOSPACE;
@@ -173,9 +178,9 @@ begin
   end else if(TextFamily = 3) then
     begin
     family := TJTypeface.JavaClass.SERIF;
-  end else if(TextFamily = 1) then
+  end else if(TextFamily = 4) then
     begin
-    family := TJTypeface.JavaClass.MONOSPACE;
+    family := TJTypeFace.JavaClass.createFromFile(StringToJString(NomeFonte));
   end;
   //********************************************
 

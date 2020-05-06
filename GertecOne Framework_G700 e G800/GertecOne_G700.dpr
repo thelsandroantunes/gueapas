@@ -95,7 +95,8 @@ uses
   JavaInterfaces in 'Imports NFC700\JavaInterfaces.pas',
   ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG},
   CodigoDeBarras in 'CodigoDeBarras.pas' {frmCodBarra},
-  CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2};
+  CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2},
+  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas';
 
 {$R *.res}
 

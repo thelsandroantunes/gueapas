@@ -308,6 +308,7 @@
             <Form>frmCodigoBarraV2</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="FMX.FontGlyphs.Android.pas"/>
         <JavaReference Include="libs\payment-1.14.13.190425.jar">
             <Disabled/>
         </JavaReference>
@@ -370,6 +371,13 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426">
                     <Platform Name="Android">
                         <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Antro Vectra.otf" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <RemoteName>Antro Vectra.otf</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

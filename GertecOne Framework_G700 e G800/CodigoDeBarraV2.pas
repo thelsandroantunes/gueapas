@@ -91,7 +91,6 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
 var
   frmCodigoBarraV2: TfrmCodigoBarraV2;
-  barCodeTitle: string;
 
 implementation
 
@@ -122,6 +121,7 @@ end;
 
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
 begin
+
 
   if Assigned(fScanManager) then
     fScanManager.Free;
@@ -262,6 +262,7 @@ begin
         fScanInProgress := True;
         try
           ReadResult := fScanManager.Scan(scanBitmap);
+
         except
           on E: Exception do
           begin
@@ -279,10 +280,10 @@ begin
           procedure
           var
             Codigo:string;
+            tipoBarCode: string;
           begin
             if (ReadResult <> nil) then
             begin
-
             //So registra mesmo codigo depois de 3 segundos
               if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
                 UltimoCodigo := Codigo;
@@ -296,13 +297,14 @@ begin
                   ListView1.EndUpdate;
 
                 //
-                  PanelMessage.Visible:=True;
-                  btnOK.Visible:=True;
 
-                  lblMsg.Visible:= True;
-                  lblMsg.Text:= 'Código TESTE';
-                  lblMsgCode.Visible:=True;
-                  lblMsgCode.Text:= 'TESTE: '+ReadResult.text;
+                   PanelMessage.Visible:=True;
+                   btnOK.Visible:=True;
+                   lblMsg.Visible:= True;
+                   lblMsg.Text:= 'Código '+tipoBarCode;
+                   lblMsgCode.Visible:=True;
+                   lblMsgCode.Text:= tipoBarCode+': '+ReadResult.text;
+
 
                 //
                   inc(iCount);

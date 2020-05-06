@@ -75,6 +75,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Antro Vectra.otf" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne_G700\assets\internal\</RemoteDir>
+            <RemoteName>Antro Vectra.otf</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_36x36.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>GertecOne_G700\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
