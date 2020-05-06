@@ -317,6 +317,7 @@ begin
           begin
             if (ReadResult <> nil) then
             begin
+            Codigo := ReadResult.text;
             //So registra mesmo codigo depois de 3 segundos
               if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
                 UltimoCodigo := Codigo;

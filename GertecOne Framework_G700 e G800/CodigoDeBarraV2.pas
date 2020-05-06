@@ -119,6 +119,33 @@ begin
   end;
 end;
 
+function RetornaFormato(barcode: TBarcodeFormat):string;
+begin
+  case barcode of
+    TBarcodeFormat.EAN_8 : result :='EAN8';
+    TBarcodeFormat.EAN_13 : result :='EAN13';
+    TBarcodeFormat.QR_CODE: result :='QRCode';
+    TBarcodeFormat.AZTEC: result := 'AZTEC';
+    TBarcodeFormat.CODABAR: result := 'CODABAR';
+    TBarcodeFormat.CODE_39: result := 'CODE_39';
+    TBarcodeFormat.CODE_93: result := 'CODE_93';
+    TBarcodeFormat.CODE_128: result := 'CODE_128';
+    TBarcodeFormat.DATA_MATRIX: result := 'DATA_MATRIX';
+    TBarcodeFormat.ITF: result := 'ITF';
+    TBarcodeFormat.MAXICODE: result := 'MAXICODE';
+    TBarcodeFormat.PDF_417: result := 'PDF_417';
+    TBarcodeFormat.RSS_14: result := 'RSS_14';
+    TBarcodeFormat.RSS_EXPANDED: result := 'RSS_EXPANED';
+    TBarcodeFormat.UPC_A: result := 'UPC_A';
+    TBarcodeFormat.UPC_E: result := 'UPC_E';
+    TBarcodeFormat.UPC_EAN_EXTENSION: result := 'UPC_EAN_EXTENSION';
+    TBarcodeFormat.MSI: result := 'MSI';
+    TBarcodeFormat.PLESSEY: result := 'PLESSEY';
+    TBarcodeFormat.ALL_1D: result := 'EAN_14';
+
+  end;
+end;
+
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
 begin
 
@@ -283,6 +310,10 @@ begin
             tipoBarCode: string;
           begin
             if (ReadResult <> nil) then
+
+            Codigo := ReadResult.text;
+            tipoBarCode := RetornaFormato(ReadResult.BarcodeFormat);
+
             begin
             //So registra mesmo codigo depois de 3 segundos
               if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
@@ -293,17 +324,17 @@ begin
                 //Lista de Leitura
                   ListView1.BeginUpdate;
                   ItemAdd := ListView1.Items.Add;
-                  ItemAdd.Text := 'TESTE' + ': ' + ReadResult.text;
+                  ItemAdd.Text := tipoBarCode + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
 
                 //
-                   tipoBarCode:='TESTE';
+
                    PanelMessage.Visible:=True;
                    btnOK.Visible:=True;
                    lblMsg.Visible:= True;
-                   lblMsg.Text:= 'Código '+tipoBarCode;
+                   lblMsg.Text:= 'Código ' + tipoBarCode;
                    lblMsgCode.Visible:=True;
-                   lblMsgCode.Text:= tipoBarCode+': '+ReadResult.text;
+                   lblMsgCode.Text:= tipoBarCode+ ': '+ReadResult.text ;
 
 
                 //

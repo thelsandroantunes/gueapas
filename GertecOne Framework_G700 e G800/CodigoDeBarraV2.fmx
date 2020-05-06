@@ -97,17 +97,17 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   end
   object PanelMessage: TPanel
     Position.X = 32.000000000000000000
-    Position.Y = 240.000000000000000000
+    Position.Y = 216.000000000000000000
     Size.Width = 297.000000000000000000
-    Size.Height = 137.000000000000000000
+    Size.Height = 161.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 23
     object btnOK: TButton
       StyledSettings = [Family, Size, Style]
-      Position.X = 48.000000000000000000
-      Position.Y = 96.000000000000000000
-      Size.Width = 49.000000000000000000
-      Size.Height = 22.000000000000000000
+      Position.X = 40.000000000000000000
+      Position.Y = 104.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 30.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
       Text = 'OK'
