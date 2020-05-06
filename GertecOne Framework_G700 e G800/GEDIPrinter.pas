@@ -58,6 +58,7 @@ type
 
     textFamily:integer; //new
 
+    testePrinter: JGEDI_PRNTR_e_Status;
 
     procedure PrintString(strPrint:string); overload;
     procedure PrintString(Alinhamento:T_ALINHAMENTO;strPrint:string);overload;
@@ -69,6 +70,8 @@ type
     procedure printOutput;
     procedure printReInit;
     procedure printImage(Imagem:TBitmap);
+
+    function statusImpressora(): JGEDI_PRNTR_e_Status;
     
     constructor Create;
 
@@ -119,6 +122,8 @@ begin
     textSize:=20;
 
     TextFamily:=0; //new
+
+    testePrinter := TJGEDI_PRNTR_e_Status.Create;
 
 end;
 //****************************************************
@@ -272,6 +277,11 @@ end;
 end;
 //****************************************************
 
+
+function TGEDIPrinter.StatusImpressora(): JGEDI_PRNTR_e_Status;
+begin
+  Result:= iPRNTR.Status;
+end;
 
 initialization
 
