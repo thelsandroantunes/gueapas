@@ -1,21 +1,23 @@
-unit uNFCId;
+unit uNFCbc;
 
 interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  FMX.Controls.Presentation, FMX.StdCtrls,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation,
+
   // JavaInterfaces,
   Androidapi.Helpers,
   G700NFC
   ;
 
 type
-  TfrmNFCid = class(TForm)
+  TfrmNFCbc = class(TForm)
     lblMensagem: TLabel;
     btnIdCartao: TButton;
     Timer1: TTimer;
+
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnIdCartaoClick(Sender: TObject);
@@ -23,50 +25,39 @@ type
 
     procedure mensagemAproximeCartao;
     procedure mensagemEscolhaOpcao;
-
-     procedure ativaCartao;
   private
     { Private declarations }
   public
     { Public declarations }
-    ok:Boolean;
   end;
 
 var
-  frmNFCid: TfrmNFCid;
+  frmNFCbc: TfrmNFCbc;
   GertecNFC : TG700NFC;
 implementation
 
 {$R *.fmx}
 
 
-
-procedure TfrmNFCid.mensagemAproximeCartao;
+procedure TfrmNFCbc.mensagemAproximeCartao;
 begin
   lblMensagem.text := 'Aproxime o cartão';
 end;
 
-procedure TfrmNFCid.mensagemEscolhaOpcao;
+procedure TfrmNFCbc.mensagemEscolhaOpcao;
 begin
   lblMensagem.text := 'Escolha uma opção';
 end;
 
-procedure TfrmNFCid.btnIdCartaoClick(Sender: TObject);
+procedure TfrmNFCbc.btnIdCartaoClick(Sender: TObject);
 begin
   mensagemAproximeCartao;
   GertecNFC.setLeituraID;
   Timer1.Enabled := true;
 end;
 
-//******************************************************
- procedure TfrmNFCid.ativaCartao;
-begin
-  mensagemAproximeCartao;
-  GertecNFC.setLeituraID;
-  Timer1.Enabled := true;
-end;
-//******************************************************
-procedure TfrmNFCid.FormActivate(Sender: TObject);
+
+procedure TfrmNFCbc.FormActivate(Sender: TObject);
 begin
 
   if(GertecNFC = nil)then begin
@@ -77,28 +68,18 @@ begin
   //EnableForegroundDispatch
   GertecNFC.PowerOn;
 
-  if ok then begin
-    btnIdCartao.Visible:=True;
-    mensagemEscolhaOpcao;
-  end else begin
-    btnIdCartao.Visible:=False;
-    mensagemAproximeCartao;
-//    GertecNFC.setLeituraID;
-    Timer1.Enabled := true;
-  end;
-
-
+  mensagemEscolhaOpcao;
 
 
 end;
 
 
-procedure TfrmNFCid.FormCreate(Sender: TObject);
+procedure TfrmNFCbc.FormCreate(Sender: TObject);
 begin
 //G700NFC := TG700NFC.Create(lblMensagem);
 end;
 
-procedure TfrmNFCid.Timer1Timer(Sender: TObject);
+procedure TfrmNFCbc.Timer1Timer(Sender: TObject);
 var
   lValid   : Boolean;
   idCartao : String;
@@ -110,10 +91,7 @@ begin
   if( not idCartao.IsEmpty) then begin
     ShowMessage('ID do cartão   : ' + GertecNFC.retornaIdCartao+#13#10'ID do cartão(Hex): ' + GertecNFC.retornaIdCartaoHex+#13#10);
     GertecNFC.LimpaIdCartao;
-    if ok then begin mensagemEscolhaOpcao;
-    end else begin
-    ativaCartao;
-    end;
+    mensagemEscolhaOpcao;
   end else begin
     Timer1.Enabled := True;
   end;

@@ -96,7 +96,8 @@ uses
   ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG},
   CodigoDeBarras in 'CodigoDeBarras.pas' {frmCodBarra},
   CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2},
-  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas';
+  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas',
+  uNFCbc in 'uNFCbc.pas' {frmNFCbc};
 
 {$R *.res}
 
@@ -109,6 +110,7 @@ begin
   Application.CreateForm(TfrmImpressaoG, frmImpressaoG);
   Application.CreateForm(TfrmCodBarra, frmCodBarra);
   Application.CreateForm(TfrmCodigoBarraV2, frmCodigoBarraV2);
+  Application.CreateForm(TfrmNFCbc, frmNFCbc);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.

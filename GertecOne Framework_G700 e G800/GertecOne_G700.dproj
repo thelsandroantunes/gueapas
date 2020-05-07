@@ -309,6 +309,10 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="FMX.FontGlyphs.Android.pas"/>
+        <DCCReference Include="uNFCbc.pas">
+            <Form>frmNFCbc</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <JavaReference Include="libs\payment-1.14.13.190425.jar">
             <Disabled/>
         </JavaReference>

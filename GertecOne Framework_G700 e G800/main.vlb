@@ -13,9 +13,6 @@ Coordinates=10,122,53,58
 [Image6]
 Coordinates=73,122,57,58
 
-[ColorButton2]
-Coordinates=246,258,90,36
-
 [Image4]
 Coordinates=10,190,57,58
 
@@ -70,4 +67,7 @@ Coordinates=10,10,235,102
 [cmdCodBarraV2]
 Coordinates=421,258,83,36
 Visible=True
+
+[cmdNFCBc]
+Coordinates=246,258,90,36
 
