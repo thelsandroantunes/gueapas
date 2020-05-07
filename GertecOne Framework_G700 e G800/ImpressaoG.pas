@@ -39,7 +39,9 @@ uses
   Fmx.Bind.Editors,
   Data.Bind.Components,
   Data.Bind.ObjectScope, FMX.Colors, FMX.ListBox, FMX.EditBox, FMX.NumberBox,
-  FMX.ComboTrackBar;
+  FMX.ComboTrackBar,
+
+  Androidapi.JNI.JavaTypes;
 
 type
   TfrmImpressaoG = class(TForm)
@@ -622,20 +624,15 @@ begin
 end;
 
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
-var result: string;
+var 
+result: string;
+
 begin
 
-  case GertecPrinter.statusImpressora.ordinal of
-     0: result:= 'IMPRESSORA OK' ;
-     1: result:= 'SEM PAPEL' ;
-     2: result:= 'SUPER AQUECIMENTO' ;
-     3: result:= 'ERRO DESCONHECIDO' ;
-  end;
+  result := GertecPrinter.StatusImpressora;
 
-  
-  
   lblMsg.Visible := True;
-  lblMsg.Text:=result;
+  lblMsgCode.Text:=result;
   lblMsgCode.Visible := True;
   PanelMessage.Visible := True;
   btnOK.Visible := True;

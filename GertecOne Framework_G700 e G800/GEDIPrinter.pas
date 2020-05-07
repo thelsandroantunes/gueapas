@@ -44,8 +44,10 @@ type
   protected
     { protected declarations }
   public
+  
     { public declarations }
-
+    
+    
     Alignment:T_ALINHAMENTO;
 
     FlagBold:boolean;
@@ -58,7 +60,8 @@ type
 
     textFamily:integer; //new
 
-    testePrinter: JGEDI_PRNTR_e_Status;
+    teste: integer;
+    
 
     procedure PrintString(strPrint:string); overload;
     procedure PrintString(Alinhamento:T_ALINHAMENTO;strPrint:string);overload;
@@ -71,10 +74,9 @@ type
     procedure printReInit;
     procedure printImage(Imagem:TBitmap);
 
-    function statusImpressora(): JGEDI_PRNTR_e_Status;
-    
+    function StatusImpressora(): String;
+    function RetornaStatus(tipoStatus: JGEDI_PRNTR_e_Status):string;
     constructor Create;
-
 
   end;
 
@@ -110,6 +112,26 @@ begin
 
 end;
 //****************************************************
+
+//Métodos de Captura do Estado do papel pelo sensor da máquina e aquecimento
+function TGEDIPrinter.RetornaStatus(tipoStatus: JGEDI_PRNTR_e_Status):string;
+begin
+  case tipoStatus.ordinal of
+    0: result:= 'IMPRESSORA OK' ;
+    1: result:= 'SUPER AQUECIMENTO' ;
+    2: result:= 'SEM PAPEL' ;
+    3: result:= 'ERRO DESCONHECIDO' ;
+
+  end;
+end;
+
+function TGEDIPrinter.StatusImpressora(): String;
+begin
+  Result:= RetornaStatus(iPRNTR.Status);
+end;
+//****************************************************
+
+
 constructor TGEDIPrinter.Create;
 begin
 
@@ -123,7 +145,7 @@ begin
 
     TextFamily:=0; //new
 
-    testePrinter := TJGEDI_PRNTR_e_Status.Create;
+    teste:=0;
 
 end;
 //****************************************************
@@ -176,7 +198,7 @@ begin
 
   if (TextFamily = 0) then
     begin
-    family := TJTypeface.JavaClass.MONOSPACE;
+    family := TJTypeface.JavaClass.DEFAULT;
   end else if(TextFamily = 1) then
     begin
     family := TJTypeface.JavaClass.MONOSPACE;
@@ -270,19 +292,8 @@ except
       ShowMessage('Erro printImage=>'+e.Message);
   end;
 end;
-
-
-//****************************************************
-
 end;
 //****************************************************
-
-
-function TGEDIPrinter.StatusImpressora(): JGEDI_PRNTR_e_Status;
-begin
-  Result:= iPRNTR.Status;
-end;
-
 initialization
 
   GertecPrinter:=TGEDIPrinter.Create;
