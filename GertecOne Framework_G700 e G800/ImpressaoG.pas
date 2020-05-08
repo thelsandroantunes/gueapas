@@ -102,6 +102,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure CleanText(limpaText: Boolean);
   end;
 
 var
@@ -143,6 +144,33 @@ begin
 
 end;
 
+//==========================================
+procedure TfrmImpressaoG.CleanText(limpaText: Boolean);
+begin
+  if limpaText then
+  begin
+    Edit1.Text := '';
+
+    RdCentro.IsChecked:=False;
+    RdDireita.IsChecked:=False;
+    RdEsquerda.IsChecked:=False;
+
+    CbFont.ItemIndex := 0;
+    CbSize.ItemIndex := 0;
+
+    CbtnNegrito.Color := $FF000000;
+    CbtnItalico.Color  := $FF000000 ;
+    CbtnSublinhado.Color := $FF000000;
+
+
+    CbBarCodeW.ItemIndex := 0;
+    CbBarCodeH.ItemIndex := 0;
+    CbQrCode.ItemIndex := 0;
+
+
+
+  end;
+end;
 
 //==========================================
 procedure TfrmImpressaoG.BtnItalicoClick(Sender: TObject);
@@ -301,7 +329,6 @@ if CbBarCodeW.ItemIndex = 0 then
   GertecPrinter.printOutput;
 end;
 
-
 //==========================================
 procedure TfrmImpressaoG.cmdImageClick(Sender: TObject);
 var
@@ -387,7 +414,6 @@ begin
   GertecPrinter.printOutput;
 
 end;
-
 
 //==========================================
 procedure TfrmImpressaoG.cmdImpressaoGClick(Sender: TObject);
@@ -481,7 +507,6 @@ except
   end;
 end;
 end;
-
 
 //==========================================
 procedure TfrmImpressaoG.cmdTextoClick(Sender: TObject);

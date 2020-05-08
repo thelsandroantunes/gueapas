@@ -86,7 +86,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
   public
     { Public declarations }
-
+     ok:Boolean;
   end;
 
 var
@@ -226,6 +226,8 @@ var
 begin
 
 
+
+
   PanelMessage.Visible:=False;
   btnOK.Visible:=False;
   lblMsg.Visible:= False;
@@ -323,8 +325,8 @@ begin
 
                 //Lista de Leitura
                   ListView1.BeginUpdate;
-                  ItemAdd := ListView1.Items.Add;
-                  ItemAdd.Text := tipoBarCode + ': ' + ReadResult.text;
+                   ItemAdd := ListView1.Items.Add;
+                   ItemAdd.Text := tipoBarCode + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
 
                 //

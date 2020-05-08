@@ -1,5 +1,7 @@
 program GertecOne_G700;
 
+
+
 uses
   System.StartUpCopy,
   FMX.Forms,
@@ -97,7 +99,8 @@ uses
   CodigoDeBarras in 'CodigoDeBarras.pas' {frmCodBarra},
   CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2},
   FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas',
-  uNFCbc in 'uNFCbc.pas' {frmNFCbc};
+  uNFCbc in 'uNFCbc.pas' {frmNFCbc},
+  uNFC in 'uNFC.pas';
 
 {$R *.res}
 

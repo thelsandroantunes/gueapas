@@ -83,7 +83,7 @@ begin
   end else begin
     btnIdCartao.Visible:=False;
     mensagemAproximeCartao;
-//    GertecNFC.setLeituraID;
+
     Timer1.Enabled := true;
   end;
 

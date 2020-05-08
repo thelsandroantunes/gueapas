@@ -313,6 +313,7 @@
             <Form>frmNFCbc</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="uNFC.pas"/>
         <JavaReference Include="libs\payment-1.14.13.190425.jar">
             <Disabled/>
         </JavaReference>

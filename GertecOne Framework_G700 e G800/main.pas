@@ -131,6 +131,7 @@ procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
 begin
 DesligaNFC;
 //frmBarCode.Show;
+frmCodigoBarraV2.ok:= False;
 frmCodigoBarraV2.Show;
 end;
 
@@ -147,6 +148,7 @@ begin
 //ShowMessage('Impressao');
 DesligaNFC;
 frmImpressaoG.PanelMessage.Visible:=False;
+frmImpressaoG.CleanText(True);
 frmImpressaoG.Show;
 end;
 
@@ -178,6 +180,10 @@ procedure TfrmMain.FormCreate(Sender: TObject);
 var
 DeviceType :string;
 begin
+
+
+
+
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
   if(DeviceType = 'Smart G800')then begin
     //ShowMessage('Smart G800');

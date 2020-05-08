@@ -2015,11 +2015,16 @@ object frmImpressaoG: TfrmImpressaoG
     TabOrder = 39
   end
   object PanelMessage: TPanel
+    Margins.Left = 1.000000000000000000
+    Margins.Top = 1.000000000000000000
+    Margins.Right = 1.000000000000000000
+    Margins.Bottom = 1.000000000000000000
     Position.X = 24.000000000000000000
     Position.Y = 344.000000000000000000
     Size.Width = 297.000000000000000000
     Size.Height = 161.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'panelstyle'
     Visible = False
     TabOrder = 23
     object btnOK: TButton
