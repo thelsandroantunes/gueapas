@@ -124,6 +124,14 @@ implementation
 procedure TfrmMain.cmdCodigoBarrasClick(Sender: TObject);
 begin
 DesligaNFC;
+
+if (frmCodBarra.getAtivoCamera = True) then
+begin
+   frmCodBarra.iniciaBarCode(False);
+end else begin
+   frmCodBarra.iniciaBarCode(True);
+end;
+
 frmCodBarra.Show;
 end;
 

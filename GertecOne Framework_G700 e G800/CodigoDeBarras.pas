@@ -86,11 +86,16 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     procedure FinalizaLeitura;
   public
     { Public declarations }
+
+    procedure iniciaBarCode(limpa: Boolean);
+    function getAtivoCamera(): Boolean;
+
   end;
 
 var
   frmCodBarra: TfrmCodBarra;
   barCodeTitle: string;
+  ativoCamera:Boolean;
 
 implementation
 
@@ -118,6 +123,24 @@ begin
   end;
 end;
 
+//***********************************************************
+ function TfrmCodBarra.getAtivoCamera(): Boolean;
+ begin
+   Result := ativoCamera;
+ end;
+
+//***********************************************************
+procedure TfrmCodBarra.iniciaBarCode(limpa: Boolean);
+begin
+  if limpa then
+  begin
+    ListView1.Items.Clear;
+  end else begin
+    ListView1.Items.Clear;
+    FinalizaLeitura;
+  end;
+end;
+
 procedure TfrmCodBarra.AtivaLeitura(tipo : TBarcodeFormat);
 begin
 
@@ -136,6 +159,7 @@ begin
   Camera.Quality := FMX.Media.TVideoCaptureQuality.MediumQuality;
   Camera.Active := True;
 
+  ativoCamera:=True;
   txtLeitura.Visible:=True;
   lblResultadoLeitura.Visible:=True;
 
@@ -224,6 +248,9 @@ begin
   imgCamera.Visible:=False;
   lblResultadoLeitura.Visible:=False;
   txtLeitura.Visible:=False;
+
+  ativoCamera:=False;
+
   //Toast('Leitura feita com sucesso.');
 end;
 
