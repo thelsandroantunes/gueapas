@@ -69,7 +69,7 @@ begin
   case ModoNFC of
     NFC_ESCRITA:        NFC.setGravaMensagemURL(txtMensagem.Text, txtUrl.Text);
     NFC_LEITURA_ID:     NFC.setLeituraID;
-    NFC_LEITURA_MSG:   NFC.setLeituraMensagem;
+    NFC_LEITURA_MSG:    NFC.setLeituraMensagem;
   end;
 
   timerNFC.Enabled := true;

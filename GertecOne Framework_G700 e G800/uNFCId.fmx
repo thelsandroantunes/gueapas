@@ -3,7 +3,7 @@ object frmNFCid: TfrmNFCid
   Top = 0
   Caption = 'Form1'
   ClientHeight = 536
-  ClientWidth = 317
+  ClientWidth = 333
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -13,9 +13,9 @@ object frmNFCid: TfrmNFCid
   object lblMensagem: TLabel
     Align = Center
     Anchors = [akLeft, akTop, akRight, akBottom]
-    StyledSettings = [Family, Style, FontColor]
-    Size.Width = 290.000000000000000000
-    Size.Height = 25.000000000000000000
+    StyledSettings = [Family]
+    Size.Width = 306.000000000000000000
+    Size.Height = 38.000000000000000000
     Size.PlatformDefault = False
     TextSettings.Font.Size = 30.000000000000000000
     TextSettings.HorzAlign = Center
@@ -38,5 +38,29 @@ object frmNFCid: TfrmNFCid
     OnTimer = Timer1Timer
     Left = 248
     Top = 8
+  end
+  object lblLeitura: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 80.000000000000000000
+    Position.Y = 232.000000000000000000
+    Size.Width = 209.000000000000000000
+    Size.Height = 41.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claGray
+    Text = 'lblLeitura'
+    Visible = False
+    TabOrder = 4
+  end
+  object lblCartaoId: TLabel
+    StyledSettings = [Family, Size, Style]
+    Position.X = 80.000000000000000000
+    Position.Y = 267.000000000000000000
+    Size.Width = 209.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.FontColor = claGray
+    Text = 'lblCartaoId'
+    Visible = False
+    TabOrder = 5
   end
 end

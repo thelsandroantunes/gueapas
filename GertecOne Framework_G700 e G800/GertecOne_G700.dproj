@@ -314,7 +314,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="uNFC.pas"/>
-        <JavaReference Include="libs\payment-1.14.13.190425.jar">
+        <JavaReference Include="libs\payment-1.14.10.181016_classes.jar">
             <Disabled/>
         </JavaReference>
         <BuildConfiguration Include="Release">
