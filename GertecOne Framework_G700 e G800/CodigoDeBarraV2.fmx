@@ -101,6 +101,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     Size.Width = 297.000000000000000000
     Size.Height = 161.000000000000000000
     Size.PlatformDefault = False
+    Visible = False
     TabOrder = 23
     object btnOK: TButton
       StyledSettings = [Family, Size, Style]

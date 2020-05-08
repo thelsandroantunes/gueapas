@@ -86,11 +86,15 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
   public
     { Public declarations }
-     ok:Boolean;
+     function getOKCamera(): Boolean;
+     procedure iniciaBarCodeV2(pauseCamera: Boolean);
+
+
   end;
 
 var
   frmCodigoBarraV2: TfrmCodigoBarraV2;
+  ok: Boolean;
 
 implementation
 
@@ -118,6 +122,30 @@ begin
       end;
   end;
 end;
+
+//***********************************************************
+ function TfrmCodigoBarraV2.getOKCamera(): Boolean;
+ begin
+    //FinalizaLeitura;
+    Result := ok;
+ end;
+
+//***********************************************************
+procedure TfrmCodigoBarraV2.iniciaBarCodeV2(pauseCamera: Boolean);
+begin
+  if pauseCamera then
+  begin
+    ListView1.Items.Clear;
+  end else begin
+    ListView1.Items.Clear;
+    PanelMessage.Visible:=False;
+    AtivaLeitura(TBarcodeFormat.Auto);
+  end;
+end;
+
+//***********************************************************
+
+
 
 function RetornaFormato(barcode: TBarcodeFormat):string;
 begin
@@ -165,6 +193,8 @@ begin
   Camera.Quality := FMX.Media.TVideoCaptureQuality.MediumQuality;
   Camera.Active := True;
 
+  ok:=True;
+
 end;
 
 procedure TfrmCodigoBarraV2.btnFlashClick(Sender: TObject);
@@ -206,7 +236,10 @@ begin
   fScanManager.Free;
   fFMXBarcode.Free;
   fScanInProgress := False;
-  Toast('Leitura feita com sucesso.');
+
+  ok := False;
+  //Toast('Leitura feita com sucesso.');
+
 end;
 
 procedure TfrmCodigoBarraV2.CameraSampleBufferReady(Sender: TObject;
@@ -224,9 +257,6 @@ procedure TfrmCodigoBarraV2.FormCreate(Sender: TObject);
 var
   AppEventSvc: IFMXApplicationEventService;
 begin
-
-
-
 
   PanelMessage.Visible:=False;
   btnOK.Visible:=False;

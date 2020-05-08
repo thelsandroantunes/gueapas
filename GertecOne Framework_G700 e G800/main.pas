@@ -139,7 +139,12 @@ procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
 begin
 DesligaNFC;
 //frmBarCode.Show;
-frmCodigoBarraV2.ok:= False;
+
+if frmCodigoBarraV2.getOKCamera then
+begin
+  frmCodigoBarraV2.iniciaBarCodeV2(False);
+end;
+
 frmCodigoBarraV2.Show;
 end;
 
