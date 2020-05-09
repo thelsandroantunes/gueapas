@@ -81,6 +81,7 @@ type
     btnOK: TButton;
     lblMsg: TLabel;
     lblMsgCode: TLabel;
+    ImageControl2: TImageControl;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);
@@ -96,7 +97,6 @@ type
     procedure BtnSublinhadoClick(Sender: TObject);
     procedure STATUSClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
-
 
   private
     { Private declarations }
@@ -167,7 +167,7 @@ begin
     CbBarCodeH.ItemIndex := 0;
     CbQrCode.ItemIndex := 0;
 
-
+    Edit1.Text.Empty;
 
   end;
 end;
@@ -336,83 +336,14 @@ qr:string;
 i:integer;
 begin
 //=========
-  //=========
-  GertecPrinter.FlagBold := True;
-  GertecPrinter.textSize := 16;
-  GertecPrinter.PrintString(ESQUERDA,'NOME DO ESTABELECIMENTO');
-  GertecPrinter.FlagBold := False;
-  GertecPrinter.textSize := 14;
-  GertecPrinter.PrintString(ESQUERDA,'Endereço,101 - Bairro');
-  GertecPrinter.PrintString(ESQUERDA,'São Paulo - SP - CEP 13.001-000');
-  GertecPrinter.FlagBold := True;
-  GertecPrinter.PrintString(ESQUERDA,'CNPJ: 11.222.333/0001-44');
-  GertecPrinter.FlagBold := False;
-  GertecPrinter.PrintString(ESQUERDA,'IE: 000.000.000.000');
-  GertecPrinter.FlagSublinhado := True;
-  GertecPrinter.PrintString(ESQUERDA,'IM:0.000.000-0                    ');
-  GertecPrinter.textSize := 30;
-  GertecPrinter.PrintString(CENTRALIZADO,'________________');
-
-  GertecPrinter.FlagSublinhado := False;
-  GertecPrinter.textSize := 16;
-  GertecPrinter.FlagBold:=True;
-  GertecPrinter.PrintString(CENTRALIZADO,'CUPOM FISCAL ELETRONICO-SAT');
-  GertecPrinter.textSize := 14;
-  GertecPrinter.FlagBold:=False;
-  GertecPrinter.PrintString(ESQUERDA,'ITEM  CÓDIGO   DESCRIÇÃO');
-  GertecPrinter.PrintString(ESQUERDA,'qtd   UN.  VL. UNIT(R$) ST  VL. ITEM(R$)');
-  GertecPrinter.printBlankLine(15);
-  GertecPrinter.PrintString(ESQUERDA,'001   1011213      NOME DO PRODUTO');
-  GertecPrinter.FlagBold:=True;
-  GertecPrinter.FlagSublinhado := True;
-
-  GertecPrinter.PrintString(ESQUERDA,'  001.000UN    X     12,00 F1 A   25,00   ');
-
-  GertecPrinter.FlagSublinhado := False;
-  GertecPrinter.FlagBold:=True;
-  GertecPrinter.FlagSublinhado := True;
-  GertecPrinter.textSize := 30;
-  GertecPrinter.PrintString(CENTRALIZADO,'________________');
-    GertecPrinter.textSize := 14;
-  GertecPrinter.PrintString(ESQUERDA,'TOTAL                           R$25,00');
-
-  GertecPrinter.textSize := 10;
-  GertecPrinter.PrintString(ESQUERDA,'Tributos Totais incidentes (Lei Federal 12.741/2012)   R$4,00');
-
-  GertecPrinter.FlagSublinhado := False;
-  GertecPrinter.FlagBold:=False;
-  GertecPrinter.textSize := 14;
-  GertecPrinter.PrintString(ESQUERDA,'N° 000000139   Série 1    01/01/2016 15:00:00');
-
-
-  GertecPrinter.PrintString(CENTRALIZADO,'Consulte pela chave de acesso em ');
-  GertecPrinter.PrintString(CENTRALIZADO,'http;//www.nfp.fazenda.sp.gov.br ');
-  GertecPrinter.PrintString(CENTRALIZADO,'CHAVE DE ACESSO ');
-  GertecPrinter.FlagBold:=True;
-  GertecPrinter.textSize := 30;
-  GertecPrinter.PrintString(CENTRALIZADO,'________________');
-
-
-  GertecPrinter.FlagSublinhado := True;
-  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.CODE_128,20,20,'12345678901234567890');
-  GertecPrinter.textSize := 30;
-  GertecPrinter.PrintString(CENTRALIZADO,'________________');
-
-  GertecPrinter.FlagSublinhado := False;
-  GertecPrinter.textSize := 14;
-  GertecPrinter.PrintString(CENTRALIZADO,'CONSUMIDOR NÃO IDENTIFICADO');
-  GertecPrinter.PrintString(ESQUERDA ,'CPF: 000.000.000-00');
-  GertecPrinter.printBlankLine(20);
-
-  qr:='';
-  for i := 1 to 5 do qr:=qr+'12345678901234567890';
-  GertecPrinter.DrawBarCode(TJGEDI_PRNTR_e_BarCodeType.JavaClass.QR_CODE,200,200,qr);
-
-
-
+  GertecPrinter.textSize := 20;
+  GertecPrinter.printString(CentralizaTraco('[Iniciando Impressao Imagem]',N_COLUNAS));
+  GertecPrinter.printOutput;
+  GertecPrinter.printImage( ImageControl1.Bitmap);
+  GertecPrinter.printBlankLine(30);
+  GertecPrinter.printString(CentralizaTraco('[Fim Impressao Imagem]',N_COLUNAS));
   GertecPrinter.printBlankLine(150);
   GertecPrinter.printOutput;
-
 end;
 
 //==========================================
@@ -515,108 +446,112 @@ TxtInput: string;
 
 begin
 
-
-
-  if CbFont.ItemIndex = 0 then
-    begin
-    GertecPrinter.TextFamily := 0;
-  end else if CbFont.ItemIndex = 1 then
-    begin
-    GertecPrinter.TextFamily := 1;
-  end else if CbFont.ItemIndex = 2 then
-    begin
-    GertecPrinter.TextFamily := 2;
-  end else if CbFont.ItemIndex = 3 then
-    begin
-    GertecPrinter.TextFamily := 3;
-  end else if CbFont.ItemIndex = 4 then
-    begin
-    GertecPrinter.TextFamily := 4;
-  end;
-
-
-
-  TxtInput := Edit1.Text;
-
-  if CbSize.ItemIndex = 0 then
-    begin
-    textSize:=60;
-  end else if CbSize.ItemIndex = 1 then
-    begin
-    textSize:=20;
-  end else if CbSize.ItemIndex = 2 then
-    begin
-    textSize:=30;
-  end else if CbSize.ItemIndex = 3 then
-    begin
-    textSize:=40;
-  end else if CbSize.ItemIndex = 4 then
-    begin
-    textSize:=50;
-  end else if CbSize.ItemIndex = 5 then
-    begin
-    textSize:=70;
-  end else if CbSize.ItemIndex = 6 then
-    begin
-    textSize:=80;
-  end else if CbSize.ItemIndex = 7 then
-    begin
-    textSize:=90;
-  end else if CbSize.ItemIndex = 8 then
-    begin
-    textSize:=100;
-  end;
-
-  GertecPrinter.textSize := textSize;
-
-  if neg then
-    begin
-      GertecPrinter.FlagBold := True;
-  end else begin
-      GertecPrinter.FlagBold := False;
-  end;
-
-  if ita then
-    begin
-      GertecPrinter.FlagItalico := True;
-  end else begin
-      GertecPrinter.FlagItalico := False;
-  end;
-
-  if sub then
+  if Edit1.Text = '' then
   begin
-        GertecPrinter.FlagSublinhado := True;
+    ShowMessage('Digite um texto para imprimir');
   end else begin
-       GertecPrinter.FlagSublinhado := False;
+
+
+
+    if CbFont.ItemIndex = 0 then
+      begin
+      GertecPrinter.TextFamily := 0;
+    end else if CbFont.ItemIndex = 1 then
+      begin
+      GertecPrinter.TextFamily := 1;
+    end else if CbFont.ItemIndex = 2 then
+      begin
+      GertecPrinter.TextFamily := 2;
+    end else if CbFont.ItemIndex = 3 then
+      begin
+      GertecPrinter.TextFamily := 3;
+    end else if CbFont.ItemIndex = 4 then
+      begin
+      GertecPrinter.TextFamily := 4;
+    end;
+
+    TxtInput := Edit1.Text;
+
+    if CbSize.ItemIndex = 0 then
+      begin
+      textSize:=60;
+    end else if CbSize.ItemIndex = 1 then
+      begin
+      textSize:=20;
+    end else if CbSize.ItemIndex = 2 then
+      begin
+      textSize:=30;
+    end else if CbSize.ItemIndex = 3 then
+      begin
+      textSize:=40;
+    end else if CbSize.ItemIndex = 4 then
+      begin
+      textSize:=50;
+    end else if CbSize.ItemIndex = 5 then
+      begin
+      textSize:=70;
+    end else if CbSize.ItemIndex = 6 then
+      begin
+      textSize:=80;
+    end else if CbSize.ItemIndex = 7 then
+      begin
+      textSize:=90;
+    end else if CbSize.ItemIndex = 8 then
+      begin
+      textSize:=100;
+    end;
+
+    GertecPrinter.textSize := textSize;
+
+    if neg then
+      begin
+        GertecPrinter.FlagBold := True;
+    end else begin
+        GertecPrinter.FlagBold := False;
+    end;
+
+    if ita then
+      begin
+        GertecPrinter.FlagItalico := True;
+    end else begin
+        GertecPrinter.FlagItalico := False;
+    end;
+
+    if sub then
+    begin
+          GertecPrinter.FlagSublinhado := True;
+    end else begin
+         GertecPrinter.FlagSublinhado := False;
+    end;
+
+    if pos = 0 then
+      begin
+
+        GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+
+    end
+
+    else if pos = -1 then
+      begin
+
+        GertecPrinter.PrintString(ESQUERDA,TxtInput);
+
+    end
+
+    else if pos = 1 then
+      begin
+
+        GertecPrinter.PrintString(DIREITA,TxtInput);
+
+    end else
+      begin
+        GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
+    end;
+
+    GertecPrinter.printBlankLine(150);
+    GertecPrinter.printOutput;
+
   end;
-
-  if pos = 0 then
-    begin
-
-      GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
-
-  end
-
-  else if pos = -1 then
-    begin
-
-      GertecPrinter.PrintString(ESQUERDA,TxtInput);
-
-  end
-
-  else if pos = 1 then
-    begin
-
-      GertecPrinter.PrintString(DIREITA,TxtInput);
-
-  end else
-    begin
-      GertecPrinter.PrintString(CENTRALIZADO,TxtInput);
-  end;
-
-  GertecPrinter.printBlankLine(150);
-  GertecPrinter.printOutput;
-
 end;
 
 procedure TfrmImpressaoG.RdCentroChange(Sender: TObject);
@@ -649,19 +584,26 @@ begin
 end;
 
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
-var 
+var
 result: string;
-
+Canvas :TCanvas;
 begin
+
+
 
   result := GertecPrinter.StatusImpressora;
 
-  lblMsg.Visible := True;
-  lblMsgCode.Text:=result;
-  lblMsgCode.Visible := True;
-  PanelMessage.Visible := True;
-  btnOK.Visible := True;
+
+
+  ShowMessage( 'Status da Impressora'+#13#10#10 +result);
+
+//  lblMsg.Visible := True;
+//  lblMsgCode.Text:=result;
+//  lblMsgCode.Visible := True;
+//  PanelMessage.Visible := True;
+//  btnOK.Visible := True;
 
 end;
- 
+
+
 end.
