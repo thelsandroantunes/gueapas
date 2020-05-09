@@ -336,12 +336,8 @@ qr:string;
 i:integer;
 begin
 //=========
-  GertecPrinter.textSize := 20;
-  GertecPrinter.printString(CentralizaTraco('[Iniciando Impressao Imagem]',N_COLUNAS));
-  GertecPrinter.printOutput;
+
   GertecPrinter.printImage( ImageControl1.Bitmap);
-  GertecPrinter.printBlankLine(30);
-  GertecPrinter.printString(CentralizaTraco('[Fim Impressao Imagem]',N_COLUNAS));
   GertecPrinter.printBlankLine(150);
   GertecPrinter.printOutput;
 end;
@@ -583,6 +579,7 @@ begin
 
 end;
 
+//==========================================
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
 var
 result: string;

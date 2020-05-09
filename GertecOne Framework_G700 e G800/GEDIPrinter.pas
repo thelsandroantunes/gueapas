@@ -76,6 +76,8 @@ type
 
     function StatusImpressora(): String;
     function RetornaStatus(tipoStatus: JGEDI_PRNTR_e_Status):string;
+
+
     constructor Create;
 
   end;
@@ -129,9 +131,8 @@ function TGEDIPrinter.StatusImpressora(): String;
 begin
   Result:= RetornaStatus(iPRNTR.Status);
 end;
+
 //****************************************************
-
-
 constructor TGEDIPrinter.Create;
 begin
 
@@ -195,7 +196,6 @@ begin
   //********************************************
     NomeFonte:=  TPath.Combine( TPath.GetDocumentsPath , 'Antro Vectra.otf');
 
-
   if (TextFamily = 0) then
     begin
     family := TJTypeface.JavaClass.DEFAULT;
@@ -220,18 +220,21 @@ begin
   iPRNTR.DrawStringExt(Config,StringToJString(strPrint));
 
 end;
+
 //****************************************************
 procedure TGEDIPrinter.PrintString(Alinhamento:T_ALINHAMENTO;strPrint:string);
 begin
   Alignment:=Alinhamento;
   PrintString(strPrint);
 end;
+
 //****************************************************
 procedure TGEDIPrinter.printBlankLine(height:integer);
 begin
   printInit;
   iPRNTR.DrawBlankLine(height);
 end;
+
 //****************************************************
 procedure TGEDIPrinter.printInit;
 begin
@@ -239,17 +242,20 @@ begin
     iPRNTR.Init;
   printInitFlag := 1;
 end;
+
 //****************************************************
 procedure TGEDIPrinter.printReInit;
 begin
   printInitFlag := 0;
 end;
+
 //****************************************************
 procedure TGEDIPrinter.printOutput;
 begin
   iPRNTR.Output;
   printInitFlag := 0;
 end;
+
 //****************************************************
 procedure TGEDIPrinter.DrawBarCode(barCodeType:JGEDI_PRNTR_e_BarCodeType; Height,Width:integer;texto:String);
 var
@@ -269,6 +275,7 @@ except
 end;
 
 end;
+
 //****************************************************
 procedure TGEDIPrinter.printImage(Imagem:TBitmap);
 var
@@ -293,6 +300,7 @@ except
   end;
 end;
 end;
+
 //****************************************************
 initialization
 

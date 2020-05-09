@@ -2,6 +2,8 @@ program GertecOne_G700;
 
 
 
+{$R *.dres}
+
 uses
   System.StartUpCopy,
   FMX.Forms,

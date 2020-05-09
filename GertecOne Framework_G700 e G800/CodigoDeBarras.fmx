@@ -3,7 +3,7 @@ object frmCodBarra: TfrmCodBarra
   Top = 0
   Caption = 'Form1'
   ClientHeight = 591
-  ClientWidth = 516
+  ClientWidth = 585
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -99,7 +99,7 @@ object frmCodBarra: TfrmCodBarra
     ClipParent = True
     Position.X = 16.000000000000000000
     Position.Y = 144.000000000000000000
-    Size.Width = 449.000000000000000000
+    Size.Width = 518.000000000000000000
     Size.Height = 265.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
@@ -153,5 +153,9 @@ object frmCodBarra: TfrmCodBarra
       end>
     Left = 288
     Top = 248
+  end
+  object MediaPlayer1: TMediaPlayer
+    Left = 512
+    Top = 72
   end
 end

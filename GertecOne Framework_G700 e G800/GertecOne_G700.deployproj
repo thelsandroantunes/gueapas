@@ -66,6 +66,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="..\..\..\Bleep.mp3" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne_G700\assets\internal\</RemoteDir>
+            <RemoteName>Bleep.mp3</RemoteName>
+            <DeployClass>ProjectFile</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>GertecOne_G700\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>

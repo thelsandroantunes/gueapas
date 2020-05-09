@@ -37,7 +37,9 @@ uses
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
   Fmx.Bind.GenData, System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
-  Data.Bind.ObjectScope;
+  Data.Bind.ObjectScope,
+  System.IOUtils;
+
 
   const
   SECOND = 1/86400;
@@ -59,6 +61,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     ActionList1: TActionList;
     ShowShareSheetAction1: TShowShareSheetAction;
     TetheringAppProfile1: TTetheringAppProfile;
+    MediaPlayer1: TMediaPlayer;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -89,6 +92,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
     procedure iniciaBarCode(limpa: Boolean);
     function getAtivoCamera(): Boolean;
+    procedure beepSound(ResourceID: string);
 
   end;
 
@@ -124,10 +128,39 @@ begin
 end;
 
 //***********************************************************
- function TfrmCodBarra.getAtivoCamera(): Boolean;
+function TfrmCodBarra.getAtivoCamera(): Boolean;
  begin
    Result := ativoCamera;
  end;
+
+//***********************************************************
+procedure TfrmCodBarra.beepSound(ResourceID: string);
+var
+  ResStream: TResourceStream;
+  TmpFile: string;
+begin
+      ResStream := TResourceStream.Create(HInstance, ResourceID, RT_RCDATA);
+      try
+
+        TmpFile := TPath.Combine(TPath.GetDocumentsPath, 'Bleep.mp3');
+
+        //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Internal }
+        //TPath.Combine(TPath.GetSharedDocumentsPath, 'filename')  { External }
+
+        ResStream.Position := 0;
+        ResStream.SaveToFile(TmpFile);
+
+        MediaPlayer1.FileName := TmpFile;
+        MediaPlayer1.Play;
+
+      finally
+        ResStream.Free;
+      end;
+
+
+      MediaPlayer1.Play;
+
+end;
 
 //***********************************************************
 procedure TfrmCodBarra.iniciaBarCode(limpa: Boolean);
@@ -298,6 +331,8 @@ var
   scanBitmap: TBitmap;
   ReadResult: TReadResult;
   ItemAdd : TListViewItem;
+
+
 begin
   Camera.SampleBufferToBitmap(imgCamera.Bitmap, True);
 
@@ -342,9 +377,13 @@ begin
           var
             Codigo:string;
           begin
+
+//            MMSystem.PlaySound(pchar('sdafasdf'), 0, SND_ASYNC or SND_FILENAME);
+
             if (ReadResult <> nil) then
             begin
             Codigo := ReadResult.text;
+            beepSound('Resource_2');
             //So registra mesmo codigo depois de 3 segundos
               if((Codigo<>UltimoCodigo)or(abs(time-UltimaHora)>3*SECOND))then begin
                 UltimoCodigo := Codigo;
