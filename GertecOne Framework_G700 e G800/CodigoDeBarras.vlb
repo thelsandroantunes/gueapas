@@ -5,19 +5,7 @@ Visible=True
 [Label1]
 Coordinates=89,188,46,51
 
-[btnQrCode]
-Coordinates=280,10,68,51
-
-[btnEan8]
-Coordinates=309,188,54,51
-
-[btnEan14]
-Coordinates=152,188,60,51
-
-[btnEan13]
-Coordinates=10,188,60,51
-
 []
-Coordinates=136,109,82,33
+Coordinates=280,10,68,51
 Visible=True
 

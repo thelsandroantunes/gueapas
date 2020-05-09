@@ -34,7 +34,8 @@ uses
   ZXing.ReadResult,
   ZXing.ScanManager,
   FMX.Barcode.DROID, FMX.Objects, FMX.Edit, FMX.ListView.Types,
-  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView;
+  FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
+  System.IOUtils, FMX.Colors;
 
 const
   SECOND = 1/86400;
@@ -52,19 +53,22 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     lblResultadoLeitura: TEdit;
     Label1: TLabel;
     txtLeitura: TLabel;
-    btnFlash: TButton;
     ListView1: TListView;
     PanelMessage: TPanel;
     btnOK: TButton;
     lblMsg: TLabel;
     lblMsgCode: TLabel;
+    MediaPlayer1: TMediaPlayer;
+    ColorButton1: TColorButton;
+    lblFlash: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 
-    procedure btnFlashClick(Sender: TObject);
     procedure btnOKClick(Sender: TObject);
+    procedure ColorButton1Click(Sender: TObject);
+    procedure Label2Click(Sender: TObject);
   private
      { Private declarations }
 
@@ -83,11 +87,14 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     procedure AtivaLeitura(tipo : TBarcodeFormat);
     procedure FinalizaLeitura;
 
+    procedure ativaFlash();
+
 
   public
     { Public declarations }
      function getOKCamera(): Boolean;
      procedure iniciaBarCodeV2(pauseCamera: Boolean);
+     procedure beepSound(ResourceID: string);
 
 
   end;
@@ -135,7 +142,7 @@ procedure TfrmCodigoBarraV2.iniciaBarCodeV2(pauseCamera: Boolean);
 begin
   if pauseCamera then
   begin
-    ListView1.Items.Clear;
+
   end else begin
     ListView1.Items.Clear;
     PanelMessage.Visible:=False;
@@ -144,9 +151,64 @@ begin
 end;
 
 //***********************************************************
+procedure TfrmCodigoBarraV2.ativaFlash();
+begin
+  if Camera.HasTorch then
+    begin
+      if lFlash then
+        begin
+          Camera.TorchMode := FMX.Media.TTorchMode.ModeOff;
+          lblFlash.Text := 'Ligar Flash';
+          lFlash := False;
+        end
+      else
+        begin
+          Camera.TorchMode := FMX.Media.TTorchMode.ModeOn;
+          lblFlash.Text := 'Desligar Flash';
+          lFlash := True;
+        end;
+    end
+  else
+    Toast('Não existe FLASH neste aparelho!');
+
+end;
+
+//***********************************************************
+procedure TfrmCodigoBarraV2.Label2Click(Sender: TObject);
+begin
+  ativaFlash;
+end;
+
+//***********************************************************
+procedure TfrmCodigoBarraV2.beepSound(ResourceID: string);
+var
+  ResStream: TResourceStream;
+  TmpFile: string;
+begin
+      ResStream := TResourceStream.Create(HInstance, ResourceID, RT_RCDATA);
+      try
+
+        TmpFile := TPath.Combine(TPath.GetDocumentsPath, 'Bleep.mp3');
+
+        //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Internal }
+        //TPath.Combine(TPath.GetSharedDocumentsPath, 'filename')  { External }
+
+        ResStream.Position := 0;
+        ResStream.SaveToFile(TmpFile);
+
+        MediaPlayer1.FileName := TmpFile;
+        MediaPlayer1.Play;
+
+      finally
+        ResStream.Free;
+      end;
 
 
+      MediaPlayer1.Play;
 
+end;
+
+//***********************************************************
 function RetornaFormato(barcode: TBarcodeFormat):string;
 begin
   case barcode of
@@ -197,28 +259,7 @@ begin
 
 end;
 
-procedure TfrmCodigoBarraV2.btnFlashClick(Sender: TObject);
-begin
-  if Camera.HasTorch then
-    begin
-      if lFlash then
-        begin
-          Camera.TorchMode := FMX.Media.TTorchMode.ModeOff;
-          btnFlash.Text := 'Ligar Flash';
-          lFlash := False;
-        end
-      else
-        begin
-          Camera.TorchMode := FMX.Media.TTorchMode.ModeOn;
-          btnFlash.Text := 'Desligar Flash';
-          lFlash := True;
-        end;
-    end
-  else
-    Toast('Não existe FLASH neste aparelho!');
-
-end;
-
+//***********************************************************
 procedure TfrmCodigoBarraV2.btnOKClick(Sender: TObject);
 begin
 
@@ -246,6 +287,12 @@ procedure TfrmCodigoBarraV2.CameraSampleBufferReady(Sender: TObject;
   const ATime: TMediaTime);
 begin
   TThread.Synchronize(TThread.CurrentThread, GetImage);
+end;
+
+//***********************************************************
+procedure TfrmCodigoBarraV2.ColorButton1Click(Sender: TObject);
+begin
+   ativaFlash;
 end;
 
 procedure TfrmCodigoBarraV2.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -343,6 +390,7 @@ begin
           begin
             if (ReadResult <> nil) then
 
+            beepSound('Resource_2');
             Codigo := ReadResult.text;
             tipoBarCode := RetornaFormato(ReadResult.BarcodeFormat);
 
@@ -355,6 +403,7 @@ begin
 
                 //Lista de Leitura
                   ListView1.BeginUpdate;
+                   ListView1.Items.Clear;
                    ItemAdd := ListView1.Items.Add;
                    ItemAdd.Text := tipoBarCode + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
@@ -385,5 +434,7 @@ begin
 
     end);
 end;
+
+
 
 end.

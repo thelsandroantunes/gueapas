@@ -3,7 +3,7 @@ object frmCodBarra: TfrmCodBarra
   Top = 0
   Caption = 'Form1'
   ClientHeight = 591
-  ClientWidth = 585
+  ClientWidth = 854
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -20,59 +20,7 @@ object frmCodBarra: TfrmCodBarra
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     TextSettings.HorzAlign = Center
     Text = 'Ler c'#243'digo de Barras'
-    TabOrder = 8
-  end
-  object btnEan13: TButton
-    StyledSettings = [Family, Size]
-    Position.X = 92.000000000000000000
-    Position.Y = 66.000000000000000000
-    Size.Width = 69.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 10
-    Text = 'EAN13'
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-    TextSettings.FontColor = claRed
-    OnClick = btnEan13Click
-  end
-  object btnEan8: TButton
-    StyledSettings = [Family, Size]
-    Position.X = 8.000000000000000000
-    Position.Y = 66.000000000000000000
-    Size.Width = 73.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 3
-    Text = 'EAN8'
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-    TextSettings.FontColor = claRed
-    OnClick = btnEan8Click
-  end
-  object btnEan14: TButton
-    StyledSettings = [Family, Size]
-    Position.X = 172.000000000000000000
-    Position.Y = 66.000000000000000000
-    Size.Width = 69.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 9
-    Text = 'EAN14'
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-    TextSettings.FontColor = claRed
-    OnClick = btnEan14Click
-  end
-  object btnQrCode: TButton
-    StyledSettings = [Family, Size]
-    Position.X = 256.000000000000000000
-    Position.Y = 66.000000000000000000
-    Size.Width = 73.000000000000000000
-    Size.Height = 46.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 11
-    Text = 'QrCode'
-    TextSettings.Font.StyleExt = {00070000000000000004000000}
-    TextSettings.FontColor = claRed
-    OnClick = btnQrCodeClick
+    TabOrder = 7
   end
   object ListView1: TListView
     ItemAppearanceClassName = 'TListItemAppearance'
@@ -86,7 +34,7 @@ object frmCodBarra: TfrmCodBarra
     Size.Width = 521.000000000000000000
     Size.Height = 473.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 14
+    TabOrder = 10
     ItemAppearanceObjects.ItemObjects.Text.Font.StyleExt = {00070000000000000004000000}
     ItemAppearanceObjects.ItemObjects.Text.TextColor = claLightgray
   end
@@ -99,7 +47,7 @@ object frmCodBarra: TfrmCodBarra
     ClipParent = True
     Position.X = 16.000000000000000000
     Position.Y = 144.000000000000000000
-    Size.Width = 518.000000000000000000
+    Size.Width = 787.000000000000000000
     Size.Height = 265.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
@@ -108,7 +56,7 @@ object frmCodBarra: TfrmCodBarra
   end
   object lblResultadoLeitura: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 7
+    TabOrder = 6
     Position.X = 16.000000000000000000
     Position.Y = 362.000000000000000000
     Enabled = False
@@ -135,7 +83,103 @@ object frmCodBarra: TfrmCodBarra
     TextSettings.Font.StyleExt = {00070000000000000004000000}
     Text = 'Leitura'
     Visible = False
-    TabOrder = 16
+    TabOrder = 12
+  end
+  object MediaPlayer1: TMediaPlayer
+    Left = 512
+    Top = 72
+  end
+  object CbtnEan8: TColorButton
+    Color = claCornflowerblue
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 20
+    OnClick = CbtnEan8Click
+  end
+  object CbtnEan13: TColorButton
+    Color = claCornflowerblue
+    Position.X = 104.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 19
+    OnClick = CbtnEan13Click
+  end
+  object CbtnEan14: TColorButton
+    Color = claCornflowerblue
+    Position.X = 192.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 18
+    OnClick = CbtnEan14Click
+  end
+  object CbtnQrCode: TColorButton
+    Color = claCornflowerblue
+    Position.X = 280.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 17
+    OnClick = CbtnQrCodeClick
+  end
+  object lblEan8: TLabel
+    StyledSettings = [Family]
+    Position.X = 40.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    Text = 'EAN8'
+    TabOrder = 24
+    OnClick = lblEan8Click
+  end
+  object lblEan13: TLabel
+    StyledSettings = [Family]
+    Position.X = 120.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    Text = 'EAN13'
+    TabOrder = 23
+    OnClick = lblEan13Click
+  end
+  object lblEan14: TLabel
+    StyledSettings = [Family]
+    Position.X = 208.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    Text = 'EAN14'
+    TabOrder = 22
+    OnClick = lblEan14Click
+  end
+  object lblQrCode: TLabel
+    StyledSettings = [Family]
+    Position.X = 288.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claRed
+    Text = 'QR  CODE'
+    TabOrder = 21
+    OnClick = lblQrCodeClick
   end
   object ActionList1: TActionList
     Left = 48
@@ -153,9 +197,5 @@ object frmCodBarra: TfrmCodBarra
       end>
     Left = 288
     Top = 248
-  end
-  object MediaPlayer1: TMediaPlayer
-    Left = 512
-    Top = 72
   end
 end

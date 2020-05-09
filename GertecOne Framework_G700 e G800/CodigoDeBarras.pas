@@ -38,7 +38,7 @@ uses
   Fmx.Bind.GenData, System.Rtti, System.Bindings.Outputs, Fmx.Bind.Editors,
   Data.Bind.EngExt, Fmx.Bind.DBEngExt, Data.Bind.Components,
   Data.Bind.ObjectScope,
-  System.IOUtils;
+  System.IOUtils, FMX.Colors;
 
 
   const
@@ -48,11 +48,7 @@ type
 TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
   TfrmCodBarra = class(TForm)
-    btnEan8: TButton;
     Label1: TLabel;
-    btnEan13: TButton;
-    btnEan14: TButton;
-    btnQrCode: TButton;
     ListView1: TListView;
     imgCamera: TImage;
     lblResultadoLeitura: TEdit;
@@ -62,14 +58,32 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     ShowShareSheetAction1: TShowShareSheetAction;
     TetheringAppProfile1: TTetheringAppProfile;
     MediaPlayer1: TMediaPlayer;
+    CbtnEan8: TColorButton;
+    CbtnEan13: TColorButton;
+    CbtnEan14: TColorButton;
+    CbtnQrCode: TColorButton;
+    lblEan8: TLabel;
+    lblEan13: TLabel;
+    lblEan14: TLabel;
+    lblQrCode: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
-    procedure btnEan8Click(Sender: TObject);
-    procedure btnEan13Click(Sender: TObject);
-    procedure btnQrCodeClick(Sender: TObject);
-    procedure btnEan14Click(Sender: TObject);
+
+    procedure ativaEan8();
+    procedure ativaEan13();
+    procedure ativaEan14();
+    procedure ativaEanQrCode();
+    procedure CbtnEan8Click(Sender: TObject);
+    procedure lblEan8Click(Sender: TObject);
+    procedure CbtnEan13Click(Sender: TObject);
+    procedure lblEan13Click(Sender: TObject);
+    procedure CbtnEan14Click(Sender: TObject);
+    procedure lblEan14Click(Sender: TObject);
+    procedure lblQrCodeClick(Sender: TObject);
+    procedure CbtnQrCodeClick(Sender: TObject);
+
   private
     { Private declarations }
     // for the external library
@@ -93,6 +107,8 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     procedure iniciaBarCode(limpa: Boolean);
     function getAtivoCamera(): Boolean;
     procedure beepSound(ResourceID: string);
+    procedure disableButtons();
+    procedure enableButtons();
 
   end;
 
@@ -174,6 +190,108 @@ begin
   end;
 end;
 
+//***********************************************************
+procedure TfrmCodBarra.disableButtons;
+begin
+  CbtnEan8.Visible:=False;
+  lblEan8.Visible := False;
+
+  CbtnEan13.Visible := False;
+  lblEan13.Visible := False;
+
+  CbtnEan14.Visible := False;
+  lblEan14.Visible := False;
+
+  CbtnQrCode.Visible := False;
+  lblQrCode.Visible := False;
+
+  ListView1.Visible:=False;
+  imgCamera.Visible:=True;
+end;
+
+procedure TfrmCodBarra.enableButtons();
+begin
+
+  CbtnEan8.Visible:=True;
+  lblEan8.Visible := True;
+
+  CbtnEan13.Visible := True;
+  lblEan13.Visible := True;
+
+  CbtnEan14.Visible := True;
+  lblEan14.Visible := True;
+
+  CbtnQrCode.Visible := True;
+  lblQrCode.Visible := True;
+
+  ListView1.Visible:=True;
+  imgCamera.Visible:=False;
+
+end;
+
+//***********************************************************
+procedure TfrmCodBarra.lblEan8Click(Sender: TObject);
+begin
+   ativaEan8();
+end;
+
+procedure TfrmCodBarra.lblEan13Click(Sender: TObject);
+begin
+   ativaEan13();
+end;
+
+procedure TfrmCodBarra.lblEan14Click(Sender: TObject);
+begin
+   ativaEan14();
+end;
+
+procedure TfrmCodBarra.lblQrCodeClick(Sender: TObject);
+begin
+   ativaEanQrCode();
+end;
+//**********************************************************
+
+//***********************************************************
+//Funções de Ativação para leituras
+procedure TfrmCodBarra.ativaEan8();
+begin
+  AtivaLeitura(TBarcodeFormat.EAN_8);
+  barCodeTitle:='EAN_8';
+  txtLeitura.Text := 'Leitura de EAN8';
+
+  disableButtons;
+
+end;
+procedure TfrmCodBarra.ativaEan13();
+begin
+  AtivaLeitura(TBarcodeFormat.EAN_13);
+  barCodeTitle:='EAN_13';
+  txtLeitura.Text := 'Leitura de EAN13';
+
+  disableButtons;
+
+end;
+procedure TfrmCodBarra.ativaEan14();
+begin
+  AtivaLeitura(TBarcodeFormat.ALL_1D);
+  barCodeTitle:='EAN_14';
+  txtLeitura.Text := 'Leitura de EAN14';
+
+  disableButtons;
+
+end;
+procedure TfrmCodBarra.ativaEanQrCode();
+begin
+  AtivaLeitura(TBarcodeFormat.QR_CODE);
+  barCodeTitle:='QR_CODE';
+  txtLeitura.Text := 'Leitura de QrCode';
+
+  disableButtons;
+
+end;
+//***********************************************************
+
+
 procedure TfrmCodBarra.AtivaLeitura(tipo : TBarcodeFormat);
 begin
 
@@ -198,71 +316,6 @@ begin
 
 end;
 
-procedure TfrmCodBarra.btnEan13Click(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.EAN_13);
-  barCodeTitle:='EAN_13';
-  txtLeitura.Text := 'Leitura de EAN13';
-
-  btnEan8.Visible:=False;
-  btnEan13.Visible:=False;
-  btnEan14.Visible:=False;
-  btnQrCode.Visible:=False;
-  
-  
-  ListView1.Visible:=False;
-  imgCamera.Visible:=True;
-end;
-
-procedure TfrmCodBarra.btnEan14Click(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.ALL_1D);
-  barCodeTitle:='EAN_14';
-  txtLeitura.Text := 'Leitura de EAN14';
-
-  btnEan8.Visible:=False;
-  btnEan13.Visible:=False;
-  btnEan14.Visible:=False;
-  btnQrCode.Visible:=False;
-  
-  
-  ListView1.Visible:=False;
-  imgCamera.Visible:=True;
-end;
-
-procedure TfrmCodBarra.btnEan8Click(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.EAN_8);
-  barCodeTitle:='EAN_8';
-  txtLeitura.Text := 'Leitura de EAN8';
-
-  btnEan8.Visible:=False;
-  btnEan13.Visible:=False;
-  btnEan14.Visible:=False;
-  btnQrCode.Visible:=False;
-  
-  
-  ListView1.Visible:=False;
-  imgCamera.Visible:=True;
-  
-end;
-
-procedure TfrmCodBarra.btnQrCodeClick(Sender: TObject);
-begin
-  AtivaLeitura(TBarcodeFormat.QR_CODE);
-  barCodeTitle:='QR_CODE';
-  txtLeitura.Text := 'Leitura de QrCode';
-
-  btnEan8.Visible:=False;
-  btnEan13.Visible:=False;
-  btnEan14.Visible:=False;
-  btnQrCode.Visible:=False;
-  
-  
-  ListView1.Visible:=False;
-  imgCamera.Visible:=True;
-end;
-
 procedure TfrmCodBarra.FinalizaLeitura;
 begin
   
@@ -270,15 +323,10 @@ begin
   fScanManager.Free;
   fFMXBarcode.Free;
   fScanInProgress := False;
-  
 
-  btnEan8.Visible:=True;
-  btnEan13.Visible:=True;
-  btnEan14.Visible:=True;
-  btnQrCode.Visible:=True;
+  enableButtons;
+
   txtLeitura.Visible:=True;
-  ListView1.Visible:=True;
-  imgCamera.Visible:=False;
   lblResultadoLeitura.Visible:=False;
   txtLeitura.Visible:=False;
 
@@ -292,6 +340,28 @@ procedure TfrmCodBarra.CameraSampleBufferReady(Sender: TObject;
 begin
   TThread.Synchronize(TThread.CurrentThread, GetImage);
 end;
+
+//**********************************************************
+procedure TfrmCodBarra.CbtnEan8Click(Sender: TObject);
+begin
+   ativaEan8();
+end;
+
+procedure TfrmCodBarra.CbtnEan13Click(Sender: TObject);
+begin
+   ativaEan13();
+end;
+
+procedure TfrmCodBarra.CbtnEan14Click(Sender: TObject);
+begin
+  ativaEan14();
+end;
+
+procedure TfrmCodBarra.CbtnQrCodeClick(Sender: TObject);
+begin
+   ativaEanQrCode();
+end;
+//**************************************************************
 
 procedure TfrmCodBarra.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin

@@ -3,7 +3,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   Top = 0
   Caption = 'Form1'
   ClientHeight = 621
-  ClientWidth = 387
+  ClientWidth = 365
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -18,22 +18,12 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     ClipParent = True
     Position.X = 12.000000000000000000
     Position.Y = 120.000000000000000000
-    Size.Width = 353.000000000000000000
+    Size.Width = 331.000000000000000000
     Size.Height = 271.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
     ParentShowHint = False
     ShowHint = False
-  end
-  object btnFlash: TButton
-    Position.X = 8.000000000000000000
-    Position.Y = 56.000000000000000000
-    Size.Width = 353.000000000000000000
-    Size.Height = 44.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 19
-    Text = 'Flash - Desligado'
-    OnClick = btnFlashClick
   end
   object txtLeitura: TLabel
     AutoTranslate = False
@@ -102,7 +92,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     Size.Height = 161.000000000000000000
     Size.PlatformDefault = False
     Visible = False
-    TabOrder = 23
+    TabOrder = 22
     object btnOK: TButton
       StyledSettings = [Family, Size, Style]
       Position.X = 40.000000000000000000
@@ -139,6 +129,26 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
       TabOrder = 2
     end
   end
+  object ColorButton1: TColorButton
+    Color = claCornflowerblue
+    Position.X = 8.000000000000000000
+    Position.Y = 56.000000000000000000
+    Size.Width = 337.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 27
+    OnClick = ColorButton1Click
+  end
+  object lblFlash: TLabel
+    Position.X = 104.000000000000000000
+    Position.Y = 58.000000000000000000
+    Size.Width = 177.000000000000000000
+    Size.Height = 47.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Flash - Desligado'
+    TabOrder = 28
+    OnClick = Label2Click
+  end
   object TetheringAppProfile1: TTetheringAppProfile
     Text = 'TetheringAppProfile1'
     Actions = <>
@@ -155,5 +165,9 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     object ShowShareSheetAction1: TShowShareSheetAction
       Category = 'Media Library'
     end
+  end
+  object MediaPlayer1: TMediaPlayer
+    Left = 400
+    Top = 184
   end
 end

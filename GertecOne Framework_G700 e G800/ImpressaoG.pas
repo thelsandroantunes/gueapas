@@ -41,7 +41,7 @@ uses
   Data.Bind.ObjectScope, FMX.Colors, FMX.ListBox, FMX.EditBox, FMX.NumberBox,
   FMX.ComboTrackBar,
 
-  Androidapi.JNI.JavaTypes;
+  Androidapi.JNI.JavaTypes, FMX.Media;
 
 type
   TfrmImpressaoG = class(TForm)
@@ -103,6 +103,7 @@ type
   public
     { Public declarations }
     procedure CleanText(limpaText: Boolean);
+
   end;
 
 var
