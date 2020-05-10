@@ -40,27 +40,25 @@ object frmNFCid: TfrmNFCid
     Top = 8
   end
   object lblLeitura: TLabel
-    StyledSettings = [Family, Size, Style]
+    StyledSettings = [Family, Style]
     Position.X = 80.000000000000000000
-    Position.Y = 232.000000000000000000
+    Position.Y = 256.000000000000000000
     Size.Width = 209.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     TextSettings.FontColor = claGray
     Text = 'lblLeitura'
-    Visible = False
     TabOrder = 4
   end
   object lblCartaoId: TLabel
-    StyledSettings = [Family, Size, Style]
+    StyledSettings = [Family, Style]
     Position.X = 80.000000000000000000
-    Position.Y = 267.000000000000000000
+    Position.Y = 291.000000000000000000
     Size.Width = 209.000000000000000000
     Size.Height = 33.000000000000000000
     Size.PlatformDefault = False
     TextSettings.FontColor = claGray
     Text = 'lblCartaoId'
-    Visible = False
     TabOrder = 5
   end
 end

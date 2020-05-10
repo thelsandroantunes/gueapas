@@ -176,7 +176,7 @@ end;
 procedure TfrmMain.cmdNFCIdClick(Sender: TObject);   //1365465
 begin
 {$IFNDEF __G800__}
-frmNFCid.setOK(True);
+frmNFCid.setOK(False);
 frmNFCid.Show;
 {$ENDIF}
 end;
@@ -184,7 +184,7 @@ end;
 procedure TfrmMain.cmdNFCBcClick(Sender: TObject);
 begin
 {$IFNDEF __G800__}
-frmNFCid.setOK(False);
+frmNFCid.setOK(True);
 frmNFCid.Show;
 {$ENDIF}
 end;

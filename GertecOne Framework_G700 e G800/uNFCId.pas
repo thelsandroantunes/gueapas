@@ -8,8 +8,7 @@ uses
   FMX.Controls.Presentation, FMX.StdCtrls,
   // JavaInterfaces,
   Androidapi.Helpers,
-  G700NFC
-  ;
+  G700NFC;
 
 type
   TfrmNFCid = class(TForm)
@@ -33,9 +32,13 @@ type
     { Public declarations }
     ok:Boolean;
     cont:Integer;
-    ler:Boolean;
+    ant: string;
+    atual: string;
+    aux: string;
+
     procedure setOK(verifica:Boolean);
-    function getOK(): Boolean;
+    procedure teste(id: string);
+
   end;
 
 var
@@ -48,7 +51,6 @@ implementation
 procedure TfrmNFCid.setOK(verifica:Boolean);
 begin
 
-
   lblLeitura.Visible := False;
   lblCartaoId.Visible := False;
   lblMensagem.Visible := True;
@@ -58,10 +60,14 @@ begin
 
 end;
 
-function TfrmNFCid.getOK(): Boolean;
- begin
-   Result := ler;
- end;
+procedure TfrmNFCid.teste(id:string);
+begin
+  if ok then
+  else begin
+    ativaCartao;
+  end;
+
+end;
 
 procedure TfrmNFCid.mensagemAproximeCartao;
 begin
@@ -71,11 +77,14 @@ begin
     lblMensagem.text := 'Aproxime o cartão';
     lblMensagem.TextSettings.FontColor:=$FF000000;
     lblMensagem.Font.Size:=30;
+
   end else begin
 
     lblMensagem.text := 'Aproxime  o  cartão  da  leitora';
     lblMensagem.TextSettings.FontColor:= $FF808080;
-    lblMensagem.Font.Size:=14;
+    lblMensagem.Font.Size:=16;
+    lblLeitura.Font.Size:=16;
+    lblCartaoId.Font.Size:=16;
 
   end;
 
@@ -89,22 +98,27 @@ begin
     lblMensagem.text := 'Escolha uma opção';
     lblMensagem.TextSettings.FontColor:=$FF000000;
     lblMensagem.Font.Size:=30;
+
   end;
 end;
 
 procedure TfrmNFCid.btnIdCartaoClick(Sender: TObject);
 begin
+
   mensagemAproximeCartao;
   GertecNFC.setLeituraID;
   Timer1.Enabled := true;
+
 end;
 
 //******************************************************
  procedure TfrmNFCid.ativaCartao;
 begin
+  GertecNFC.PowerOn;
   mensagemAproximeCartao;
   GertecNFC.setLeituraID;
   Timer1.Enabled := true;
+
 end;
 //******************************************************
 procedure TfrmNFCid.FormActivate(Sender: TObject);
@@ -113,7 +127,6 @@ begin
   if(GertecNFC = nil)then begin
     GertecNFC := TG700NFC.Create();
     GertecNFC.setLeituraID;
-    ler:=True;
   end;
 
   //EnableForegroundDispatch
@@ -125,9 +138,9 @@ begin
   end else begin
     btnIdCartao.Visible:=False;
     mensagemAproximeCartao;
-
-    Timer1.Enabled := true;
   end;
+
+  Timer1.Enabled := true;
 
 end;
 
@@ -146,6 +159,7 @@ begin
   Timer1.Enabled := False;
   idCartao := GertecNFC.retornaIdCartao;
 
+
   if( not idCartao.IsEmpty) then begin
 
     Inc(cont);
@@ -155,6 +169,8 @@ begin
       lblMensagem.Visible := True;
 
       ShowMessage('ID do cartão   : ' + GertecNFC.retornaIdCartao+#13#10'ID do cartão(Hex): ' + GertecNFC.retornaIdCartaoHex+#13#10);
+      mensagemEscolhaOpcao;
+
     end else begin
 
       lblMensagem.Visible := False;
@@ -162,23 +178,21 @@ begin
       lblLeitura.BeginUpdate;
         lblLeitura.Visible := True;
         lblLeitura.Text := 'Leitura: ' + IntToStr(cont);
-        lblLeitura.Font.Size:=11;
       lblLeitura.EndUpdate;
 
       lblCartaoId.BeginUpdate;
         lblCartaoId.Visible := True;
         lblCartaoId.Text := 'ID do cartão: ' + GertecNFC.retornaIdCartao;
-        lblCartaoId.Font.Size:=11;
       lblCartaoId.EndUpdate;
 
     end;
 
     GertecNFC.LimpaIdCartao;
 
-    if ok then begin mensagemEscolhaOpcao;
-    end else begin ativaCartao; end;
+    teste(idCartao);
 
   end else begin
+
     Timer1.Enabled := True;
   end;
 

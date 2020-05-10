@@ -465,8 +465,6 @@ begin
                   ItemAdd := ListView1.Items.Add;
                   ItemAdd.Text := BarCodeTitle + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
-
-                  
                 //
                 
                 inc(iCount);
