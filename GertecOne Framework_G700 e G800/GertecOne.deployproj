@@ -84,6 +84,15 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Antro Vectra.otf" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne\assets\internal\</RemoteDir>
+            <RemoteName>Antro Vectra.otf</RemoteName>
+            <DeployClass>File</DeployClass>
+            <Operation>0</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_36x36.png" Condition="'$(Config)'=='Debug'">
             <RemoteDir>GertecOne\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
@@ -111,19 +120,19 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne\classes\</RemoteDir>
-            <RemoteName>classes.dex</RemoteName>
-            <DeployClass>AndroidClassesDexFile</DeployClass>
+        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>gdbserver</RemoteName>
+            <DeployClass>AndroidGDBServer</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>gdbserver</RemoteName>
-            <DeployClass>AndroidGDBServer</DeployClass>
+        <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne\classes\</RemoteDir>
+            <RemoteName>classes.dex</RemoteName>
+            <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
             <RemoteCommand/>

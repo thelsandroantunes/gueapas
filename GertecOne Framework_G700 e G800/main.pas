@@ -197,7 +197,8 @@ DesligaNFC;
 //ShowMessage('Impressao');
 
 {$IFDEF __G800__}
-
+  frmImpressaoG800.PanelMessage.Visible:=False;
+  frmImpressaoG800.CleanText(True);
   frmImpressaoG800.Show;
 
 {$ELSE}
