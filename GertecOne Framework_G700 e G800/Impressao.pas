@@ -37,10 +37,13 @@ type
     cmdTesteImpressao: TButton;
     ImageControl1: TImageControl;
     Edit1: TEdit;
+
     procedure cmdTesteImpressaoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+
   private
     { Private declarations }
+    function CentralizaTraco(strTitulo:string;NColunas:integer):string;
   public
     { Public declarations }
   end;
@@ -49,14 +52,15 @@ var
   frmImpressao: TfrmImpressao;
   iCount:integer;
 
-const N_COLUNAS=32;
+
+  const N_COLUNAS=32;
 
 implementation
 
 {$R *.fmx}
 
 //==========================================
-function CentralizaTraco(strTitulo:string;NColunas:integer):string;
+function TfrmImpressao.CentralizaTraco(strTitulo:string;NColunas:integer):string;
 var
 i,iLen:integer;
 strAux:string;

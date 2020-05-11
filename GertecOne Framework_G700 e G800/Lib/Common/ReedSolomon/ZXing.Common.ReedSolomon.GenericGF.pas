@@ -691,3 +691,4 @@ initialization
 finalization
   TGenericGF.FinalizeClass();
 end.
+

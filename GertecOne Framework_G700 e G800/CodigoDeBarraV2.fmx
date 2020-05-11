@@ -3,7 +3,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   Top = 0
   Caption = 'Form1'
   ClientHeight = 621
-  ClientWidth = 365
+  ClientWidth = 371
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -18,7 +18,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     ClipParent = True
     Position.X = 12.000000000000000000
     Position.Y = 120.000000000000000000
-    Size.Width = 331.000000000000000000
+    Size.Width = 337.000000000000000000
     Size.Height = 271.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch
@@ -42,7 +42,7 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
   object Camera: TCameraComponent
     Kind = BackCamera
     OnSampleBufferReady = CameraSampleBufferReady
-    Left = 112
+    Left = 96
     Top = 224
   end
   object Label1: TLabel
@@ -149,6 +149,10 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     TabOrder = 28
     OnClick = Label2Click
   end
+  object MediaPlayer1: TMediaPlayer
+    Left = 192
+    Top = 224
+  end
   object TetheringAppProfile1: TTetheringAppProfile
     Text = 'TetheringAppProfile1'
     Actions = <>
@@ -156,8 +160,8 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
       item
         IsPublic = True
       end>
-    Left = 288
-    Top = 248
+    Left = 152
+    Top = 224
   end
   object ActionList1: TActionList
     Left = 48
@@ -165,9 +169,5 @@ object frmCodigoBarraV2: TfrmCodigoBarraV2
     object ShowShareSheetAction1: TShowShareSheetAction
       Category = 'Media Library'
     end
-  end
-  object MediaPlayer1: TMediaPlayer
-    Left = 400
-    Top = 184
   end
 end

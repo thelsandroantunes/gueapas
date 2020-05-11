@@ -30,14 +30,22 @@ uses
 
 
   //Units do projeto
-  //BarCode,
   CodigoDeBarraV2,
   CodigoDeBarras,
-  //Impressao,
   ImpressaoG,
+
   {$IFDEF __G800__}
-  uNFC
+  uNFC,
+  FMX.Ani,
+  FMX.Layouts,
+  FMX.ExtCtrls,
+
+  Impressao_G800,
+  CodigoDeBarras_G800,
+  CodigoDeBarraV2_G800
+
   {$ELSE}
+
   G700NFC,
   uNFCid,
   FMX.Ani,
@@ -90,11 +98,9 @@ TBarCodes = (QRCODE);
     Label6: TLabel;
     Image5: TImage;
     cmdNFCBc: TColorButton;
-    Label7: TLabel;
+    lblINFCbc: TLabel;
     Image6: TImage;
-    ImageViewer1: TImageViewer;
-    BitmapAnimation1: TBitmapAnimation;
-    ImageViewer2: TImageViewer;
+    imageNCFbc: TImageViewer;
 
     procedure cmdCodigoBarrasClick(Sender: TObject);
     procedure cmdImpressaoClick(Sender: TObject);
@@ -125,27 +131,55 @@ procedure TfrmMain.cmdCodigoBarrasClick(Sender: TObject);
 begin
 DesligaNFC;
 
-if (frmCodBarra.getAtivoCamera = True) then
-begin
-   frmCodBarra.iniciaBarCode(False);
-end else begin
-   frmCodBarra.iniciaBarCode(True);
-end;
+{$IFDEF __G800__}
 
-frmCodBarra.Show;
+  if (frmCodBarras_G800.getAtivoCamera = True) then
+  begin
+     frmCodBarras_G800.iniciaBarCode(False);
+  end else begin
+     frmCodBarras_G800.iniciaBarCode(True);
+  end;
+
+  frmCodBarras_G800.Show;
+
+{$ELSE}
+
+  if (frmCodBarra.getAtivoCamera = True) then
+  begin
+     frmCodBarra.iniciaBarCode(False);
+  end else begin
+     frmCodBarra.iniciaBarCode(True);
+  end;
+
+  frmCodBarra.Show;
+
+{$ENDIF}
+
 end;
 
 procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
 begin
 DesligaNFC;
-//frmBarCode.Show;
 
-if frmCodigoBarraV2.getOKCamera then
-begin
-  frmCodigoBarraV2.iniciaBarCodeV2(False);
-end;
+{$IFDEF __G800__}
 
-frmCodigoBarraV2.Show;
+  if frmCodBarraV2_G800.getOKCamera = True then
+  begin
+    frmCodBarraV2_G800.iniciaBarCodeV2(False);
+  end;
+
+  frmCodBarraV2_G800.Show;
+
+{$ELSE}
+
+  if frmCodigoBarraV2.getOKCamera = True then
+  begin
+    frmCodigoBarraV2.iniciaBarCodeV2(False);
+  end;
+
+  frmCodigoBarraV2.Show;
+
+{$ENDIF}
 end;
 
 procedure TfrmMain.DesligaNFC;
@@ -158,11 +192,22 @@ end;
 
 procedure TfrmMain.cmdImpressaoClick(Sender: TObject);
 begin
-//ShowMessage('Impressao');
 DesligaNFC;
-frmImpressaoG.PanelMessage.Visible:=False;
-frmImpressaoG.CleanText(True);
-frmImpressaoG.Show;
+
+//ShowMessage('Impressao');
+
+{$IFDEF __G800__}
+
+  frmImpressaoG800.Show;
+
+{$ELSE}
+
+  frmImpressaoG.PanelMessage.Visible:=False;
+  frmImpressaoG.CleanText(True);
+  frmImpressaoG.Show;
+
+{$ENDIF}
+
 end;
 
 procedure TfrmMain.cmdNFCClick(Sender: TObject);
@@ -194,13 +239,16 @@ var
 DeviceType :string;
 begin
 
-
-
-
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
+
   if(DeviceType = 'Smart G800')then begin
     //ShowMessage('Smart G800');
     cmdNFC.Visible := True;
+    cmdNFCBc.Visible := False;
+    imageNCFbc.Visible := False;
+
+    cmdNFC.Position.Y := cmdNFCBc.Position.Y;
+
   end else begin//'GPOS700'
     //ShowMessage('NOT Smart G800');
     cmdNFC.Visible := False;

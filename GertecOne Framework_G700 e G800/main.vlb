@@ -22,9 +22,6 @@ Coordinates=333,122,53,58
 [cmdImpressao]
 Coordinates=137,258,99,36
 
-[ImageViewer2]
-Coordinates=203,190,97,58
-
 [Image5]
 Coordinates=318,10,57,58
 
@@ -39,9 +36,6 @@ Coordinates=444,190,76,36
 
 [Label6]
 Coordinates=270,122,53,58
-
-[Label7]
-Coordinates=207,122,53,58
 
 [Image2]
 Coordinates=140,122,57,58
@@ -70,4 +64,10 @@ Visible=True
 
 [cmdNFCBc]
 Coordinates=246,258,90,36
+
+[lblINFCbc]
+Coordinates=207,122,53,58
+
+[imageNCFbc]
+Coordinates=203,190,97,58
 

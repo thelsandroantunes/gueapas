@@ -168,7 +168,6 @@
         <IncludeAndroid_Splash>False</IncludeAndroid_Splash>
         <AUP_NFC>true</AUP_NFC>
         <AUP_NFC_TRANSACTION_EVENT>true</AUP_NFC_TRANSACTION_EVENT>
-        <BT_BuildType>AppStore</BT_BuildType>
         <PF_KeyStore>C:\Marcos\Gertec\JKS\Development_MarcosPSaporetti_CustomerAPP.keystore</PF_KeyStore>
         <PF_KeyStorePass>850B47CC5F81078FCF7DE53AA4417BAEE4430519A05A97D897C80FA28E363C94DB04A390E34B1C31C1B15774FAD1C339BABA3609043F22FC1657458CE5A722CFC949F31FD555FAFEBFE4AF0D07551D5892013310C35D7270EB236E791211ECEA1B7C645ABEA3837D00E277BB62C4571938D267BC57F19CE0298A27B33AE8F238</PF_KeyStorePass>
         <PF_AliasKey>developmentmarcospsaporetti_customerapp</PF_AliasKey>
@@ -348,12 +347,6 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_72x72.png" Configuration="Debug" Class="Android_NotificationIcon72">
-                    <Platform Name="Android">
-                        <RemoteName>ic_notification.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
@@ -363,18 +356,6 @@
                 <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
                     <Platform Name="Android">
                         <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640">
-                    <Platform Name="Android">
-                        <RemoteName>splash_image.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960">
-                    <Platform Name="Android">
-                        <RemoteName>splash_image.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -390,10 +371,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Antro Vectra.otf" Configuration="Debug" Class="File">
-                    <Platform Name="Android">
-                        <RemoteDir>.\assets\internal\</RemoteDir>
-                        <RemoteName>Antro Vectra.otf</RemoteName>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Configuration="Debug" Class="Android_LauncherIcon36">
+                    <Platform Name="Android64">
+                        <RemoteName>ic_launcher.png</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -403,32 +383,21 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
-                    <Platform Name="Android">
-                        <RemoteName>ic_launcher.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\GertecOne_G700.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>GertecOne_G700.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Configuration="Debug" Class="Android_LauncherIcon144">
+                    <Platform Name="Android64">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="$(BDS)\lib\android\debug\mips\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeMipsFile">
                     <Platform Name="Android">
                         <RemoteName>libGertecOne_G700.so</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
-                    <Platform Name="Android">
-                        <RemoteName>classes.dex</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
-                    <Platform Name="Android">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -449,9 +418,9 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
-                    <Platform Name="Android">
-                        <RemoteName>libGertecOne_G700.so</RemoteName>
+                <DeployFile LocalName="Android64\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
+                    <Platform Name="Android64">
+                        <RemoteName>classes.dex</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -460,19 +429,20 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470">
-                    <Platform Name="Android">
-                        <RemoteName>splash_image.png</RemoteName>
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
-                    <Platform Name="iOSSimulator">
+                <DeployFile LocalName="Android64\Debug\provider_paths.xml" Configuration="Debug" Class="AndroidFileProvider">
+                    <Platform Name="Android64">
+                        <RemoteName>provider_paths.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Configuration="Debug" Class="AndroidLibnativeArmeabiFile">
+                    <Platform Name="Android">
+                        <RemoteName>libGertecOne_G700.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -504,15 +474,137 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\libGertecOne_G700.so" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="Android\Debug\provider_paths.xml" Configuration="Debug" Class="AndroidFileProvider">
                     <Platform Name="Android">
+                        <RemoteName>provider_paths.xml</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Debug\strings.xml" Configuration="Debug" Class="Android_Strings">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960">
+                    <Platform Name="Android64">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_72x72.png" Configuration="Debug" Class="Android_NotificationIcon72">
+                    <Platform Name="Android">
+                        <RemoteName>ic_notification.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Configuration="Debug" Class="Android_LauncherIcon72">
+                    <Platform Name="Android64">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Configuration="Debug" Class="Android_LauncherIcon96">
+                    <Platform Name="Android64">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640">
+                    <Platform Name="Android64">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\..\Bleep.mp3" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Android64">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Configuration="Debug" Class="Android_SplashImage640">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470">
+                    <Platform Name="Android64">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Configuration="Debug" Class="Android_SplashImage960">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Antro Vectra.otf" Configuration="Debug" Class="File">
+                    <Platform Name="Android">
+                        <RemoteDir>.\assets\internal\</RemoteDir>
+                        <RemoteName>Antro Vectra.otf</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                    <Platform Name="Android">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android\Debug\classes.dex" Configuration="Debug" Class="AndroidClassesDexFile">
+                    <Platform Name="Android">
+                        <RemoteName>classes.dex</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Configuration="Debug" Class="AndroidGDBServer">
+                    <Platform Name="Android">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android64\Debug\colors.xml" Configuration="Debug" Class="Android_Colors">
+                    <Platform Name="Android64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android64\Debug\AndroidManifest.xml" Configuration="Debug" Class="ProjectAndroidManifest">
+                    <Platform Name="Android64">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Configuration="Debug" Class="Android_LauncherIcon48">
+                    <Platform Name="Android64">
+                        <RemoteName>ic_launcher.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libpcre.dylib" Class="DependencyModule">
+                    <Platform Name="iOSSimulator">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Configuration="Debug" Class="Android_SplashImage470">
+                    <Platform Name="Android">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Configuration="Debug" Class="Android_SplashImage426">
+                    <Platform Name="Android64">
+                        <RemoteName>splash_image.png</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Android64\Debug\libGertecOne_G700.so" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Android64">
                         <RemoteName>libGertecOne_G700.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\provider_paths.xml" Configuration="Debug" Class="AndroidFileProvider">
+                <DeployFile LocalName="Android\Debug\libGertecOne_G700.so" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Android">
-                        <RemoteName>provider_paths.xml</RemoteName>
+                        <RemoteName>libGertecOne_G700.so</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -521,14 +613,14 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\styles-v21.xml" Configuration="Debug" Class="AndroidSplashStylesV21">
-                    <Platform Name="Android">
-                        <RemoteName>styles.xml</RemoteName>
+                <DeployFile LocalName="Android64\Debug\strings.xml" Configuration="Debug" Class="Android_Strings">
+                    <Platform Name="Android64">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Android\Debug\strings.xml" Configuration="Debug" Class="Android_Strings">
+                <DeployFile LocalName="Android\Debug\styles-v21.xml" Configuration="Debug" Class="AndroidSplashStylesV21">
                     <Platform Name="Android">
+                        <RemoteName>styles.xml</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>

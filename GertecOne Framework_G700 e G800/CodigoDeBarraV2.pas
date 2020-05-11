@@ -61,6 +61,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     MediaPlayer1: TMediaPlayer;
     ColorButton1: TColorButton;
     lblFlash: TLabel;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -115,7 +116,7 @@ var lFlash : Boolean;
     UltimoCodigo:string;
     UltimaHora:TDateTime;
 
-
+//***********************************************************
 function TfrmCodigoBarraV2.AppEvent(AAppEvent: TApplicationEvent;
   AContext: TObject): Boolean;
 begin
@@ -129,14 +130,11 @@ begin
       end;
   end;
 end;
-
-//***********************************************************
- function TfrmCodigoBarraV2.getOKCamera(): Boolean;
+function TfrmCodigoBarraV2.getOKCamera(): Boolean;
  begin
     //FinalizaLeitura;
     Result := ok;
  end;
-
 //***********************************************************
 procedure TfrmCodigoBarraV2.iniciaBarCodeV2(pauseCamera: Boolean);
 begin
@@ -149,7 +147,6 @@ begin
     AtivaLeitura(TBarcodeFormat.Auto);
   end;
 end;
-
 //***********************************************************
 procedure TfrmCodigoBarraV2.ativaFlash();
 begin
@@ -172,13 +169,15 @@ begin
     Toast('Não existe FLASH neste aparelho!');
 
 end;
-
 //***********************************************************
 procedure TfrmCodigoBarraV2.Label2Click(Sender: TObject);
 begin
   ativaFlash;
 end;
-
+procedure TfrmCodigoBarraV2.ColorButton1Click(Sender: TObject);
+begin
+   ativaFlash;
+end;
 //***********************************************************
 procedure TfrmCodigoBarraV2.beepSound(ResourceID: string);
 var
@@ -207,7 +206,6 @@ begin
       MediaPlayer1.Play;
 
 end;
-
 //***********************************************************
 function RetornaFormato(barcode: TBarcodeFormat):string;
 begin
@@ -235,7 +233,6 @@ begin
 
   end;
 end;
-
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
 begin
 
@@ -258,7 +255,6 @@ begin
   ok:=True;
 
 end;
-
 //***********************************************************
 procedure TfrmCodigoBarraV2.btnOKClick(Sender: TObject);
 begin
@@ -270,7 +266,6 @@ begin
 
 
 end;
-
 procedure TfrmCodigoBarraV2.FinalizaLeitura;
 begin
   Camera.Active := False;
@@ -282,24 +277,16 @@ begin
   //Toast('Leitura feita com sucesso.');
 
 end;
-
 procedure TfrmCodigoBarraV2.CameraSampleBufferReady(Sender: TObject;
   const ATime: TMediaTime);
 begin
   TThread.Synchronize(TThread.CurrentThread, GetImage);
 end;
-
 //***********************************************************
-procedure TfrmCodigoBarraV2.ColorButton1Click(Sender: TObject);
-begin
-   ativaFlash;
-end;
-
 procedure TfrmCodigoBarraV2.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose := not fInProgress;
 end;
-
 procedure TfrmCodigoBarraV2.FormCreate(Sender: TObject);
 var
   AppEventSvc: IFMXApplicationEventService;
@@ -329,13 +316,11 @@ begin
   fInProgress := False;
 
 end;
-
 procedure TfrmCodigoBarraV2.FormDestroy(Sender: TObject);
 begin
   fScanManager.Free;
   fFMXBarcode.Free;
 end;
-
 procedure TfrmCodigoBarraV2.GetImage;
 var
   scanBitmap: TBitmap;

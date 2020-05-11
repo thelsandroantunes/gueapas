@@ -3,7 +3,7 @@ object frmBarCode: TfrmBarCode
   Top = 0
   Caption = 'Form1'
   ClientHeight = 619
-  ClientWidth = 422
+  ClientWidth = 413
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -30,7 +30,7 @@ object frmBarCode: TfrmBarCode
     ClipParent = True
     Position.X = 12.000000000000000000
     Position.Y = 170.000000000000000000
-    Size.Width = 386.000000000000000000
+    Size.Width = 377.000000000000000000
     Size.Height = 221.000000000000000000
     Size.PlatformDefault = False
     WrapMode = Stretch

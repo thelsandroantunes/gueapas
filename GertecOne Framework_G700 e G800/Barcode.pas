@@ -8,6 +8,7 @@ uses
   System.UITypes,
   System.Classes,
   System.Variants,
+
   FMX.Types,
   FMX.Controls,
   FMX.Forms,
@@ -57,6 +58,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     txtLeitura: TLabel;
     ImageControl1: TImageControl;
     btnFlash: TButton;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -66,6 +68,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     procedure btnQrCodeClick(Sender: TObject);
     procedure btnAutoClick(Sender: TObject);
     procedure btnFlashClick(Sender: TObject);
+
   private
     { Private declarations }
 
