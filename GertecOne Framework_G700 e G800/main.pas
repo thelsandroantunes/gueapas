@@ -163,8 +163,10 @@ DesligaNFC;
 
 {$IFDEF __G800__}
 
-  if frmCodBarraV2_G800.getOKCamera = True then
+  if frmCodBarraV2_G800.getOKCamera then
   begin
+    frmCodBarraV2_G800.iniciaBarCodeV2(True);
+  end else begin
     frmCodBarraV2_G800.iniciaBarCodeV2(False);
   end;
 

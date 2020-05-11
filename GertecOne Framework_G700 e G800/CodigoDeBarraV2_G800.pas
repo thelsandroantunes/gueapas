@@ -51,21 +51,25 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
     ShowShareSheetAction1: TShowShareSheetAction;
     txtLeitura: TLabel;
     Camera: TCameraComponent;
-    btnQrCode: TButton;
     lblResultadoLeitura: TEdit;
     imgCamera: TImage;
     ColorButton1: TColorButton;
     lblFlash: TLabel;
     ListView1: TListView;
+    MediaPlayer1: TMediaPlayer;
+    PanelMessage: TPanel;
+    btnOK: TButton;
+    lblMsg: TLabel;
+    lblMsgCode: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure CameraSampleBufferReady(Sender: TObject; const ATime: TMediaTime);
 
-    procedure btnQrCodeClick(Sender: TObject);
     procedure lblFlashClick(Sender: TObject);
     procedure ColorButton1Click(Sender: TObject);
+    procedure btnOKClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -88,8 +92,10 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
 
   public
     { Public declarations }
-    function getOKCamera(): Boolean;
+    function getOKCamera: Boolean;
     procedure iniciaBarCodeV2(pauseCamera: Boolean);
+    procedure beepSound(ResourceID: string);
+    function RetornaFormato(barcode: TBarcodeFormat):string;
   end;
 
 var
@@ -125,17 +131,72 @@ function TfrmCodBarraV2_G800.getOKCamera;
 begin
     Result := ok;
 end;
-procedure TfrmCodBarraV2_G800.iniciaBarCodeV2;
+procedure TfrmCodBarraV2_G800.iniciaBarCodeV2(pauseCamera: Boolean);
 begin
   if pauseCamera then
   begin
-
+    ListView1.Items.Clear;
+    PanelMessage.Visible:=False;
+    AtivaLeitura(TBarcodeFormat.Auto);
   end else begin
     ListView1.Items.Clear;
-    //PanelMessage.Visible:=False;
+    PanelMessage.Visible:=False;
     AtivaLeitura(TBarcodeFormat.Auto);
   end;
 
+end;
+procedure TfrmCodBarraV2_G800.beepSound(ResourceID: string);
+var
+  ResStream: TResourceStream;
+  TmpFile: string;
+begin
+    ResStream := TResourceStream.Create(HInstance, ResourceID, RT_RCDATA);
+      try
+
+        TmpFile := TPath.Combine(TPath.GetDocumentsPath, 'Bleep.mp3');
+
+        //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Internal }
+        //TPath.Combine(TPath.GetSharedDocumentsPath, 'filename')  { External }
+
+        ResStream.Position := 0;
+        ResStream.SaveToFile(TmpFile);
+
+        MediaPlayer1.FileName := TmpFile;
+        MediaPlayer1.Play;
+
+      finally
+        ResStream.Free;
+      end;
+
+
+      MediaPlayer1.Play;
+end;
+//***********************************************************
+function TfrmCodBarraV2_G800.RetornaFormato(barcode: TBarcodeFormat): string;
+begin
+  case barcode of
+    TBarcodeFormat.EAN_8 : result :='EAN8';
+    TBarcodeFormat.EAN_13 : result :='EAN13';
+    TBarcodeFormat.QR_CODE: result :='QRCode';
+    TBarcodeFormat.AZTEC: result := 'AZTEC';
+    TBarcodeFormat.CODABAR: result := 'CODABAR';
+    TBarcodeFormat.CODE_39: result := 'CODE_39';
+    TBarcodeFormat.CODE_93: result := 'CODE_93';
+    TBarcodeFormat.CODE_128: result := 'CODE_128';
+    TBarcodeFormat.DATA_MATRIX: result := 'DATA_MATRIX';
+    TBarcodeFormat.ITF: result := 'ITF';
+    TBarcodeFormat.MAXICODE: result := 'MAXICODE';
+    TBarcodeFormat.PDF_417: result := 'PDF_417';
+    TBarcodeFormat.RSS_14: result := 'RSS_14';
+    TBarcodeFormat.RSS_EXPANDED: result := 'RSS_EXPANED';
+    TBarcodeFormat.UPC_A: result := 'UPC_A';
+    TBarcodeFormat.UPC_E: result := 'UPC_E';
+    TBarcodeFormat.UPC_EAN_EXTENSION: result := 'UPC_EAN_EXTENSION';
+    TBarcodeFormat.MSI: result := 'MSI';
+    TBarcodeFormat.PLESSEY: result := 'PLESSEY';
+    TBarcodeFormat.ALL_1D: result := 'EAN_14';
+
+  end;
 end;
 //***********************************************************
 procedure TfrmCodBarraV2_G800.AtivaLeitura(tipo : TBarcodeFormat);
@@ -200,10 +261,12 @@ begin
   ativaFlash;
 end;
 //***********************************************************
-procedure TfrmCodBarraV2_G800.btnQrCodeClick(Sender: TObject);
+procedure TfrmCodBarraV2_G800.btnOKClick(Sender: TObject);
 begin
-  AtivaLeitura(TBarcodeFormat.QR_CODE);
-  txtLeitura.Text := 'Leitura de QrCode';
+  PanelMessage.Visible:=False;
+  btnOK.Visible:=False;
+  lblMsg.Visible:= False;
+  lblMsgCode.Visible:=False;
 end;
 
 //***********************************************************
@@ -223,8 +286,14 @@ var
   AppEventSvc: IFMXApplicationEventService;
 begin
 
+  PanelMessage.Visible:=False;
+  btnOK.Visible:=False;
+  lblMsg.Visible:= False;
+  lblMsgCode.Visible:=False;
+
   AtivaLeitura(TBarcodeFormat.Auto);
   txtLeitura.Text := 'Leitura de Tudo';
+  //ListView1.Items.Clear;
 
   lFlash := False;
   iCount:=1;
@@ -301,9 +370,9 @@ begin
           begin
             if (ReadResult <> nil) then
 
-            //beepSound('Resource_2');
+            beepSound('Resource_1');
             Codigo := ReadResult.text;
-            //tipoBarCode := RetornaFormato(ReadResult.BarcodeFormat);
+            tipoBarCode := RetornaFormato(ReadResult.BarcodeFormat);
 
             begin
             //So registra mesmo codigo depois de 3 segundos
@@ -316,17 +385,17 @@ begin
                   ListView1.BeginUpdate;
                    ListView1.Items.Clear;
                    ItemAdd := ListView1.Items.Add;
-                   ItemAdd.Text := 'tipoBarCode' + ': ' + ReadResult.text;
+                   ItemAdd.Text := tipoBarCode + ': ' + ReadResult.text;
                   ListView1.EndUpdate;
 
                 //
 
-                   //PanelMessage.Visible:=True;
-                   //btnOK.Visible:=True;
-                   //lblMsg.Visible:= True;
-                   //lblMsg.Text:= 'Código ' + tipoBarCode;
-                   //lblMsgCode.Visible:=True;
-                   //lblMsgCode.Text:= tipoBarCode+ ': '+ReadResult.text ;
+                   PanelMessage.Visible:=True;
+                   btnOK.Visible:=True;
+                   lblMsg.Visible:= True;
+                   lblMsg.Text:= 'Código ' + tipoBarCode;
+                   lblMsgCode.Visible:=True;
+                   lblMsgCode.Text:= tipoBarCode + ': '+ReadResult.text ;
 
 
                 //

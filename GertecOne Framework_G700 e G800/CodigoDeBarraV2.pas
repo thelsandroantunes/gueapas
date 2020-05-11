@@ -96,7 +96,7 @@ TBarCodes = (EAN8, EAN13, QRCODE, AUTO);
      function getOKCamera(): Boolean;
      procedure iniciaBarCodeV2(pauseCamera: Boolean);
      procedure beepSound(ResourceID: string);
-
+     function RetornaFormato(barcode: TBarcodeFormat):string;
 
   end;
 
@@ -169,7 +169,6 @@ begin
     Toast('Não existe FLASH neste aparelho!');
 
 end;
-//***********************************************************
 procedure TfrmCodigoBarraV2.Label2Click(Sender: TObject);
 begin
   ativaFlash;
@@ -207,7 +206,7 @@ begin
 
 end;
 //***********************************************************
-function RetornaFormato(barcode: TBarcodeFormat):string;
+function TfrmCodigoBarraV2.RetornaFormato(barcode: TBarcodeFormat):string;
 begin
   case barcode of
     TBarcodeFormat.EAN_8 : result :='EAN8';
@@ -235,7 +234,6 @@ begin
 end;
 procedure TfrmCodigoBarraV2.AtivaLeitura(tipo : TBarcodeFormat);
 begin
-
 
   if Assigned(fScanManager) then
     fScanManager.Free;
