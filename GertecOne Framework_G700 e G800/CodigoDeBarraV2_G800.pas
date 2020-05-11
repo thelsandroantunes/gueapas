@@ -133,17 +133,9 @@ begin
 end;
 procedure TfrmCodBarraV2_G800.iniciaBarCodeV2(pauseCamera: Boolean);
 begin
-  if pauseCamera then
-  begin
     ListView1.Items.Clear;
     PanelMessage.Visible:=False;
     AtivaLeitura(TBarcodeFormat.Auto);
-  end else begin
-    ListView1.Items.Clear;
-    PanelMessage.Visible:=False;
-    AtivaLeitura(TBarcodeFormat.Auto);
-  end;
-
 end;
 procedure TfrmCodBarraV2_G800.beepSound(ResourceID: string);
 var
