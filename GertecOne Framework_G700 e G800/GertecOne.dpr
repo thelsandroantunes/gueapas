@@ -95,7 +95,7 @@ uses
   NFCHelper in 'Imports NFC\NFCHelper.pas',
   CodigoDeBarras_G800 in 'CodigoDeBarras_G800.pas' {frmCodBarras_G800},
   Impressao_G800 in 'Impressao_G800.pas' {frmImpressaoG800},
-  NFC_G800 in 'NFC_G800.pas' {Form4},
+  NFC_G800 in 'NFC_G800.pas' {frmNfcG800},
   CodigoDeBarraV2_G800 in 'CodigoDeBarraV2_G800.pas' {frmCodBarraV2_G800};
 
 {$R *.res}
@@ -108,7 +108,7 @@ begin
   Application.CreateForm(TfrmNFC, frmNFC);
   Application.CreateForm(TfrmCodBarras_G800, frmCodBarras_G800);
   Application.CreateForm(TfrmImpressaoG800, frmImpressaoG800);
-  Application.CreateForm(TForm4, Form4);
+  Application.CreateForm(TfrmNfcG800, frmNfcG800);
   Application.CreateForm(TfrmCodBarraV2_G800, frmCodBarraV2_G800);
   Application.Run;
 end.

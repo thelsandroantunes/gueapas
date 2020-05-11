@@ -302,7 +302,7 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="NFC_G800.pas">
-            <Form>Form4</Form>
+            <Form>frmNfcG800</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="CodigoDeBarraV2_G800.pas">

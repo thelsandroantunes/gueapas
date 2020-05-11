@@ -36,13 +36,15 @@ uses
 
   {$IFDEF __G800__}
   uNFC,
+
   FMX.Ani,
   FMX.Layouts,
   FMX.ExtCtrls,
 
   Impressao_G800,
   CodigoDeBarras_G800,
-  CodigoDeBarraV2_G800
+  CodigoDeBarraV2_G800,
+  NFC_G800
 
   {$ELSE}
 
@@ -217,7 +219,8 @@ procedure TfrmMain.cmdNFCClick(Sender: TObject);
 begin
 //ShowMessage('NFC');
 {$IFDEF __G800__}
-frmNFC.Show;
+//frmNFC.Show;
+frmNfcG800.Show;
 {$ENDIF}
 end;
 

@@ -4,10 +4,21 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation, FMX.Edit, FMX.Colors;
 
 type
-  TForm4 = class(TForm)
+  TfrmNfcG800 = class(TForm)
+    Edit1: TEdit;
+    lblMensagem: TLabel;
+    ColorButton1: TColorButton;
+    ColorButton2: TColorButton;
+    ColorButton3: TColorButton;
+    ColorButton4: TColorButton;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
   private
     { Private declarations }
   public
@@ -15,7 +26,7 @@ type
   end;
 
 var
-  Form4: TForm4;
+  frmNfcG800: TfrmNfcG800;
 
 implementation
 
