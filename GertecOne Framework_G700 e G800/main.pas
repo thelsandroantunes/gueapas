@@ -220,6 +220,11 @@ begin
 //ShowMessage('NFC');
 {$IFDEF __G800__}
 //frmNFC.Show;
+if frmNfcG800.getLigado then
+begin
+  frmNfcG800.iniciaNFC(False);
+end;
+
 frmNfcG800.Show;
 {$ENDIF}
 end;

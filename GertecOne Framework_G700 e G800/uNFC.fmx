@@ -2,8 +2,8 @@ object frmNFC: TfrmNFC
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 546
-  ClientWidth = 362
+  ClientHeight = 577
+  ClientWidth = 516
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -11,7 +11,8 @@ object frmNFC: TfrmNFC
   DesignerMasterStyle = 0
   object lblMensagem: TLabel
     AutoTranslate = False
-    Position.Y = 322.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 330.000000000000000000
     Size.Width = 353.000000000000000000
     Size.Height = 42.000000000000000000
     Size.PlatformDefault = False
@@ -42,7 +43,7 @@ object frmNFC: TfrmNFC
   object ImageViewer1: TImageViewer
     Anchors = [akLeft, akBottom]
     Position.X = 4.000000000000000000
-    Position.Y = 407.000000000000000000
+    Position.Y = 438.000000000000000000
     Size.Width = 353.000000000000000000
     Size.Height = 140.000000000000000000
     Size.PlatformDefault = False
@@ -706,8 +707,8 @@ object frmNFC: TfrmNFC
     Size.Height = 80.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
-    Viewport.Width = 340.000000000000000000
-    Viewport.Height = 76.000000000000000000
+    Viewport.Width = 344.000000000000000000
+    Viewport.Height = 80.000000000000000000
   end
   object Label1: TLabel
     Position.X = 10.000000000000000000
