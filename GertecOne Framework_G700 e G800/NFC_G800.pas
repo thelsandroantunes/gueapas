@@ -29,7 +29,7 @@ uses
 
 type
 
-  NFC_MODOS = (NFC_NONE, NFC_LEITURA_ID, NFC_LEITURA_MSG, NFC_ESCRITA);
+  NFC_MODOS = (NFC_NONE, NFC_LEITURA_ID, NFC_LEITURA_MSG, NFC_ESCRITA, NFC_GRAVAR_LER);
 
   TfrmNfcG800 = class(TForm)
     Edit1: TEdit;
@@ -49,11 +49,15 @@ type
     lblTempo: TLabel;
     lblGravar: TLabel;
     lblSub: TLabel;
-    StyleBook1: TStyleBook;
     timerNFC: TTimer;
     lblMensagem2: TLabel;
     Label1: TLabel;
-    lblTxtCartao: TLabel;
+    lblMsgCartao: TLabel;
+    ImageViewer2: TImageViewer;
+    StyleBook1: TStyleBook;
+    CbtnMsg: TColorButton;
+    lblMsg: TLabel;
+    mMsg: TMemo;
 
     procedure CbtnLerCartaoClick(Sender: TObject);
     procedure lblLerCartaoClick(Sender: TObject);
@@ -63,6 +67,8 @@ type
     procedure lblFormatarCartaoClick(Sender: TObject);
     procedure CbtnTesteCartaoClick(Sender: TObject);
     procedure lblTesteCartaoClick(Sender: TObject);
+    procedure CtbMsgClick(Sender: TObject);
+    procedure lblMsgClick(Sender: TObject);
 
     procedure FormKeyUp(Sender: TObject; var Key: Word; var Keychar: Char; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
@@ -71,7 +77,8 @@ type
     procedure ExecuteNFC(NewNFCMode:NFC_MODOS);
 
     procedure MensagemEscolhaOpcao; //teste
-    procedure MensagemAproximeCartao; // teste
+    procedure MensagemAproximeCartao;
+    procedure lblMsgCartaoClick(Sender: TObject); // teste
 
 
   private
@@ -82,6 +89,7 @@ type
     procedure gravarCartao;
     procedure formatarCartao;
     procedure testeCartao;
+    procedure msgCartao;
 
   public
     { Public declarations }
@@ -109,9 +117,15 @@ begin
   ModoNFC := NewNFCMode;
 
   case ModoNFC of
-    NFC_ESCRITA:        NFC.setGravaMensagemURL(Edit1.Text, 'https://www.gertec.com.br');
-    NFC_LEITURA_ID:     NFC.setLeituraID;
-    NFC_LEITURA_MSG:    NFC.setLeituraMensagem;
+    NFC_ESCRITA:      NFC.setGravaMensagemURL(Edit1.Text, 'https://www.gertec.com.br');
+    NFC_LEITURA_ID:   NFC.setLeituraID;
+    NFC_LEITURA_MSG:  NFC.setLeituraMensagem;
+    NFC_GRAVAR_LER:
+    begin
+      NFC.setGravaMensagemURL('GERTEC1000', 'https://www.gertec.com.br');
+      NFC.setLeituraID;
+      NFC.setLeituraMensagem;
+    end;
   end;
 
   timerNFC.Enabled := true;
@@ -135,9 +149,8 @@ begin
     for i := contador DownTo 1 do
      begin
         dec(contador);
-        Edit1.Text.Empty;
      end;
-
+     Edit1.Text := '';
   end;
 end;
 procedure TfrmNfcG800.enablePanel;
@@ -150,8 +163,9 @@ begin
 
     ImageViewer1.Visible := True;
     lblIdCartao.Visible := False;
-    lblTxtCartao.Visible := False;
+    lblMsgCartao.Visible := False;
     lblTempo.Visible := False;
+    mMsg.Visible := False;
 
 end;
 procedure TfrmNfcG800.disablePanel;
@@ -159,9 +173,21 @@ begin
   Panel1.Visible := False;
   Panel1.Height := 330;
   ImageViewer1.Visible := False;
+  mMsg.Visible := False;
 
 end;
 //************************************************************
+procedure TfrmNfcG800.msgCartao;
+begin
+   enablePanel;
+   lblTextTitle.Text := 'Mensagem do Cartão';
+
+   lblGravar.Visible := False;
+   lblSub.Visible := False;
+
+   ExecuteNFC(NFC_LEITURA_MSG);
+   contador := 0;
+end;
 procedure TfrmNfcG800.lerCartao;
 begin
 
@@ -170,11 +196,9 @@ begin
   lblGravar.Visible := False;
   lblSub.Visible := False;
 
-  Label1.Text := IntToStr(contador);
 
-  contador := 0;
   ExecuteNFC(NFC_LEITURA_ID);
-  //ExecuteNFC(NFC_LEITURA_MSG);
+  contador := 0;
 end;
 procedure TfrmNfcG800.gravarCartao;
 begin
@@ -206,6 +230,9 @@ begin
   lblGravar.Text := 'Aproxime o cartão';
   lblSub.Visible := True;
   Panel1.Height := 377;
+
+  ExecuteNFC(NFC_GRAVAR_LER);
+
   contador := 0;
 end;
 //************************************************************
@@ -220,7 +247,10 @@ end;
 procedure TfrmNfcG800.CbtnLerCartaoClick(Sender: TObject);
 begin
    lerCartao;
-
+end;
+procedure TfrmNfcG800.CtbMsgClick(Sender: TObject);
+begin
+  msgCartao;
 end;
 procedure TfrmNfcG800.CbtnTesteCartaoClick(Sender: TObject);
 begin
@@ -239,10 +269,19 @@ begin
    lerCartao;
 
 end;
+procedure TfrmNfcG800.lblMsgClick(Sender: TObject);
+begin
+  msgCartao;
+end;
 procedure TfrmNfcG800.lblTesteCartaoClick(Sender: TObject);
 begin
   testeCartao;
 end;
+procedure TfrmNfcG800.lblMsgCartaoClick(Sender: TObject);
+begin
+
+end;
+
 //************************************************************
 procedure TfrmNfcG800.FormCreate(Sender: TObject);
 begin
@@ -299,26 +338,32 @@ begin
   case ModoNFC of
 
     NFC_LEITURA_ID:begin
+
+      Panel1.Height := 433;
+
       if(NFC.CardId = '')then begin
         timerNFC.Enabled := true;
       end else begin
 
         MensagemEscolhaOpcao;
-        Panel1.Height := 410;
 
         lblIdCartao.Visible := True;
         lblIdCartao.Text := 'ID Cartão: ' + NFC.CardId+#13#10#10;
-        lblTxtCartao.Visible := True;
-        lblTxtCartao.Text := 'Teste: ' + NFC.NFCMensagem;
+
         lblTempo.Visible := True;
         lblTempo.Text := 'Tempo de Execução: ' + FloatToStr(StrToFloat(timerNFC.Interval.ToString)/1000) + 's';
 
-        ShowMessage('Leitura com Sucesso!');
+        ShowMessage('Leitura com Sucesso! ');
+
       end;
 
     end;
 
-    NFC_LEITURA_MSG:begin
+    NFC_LEITURA_MSG:
+    begin
+
+      Panel1.Height := 433;
+
       if((NFC.NFCMensagem = '')and(NFC.NFCUrl = ''))then begin
         timerNFC.Enabled := true;
       end else begin
@@ -326,19 +371,22 @@ begin
         MensagemEscolhaOpcao;
 
         if(NFC.NFCMensagem <> '')then  begin
-          //txtMensagem.Lines.Clear;
-          //txtMensagem.Lines.Add(NFC.NFCMensagem);
-          lblTxtCartao.Text := NFC.NFCMensagem;
-          //ShowMessage('TESTE: '+ NFC.NFCMensagem);
+          mMsg.Lines.Clear;
+          mMsg.Lines.Add('Mensagem: ');
+          mMsg.Lines.Add(NFC.NFCMensagem);
+          //lblTxtCartao.Visible := True;
+          //lblTxtCartao.Text := 'Mensagem: '+#13#10 + NFC.NFCMensagem;
         end;
-
+        mMsg.Visible := True;
         //if(NFC.NFCUrl<>'')then
           //txtUrl.Text := NFC.NFCUrl;
         //ShowMessage('Mensagem' + #13#10 + NFC.NFCMensagem +#13#10#13#10 + 'Url:'#13#10+NFC.NFCUrl );
+         ShowMessage('Cartão com Mensagem! ');
       end;
     end;
 
-     NFC_ESCRITA:begin
+     NFC_ESCRITA:
+     begin
 
       case nfc.NFCWriteStatus of
         NFC_WRITE_OK,
@@ -350,6 +398,50 @@ begin
         NFC_WRITE_FAIL:ShowMessage('Erro ao gravar mensagem no cartão.');
         else timerNFC.Enabled := true;
       end;
+
+    end;
+
+    NFC_GRAVAR_LER:
+    begin
+
+      case nfc.NFCWriteStatus of
+        NFC_WRITE_OK,
+        NFC_WRITE_FAIL:MensagemEscolhaOpcao;
+      end;
+
+      timerNFC.Enabled := true;
+
+       if(NFC.CardId <> '')then begin
+        MensagemEscolhaOpcao;
+
+        //lblIdCartao.Visible := True;
+        lblIdCartao.Text := 'ID Cartão: ' + NFC.CardId+#13#10#10;
+
+        //lblTempo.Visible := True;
+        lblTempo.Text := 'Tempo de Execução: ' + FloatToStr(StrToFloat(timerNFC.Interval.ToString)/1000) + 's';
+
+      end;
+
+       if(NFC.NFCMensagem <> '')and(NFC.NFCUrl <> '')then begin
+
+        mMsg.Lines.Clear;
+        mMsg.Lines.Add(lblIdCartao.Text);
+        mMsg.Lines.Add('Código Gravado: GERTEC1000');
+        mMsg.Lines.Add(' ');
+        mMsg.Lines.Add('Código ID: '+NFC.CardId);
+        mMsg.Lines.Add('Leitura código: '+NFC.NFCMensagem);
+        //lblTxtCartao.Visible := True;
+        //lblTxtCartao.Text := 'Mensagem: '+#13#10 + NFC.NFCMensagem;
+        mMsg.Lines.Add(' ');
+        mMsg.Lines.Add('Tempo de Execução: ' + FloatToStr(StrToFloat(timerNFC.Interval.ToString)/1000) + 's');
+        mMsg.Visible := True;
+        //if(NFC.NFCUrl<>'')then
+          //txtUrl.Text := NFC.NFCUrl;
+        //ShowMessage('Mensagem' + #13#10 + NFC.NFCMensagem +#13#10#13#10 + 'Url:'#13#10+NFC.NFCUrl );
+
+      end;
+
+      ShowMessage('Gravar/Ler OK! ');
 
     end;
 
