@@ -83,8 +83,6 @@ type
     procedure formatarCartao;
     procedure testeCartao;
 
-    procedure ativaNFC;
-
   public
     { Public declarations }
     procedure iniciaNFC(limpar: Boolean);
@@ -104,12 +102,6 @@ implementation
 {$R *.fmx}
 
 //***********************************************************
-procedure TfrmNfcG800.ativaNFC;
-begin
-   //NFC := TNFCHelper.Create( lblMensagem, txtMensagem, txtUrl);
-  NFC := TNFCHelper.Create;
-  MensagemEscolhaOpcao;
-end;
 procedure TfrmNfcG800.ExecuteNFC(NewNFCMode:NFC_MODOS);
 begin
   nfc.ClearData;
@@ -143,8 +135,9 @@ begin
     for i := contador DownTo 1 do
      begin
         dec(contador);
+        Edit1.Text.Empty;
      end;
-     ativaNFC;
+
   end;
 end;
 procedure TfrmNfcG800.enablePanel;
@@ -181,7 +174,7 @@ begin
 
   contador := 0;
   ExecuteNFC(NFC_LEITURA_ID);
-
+  //ExecuteNFC(NFC_LEITURA_MSG);
 end;
 procedure TfrmNfcG800.gravarCartao;
 begin
@@ -194,7 +187,6 @@ begin
   Panel1.Height := 330;
 
   ExecuteNFC(NFC_ESCRITA);
-  ExecuteNFC(NFC_LEITURA_MSG);
   contador := 0;
 
 end;
@@ -254,7 +246,10 @@ end;
 //************************************************************
 procedure TfrmNfcG800.FormCreate(Sender: TObject);
 begin
-  ativaNFC;
+   //NFC := TNFCHelper.Create( lblMensagem, txtMensagem, txtUrl);
+  NFC := TNFCHelper.Create;
+  MensagemEscolhaOpcao;
+
   contador := 0;
   ativoPanel := -1;
 end;
@@ -314,13 +309,11 @@ begin
         lblIdCartao.Visible := True;
         lblIdCartao.Text := 'ID Cartão: ' + NFC.CardId+#13#10#10;
         lblTxtCartao.Visible := True;
-
-        //lblTxtCartao.Text := 'teste: '+NFC.NFCMensagem;
+        lblTxtCartao.Text := 'Teste: ' + NFC.NFCMensagem;
+        lblTempo.Visible := True;
+        lblTempo.Text := 'Tempo de Execução: ' + FloatToStr(StrToFloat(timerNFC.Interval.ToString)/1000) + 's';
 
         ShowMessage('Leitura com Sucesso!');
-
-        lblTempo.Visible := True;
-
       end;
 
     end;
@@ -336,6 +329,7 @@ begin
           //txtMensagem.Lines.Clear;
           //txtMensagem.Lines.Add(NFC.NFCMensagem);
           lblTxtCartao.Text := NFC.NFCMensagem;
+          //ShowMessage('TESTE: '+ NFC.NFCMensagem);
         end;
 
         //if(NFC.NFCUrl<>'')then

@@ -148,9 +148,9 @@ object frmNfcG800: TfrmNfcG800
     object lblIdCartao: TLabel
       StyledSettings = [Size, Style]
       Position.X = 24.000000000000000000
-      Position.Y = 344.000000000000000000
+      Position.Y = 336.000000000000000000
       Size.Width = 265.000000000000000000
-      Size.Height = 33.000000000000000000
+      Size.Height = 41.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Family = 'Arial'
       TextSettings.FontColor = claGray
