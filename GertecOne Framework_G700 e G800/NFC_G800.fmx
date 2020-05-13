@@ -3,11 +3,12 @@ object frmNfcG800: TfrmNfcG800
   Top = 0
   Caption = 'Form4'
   ClientHeight = 608
-  ClientWidth = 356
+  ClientWidth = 431
   StyleBook = StyleBook1
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
   OnKeyUp = FormKeyUp
   DesignerMasterStyle = 0
   object Edit1: TEdit
@@ -146,8 +147,8 @@ object frmNfcG800: TfrmNfcG800
     end
     object lblIdCartao: TLabel
       StyledSettings = [Size, Style]
-      Position.X = 16.000000000000000000
-      Position.Y = 328.000000000000000000
+      Position.X = 24.000000000000000000
+      Position.Y = 344.000000000000000000
       Size.Width = 265.000000000000000000
       Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
@@ -158,8 +159,8 @@ object frmNfcG800: TfrmNfcG800
     end
     object lblTempo: TLabel
       StyledSettings = [Size, Style]
-      Position.X = 16.000000000000000000
-      Position.Y = 368.000000000000000000
+      Position.X = 24.000000000000000000
+      Position.Y = 400.000000000000000000
       Size.Width = 257.000000000000000000
       Size.Height = 33.000000000000000000
       Size.PlatformDefault = False
@@ -193,6 +194,18 @@ object frmNfcG800: TfrmNfcG800
       TextSettings.HorzAlign = Center
       Text = '__________________________________'
       TabOrder = 4
+    end
+    object lblTxtCartao: TLabel
+      StyledSettings = []
+      Position.X = 24.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 273.000000000000000000
+      Size.Height = 33.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Arial'
+      TextSettings.FontColor = claGray
+      Text = 'lblTxtCartao'
+      TabOrder = 5
     end
   end
   object ImageViewer1: TImageViewer
@@ -262,6 +275,32 @@ object frmNfcG800: TfrmNfcG800
     Viewport.Width = 197.000000000000000000
     Viewport.Height = 221.000000000000000000
   end
+  object lblMensagem2: TLabel
+    AutoTranslate = False
+    Position.X = 8.000000000000000000
+    Position.Y = 498.000000000000000000
+    Size.Width = 353.000000000000000000
+    Size.Height = 42.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.HorzAlign = Center
+    Text = 'Gertec'
+    Visible = False
+    TabOrder = 0
+  end
+  object Label1: TLabel
+    StyledSettings = [Family, FontColor]
+    Position.X = 136.000000000000000000
+    Position.Y = 432.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.HorzAlign = Center
+    Text = 'Label1'
+    Visible = False
+    TabOrder = 15
+  end
   object StyleBook1: TStyleBook
     Styles = <
       item
@@ -279,5 +318,11 @@ object frmNfcG800: TfrmNfcG800
       end>
     Left = 488
     Top = 88
+  end
+  object timerNFC: TTimer
+    Enabled = False
+    OnTimer = timerNFCTimer
+    Left = 376
+    Top = 24
   end
 end

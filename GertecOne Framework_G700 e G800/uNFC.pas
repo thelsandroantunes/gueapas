@@ -115,58 +115,58 @@ end;
 
 procedure TfrmNFC.timerNFCTimer(Sender: TObject);
 begin
-timerNFC.Enabled := false;
+  timerNFC.Enabled := false;
 
-case ModoNFC of
+  case ModoNFC of
 
-  NFC_LEITURA_ID:begin
-    if(NFC.CardId = '')then begin
-      timerNFC.Enabled := true;
-    end else begin
-      MensagemEscolhaOpcao;
-      ShowMessage('ID do cartão   : ' + NFC.CardId+#13#10'ID do cartão(Hex): ' + NFC.CardIdHex+#13#10);
-    end;
-
-  end;
-
-  NFC_LEITURA_MSG:begin
-    if((NFC.NFCMensagem = '')and(NFC.NFCUrl = ''))then begin
-      timerNFC.Enabled := true;
-    end else begin
-
-      MensagemEscolhaOpcao;
-      if(NFC.NFCMensagem <> '')then  begin
-        txtMensagem.Lines.Clear;
-        txtMensagem.Lines.Add(NFC.NFCMensagem);
+    NFC_LEITURA_ID:begin
+      if(NFC.CardId = '')then begin
+        timerNFC.Enabled := true;
+      end else begin
+        MensagemEscolhaOpcao;
+        ShowMessage('ID do cartão   : ' + NFC.CardId+#13#10'ID do cartão(Hex): ' + NFC.CardIdHex+#13#10);
       end;
 
-      if(NFC.NFCUrl<>'')then
-        txtUrl.Text := NFC.NFCUrl;
-      ShowMessage('Mensagem' + #13#10 + NFC.NFCMensagem +#13#10#13#10 + 'Url:'#13#10+NFC.NFCUrl );
+    end;
+
+    NFC_LEITURA_MSG:begin
+      if((NFC.NFCMensagem = '')and(NFC.NFCUrl = ''))then begin
+        timerNFC.Enabled := true;
+      end else begin
+
+        MensagemEscolhaOpcao;
+        if(NFC.NFCMensagem <> '')then  begin
+          txtMensagem.Lines.Clear;
+          txtMensagem.Lines.Add(NFC.NFCMensagem);
+        end;
+
+        if(NFC.NFCUrl<>'')then
+          txtUrl.Text := NFC.NFCUrl;
+        ShowMessage('Mensagem' + #13#10 + NFC.NFCMensagem +#13#10#13#10 + 'Url:'#13#10+NFC.NFCUrl );
+      end;
+
+
+
+
+    end;//NFC_LEITURA_MSGX
+
+    NFC_ESCRITA:begin
+
+      case nfc.NFCWriteStatus of
+        NFC_WRITE_OK,
+        NFC_WRITE_FAIL:MensagemEscolhaOpcao;
+      end;
+
+      case nfc.NFCWriteStatus of
+        NFC_WRITE_OK:ShowMessage('Dados gravados com sucesso.');
+        NFC_WRITE_FAIL:ShowMessage('Erro ao gravar mensagem no cartão.');
+        else timerNFC.Enabled := true;
+      end;
+
     end;
 
 
-
-
-  end;//NFC_LEITURA_MSGX
-
-  NFC_ESCRITA:begin
-
-    case nfc.NFCWriteStatus of
-      NFC_WRITE_OK,
-      NFC_WRITE_FAIL:MensagemEscolhaOpcao;
-    end;
-
-    case nfc.NFCWriteStatus of
-      NFC_WRITE_OK:ShowMessage('Dados gravados com sucesso.');
-      NFC_WRITE_FAIL:ShowMessage('Erro ao gravar mensagem no cartão.');
-      else timerNFC.Enabled := true;
-    end;
-
-  end;
-
-
-end; //case
+  end; //case
 
 
 end;

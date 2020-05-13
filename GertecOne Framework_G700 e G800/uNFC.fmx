@@ -707,8 +707,8 @@ object frmNFC: TfrmNFC
     Size.Height = 80.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
-    Viewport.Width = 344.000000000000000000
-    Viewport.Height = 80.000000000000000000
+    Viewport.Width = 340.000000000000000000
+    Viewport.Height = 76.000000000000000000
   end
   object Label1: TLabel
     Position.X = 10.000000000000000000
