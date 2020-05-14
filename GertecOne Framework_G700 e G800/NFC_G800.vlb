@@ -1,76 +1,83 @@
 ﻿[lblMensagem]
-Coordinates=10,78,91,58
+Coordinates=10,78,79,51
 
 [lblSub]
-Coordinates=305,78,50,58
+Coordinates=305,78,45,51
 
 [lblTempo]
-Coordinates=10,146,67,58
+Coordinates=10,146,60,51
 
 [CbtnFormatarCartao]
-Coordinates=306,282,132,36
+Coordinates=306,282,115,33
 
 [lblIdCartao]
-Coordinates=218,78,77,58
+Coordinates=218,78,68,51
 
 [lblLerCartao]
-Coordinates=10,214,85,58
+Coordinates=10,214,75,51
 
 [lblFormatarCartao]
-Coordinates=179,10,118,58
+Coordinates=179,10,103,51
 
 [lblTesteCartao]
-Coordinates=87,146,98,58
+Coordinates=87,146,85,51
 
 [CbtnLerCartao]
-Coordinates=197,282,99,36
+Coordinates=197,282,86,33
 
 [ImageViewer1]
-Coordinates=10,10,97,58
+Coordinates=10,10,83,51
 
 [Panel1]
-Coordinates=132,282,55,36
+Coordinates=132,282,47,33
 
 [CbtnTesteCartao]
-Coordinates=10,282,112,36
+Coordinates=10,282,97,33
 
 [CbtnGravarCartao]
-Coordinates=351,214,119,36
+Coordinates=351,214,103,33
 
 [timerNFC]
-Coordinates=518,111,69,36
+Coordinates=518,111,60,33
 
 [lblTextTitle]
-Coordinates=195,146,78,58
+Coordinates=195,146,68,51
 
 [lblMensagem2]
-Coordinates=283,146,98,58
+Coordinates=283,146,85,51
 
 [lblGravarCartao]
-Coordinates=159,214,106,58
+Coordinates=159,214,92,51
 
 [lblGravar]
-Coordinates=370,10,67,58
+Coordinates=370,10,59,51
 
 [Label1]
-Coordinates=391,146,53,58
+Coordinates=391,146,46,51
 
 [Edit1]
-Coordinates=105,214,44,58
+Coordinates=105,214,40,51
 
 [StyleBook1]
-Coordinates=429,365,80,36
+Coordinates=429,365,70,33
 
 [ImageViewer2]
-Coordinates=111,78,97,58
+Coordinates=111,78,83,51
 
 [CbtnMsg]
-Coordinates=275,214,66,36
+Coordinates=275,214,58,33
 Visible=True
 
 []
-Coordinates=117,10,52,58
+Coordinates=112,1,49,51
+Visible=True
 
 [lblMsgCartao]
-Coordinates=365,78,84,58
+Coordinates=365,78,79,51
+
+[lblMsg]
+Coordinates=492,1,46,51
+
+[mMsg]
+Coordinates=324,1,44,51
 

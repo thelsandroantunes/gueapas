@@ -25,7 +25,9 @@ uses
   FMX.Platform,
 
   FMX.ScrollBox,
-  FMX.Memo;
+  FMX.Memo,
+
+  FMX.Objects;
 
 type
 
@@ -106,7 +108,8 @@ var
 
 
 implementation
-
+uses
+  EncdDecd;
 {$R *.fmx}
 
 //***********************************************************
@@ -142,6 +145,7 @@ begin
   if limpar then
   begin
      //ShowMessage('TRUE');
+
   end else
   begin
     //ShowMessage('FALSE');
@@ -160,6 +164,12 @@ begin
     lblTextTitle.TextSettings.Font.Size:= 21;
 
     Panel1.Visible := True;
+
+    if (Panel1.ControlsCount >= 1) and (Panel1.Controls[0] is TShape) then
+    begin
+      (Panel1.Controls[0] as TShape).Fill.Color := TAlphaColorRec.White;  // uses System.UITypes
+    end;
+
 
     ImageViewer1.Visible := True;
     lblIdCartao.Visible := False;
@@ -215,12 +225,19 @@ begin
 
 end;
 procedure TfrmNfcG800.formatarCartao;
+
 begin
+
   enablePanel;
   lblTextTitle.Text := 'Formatar Cartão';
   lblGravar.Visible := False;
   lblSub.Visible := False;
+
   contador := 0;
+
+  
+
+
 end;
 procedure TfrmNfcG800.testeCartao;
 begin
