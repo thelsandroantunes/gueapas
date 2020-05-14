@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- BEGIN_INCLUDE(manifest) -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.embarcadero.GertecOne"
+        package="com.embarcadero.GertecOne_G800"
         android:versionCode="1"
         android:versionName="1.0.0"
         android:installLocation="auto">
@@ -32,7 +32,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.embarcadero.GertecOne.fileprovider"
+            android:authorities="com.embarcadero.GertecOne_G800.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -51,7 +51,7 @@
                 android:launchMode="singleTask">
             <!-- Tell NativeActivity the name of our .so -->
             <meta-data android:name="android.app.lib_name"
-                android:value="GertecOne" />
+                android:value="GertecOne_G800" />
             <intent-filter>  
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

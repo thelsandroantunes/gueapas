@@ -29,7 +29,11 @@ uses
   // FMX.ExtCtrlsm,
   FMX.Edit,
   FMX.ScrollBox,
-  FMX.Memo;
+  FMX.Memo,
+
+  //
+
+  ;
 
 type
 

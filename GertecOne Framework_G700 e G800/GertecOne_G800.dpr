@@ -1,11 +1,11 @@
-program GertecOne;
+program GertecOne_G800;
 
 {$R *.dres}
 
 uses
   System.StartUpCopy,
   FMX.Forms,
-  GertecOne_G800 in 'GertecOne_G800.pas' {frmMain},
+  main in 'main.pas' {frmMain},
   Androidapi.JNI.Toast in 'Lib\Androidapi.JNI.Toast.pas',
   FMX.Barcode.DROID in 'Lib\FMX.Barcode.DROID.pas',
   FMX.Barcode.IOS in 'Lib\FMX.Barcode.IOS.pas',

@@ -1,4 +1,4 @@
-unit main;
+unit GertecOne_G800;
 
 interface
 

@@ -123,6 +123,7 @@ begin
     NFC_ESCRITA:      NFC.setGravaMensagemURL(Edit1.Text, 'https://www.gertec.com.br');
     NFC_LEITURA_ID:   NFC.setLeituraID;
     NFC_LEITURA_MSG:  NFC.setLeituraMensagem;
+
     NFC_GRAVAR_LER:
     begin
       NFC.setGravaMensagemURL('GERTEC1000', 'https://www.gertec.com.br');
@@ -455,10 +456,10 @@ begin
         //if(NFC.NFCUrl<>'')then
           //txtUrl.Text := NFC.NFCUrl;
         //ShowMessage('Mensagem' + #13#10 + NFC.NFCMensagem +#13#10#13#10 + 'Url:'#13#10+NFC.NFCUrl );
-
+         ShowMessage('Gravar/Ler OK! ');
       end;
 
-      ShowMessage('Gravar/Ler OK! ');
+
 
     end;
 
