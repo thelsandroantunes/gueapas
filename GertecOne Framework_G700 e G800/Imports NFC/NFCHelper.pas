@@ -29,7 +29,7 @@ uses
   // FMX.ExtCtrlsm,
   FMX.Edit,
   FMX.ScrollBox,
-  FMX.Memo,
+  FMX.Memo
 
   //
 
@@ -48,6 +48,7 @@ TNFCHelper = class
       lReadUrlCard : Boolean;
       lGravarMensagem : Boolean;
       lGravarUrl : Boolean;
+      lFormat : Boolean; //
 
       AppEvents: IFMXApplicationEventService;
       NfcAdapter: JNfcAdapter;
@@ -99,6 +100,10 @@ TNFCHelper = class
 
     function DecodeURI(RecordBytes: TJavaArray<Byte>): string;
 
+    // Formata cartão
+    procedure FormatandoNFC(const Tag: JTag); //
+    function FormataNfc(const Tag: JTag): Boolean; //
+
   public
 
     NFCMensagem: string;
@@ -106,7 +111,7 @@ TNFCHelper = class
     CardId: string;
     CardIdHex: string;
     NFCWriteStatus : NFC_WRITE_STATUS;
-
+    FormatNFC: string; //
 
     constructor Create;
 
@@ -123,6 +128,7 @@ TNFCHelper = class
 
     procedure ClearData;
 
+    procedure setFormat;
 
 end;
 
@@ -170,6 +176,7 @@ begin
   ClearData;
 
 end;
+
 
 procedure TNFCHelper.ClearData;
 begin
@@ -298,6 +305,9 @@ begin
 
         else if lGravarMensagem then
           GravarMensagem(TJTag.Wrap(TagParcel))
+
+        else if lFormat then    //
+          FormatandoNFC(TJTag.Wrap(TagParcel))  
 
         //else
         //  MensagemEscolhaFuncao
@@ -455,6 +465,54 @@ begin
     raise Exception.Create('Esta não é uma tag compatível com NDEF!');
 end;
 
+//******************************************************************************
+function TNFCHelper.FormataNfc(const Tag: JTag): Boolean;
+var
+  {I : Integer;
+  lResultNDef : Boolean;
+  teste: JNdefFormatableClass;
+  formatNDef: JNdefFormatable;
+  NDef: JNdef;
+  formatNDefMsg: JNdefMessage;
+  formatMensagem: string;}
+  I : Integer;
+  lResult : Boolean;
+  NDef: JNdef;
+  NDefMsg: JNdefMessage;
+  mensagem: string;
+
+begin
+
+  NDef := TJNdef.JavaClass.get(Tag);
+  //formatNDef := teste.get(Tag);
+
+  if NDef <> nil then
+  begin
+    try
+      NDef.connect;
+      lResult := NDef.isConnected;
+
+      ShowMessage('isConnect ' + BoolToStr(lResult));
+
+      if lResult then
+      begin
+
+        NDefMsg := Ndef.getNdefMessage;
+
+        Result := True;
+
+        NDef.close;
+      end;
+    except
+      on EJNIException do
+        Result := False;
+    end;
+  end
+  else
+    raise Exception.Create('Esta não é uma tag compatível com NDEF!');
+end;
+//******************************************************************************
+
 function TNFCHelper.GravaCartao(const Tag: JTag): Boolean;
 var
   NDef: JNdef;
@@ -513,7 +571,39 @@ begin
   end;
 
 end;
+//******************************************************************************
+procedure TNFCHelper.FormatandoNFC(const Tag: JTag);
+var
+lFormatResult: Boolean;
+begin
 
+  try
+
+    try
+      lFormatResult := FormataNfc(Tag);
+
+      if lFormatResult then
+        //TDialogService.ShowMessage('Dados gravados com sucesso.')
+        FormatNFC := 'Cartão Formatado'
+      else
+        //TDialogService.ShowMessage('Erro ao gravar mensagem no cartão.');
+        FormatNFC := 'Não é necessário formatar este cartão'
+
+    except
+
+      on e: exception do begin
+        ShowMessage('Erro=>'+e.Message);
+      end;
+
+    end;
+
+  finally
+    StartVariaveis;
+  end;
+
+
+end;
+//******************************************************************************
 procedure TNFCHelper.LeMensagemCartao(const Tag : JTag);
 var
   mensagem : string;
@@ -603,6 +693,12 @@ begin
   NFCWriteStatus := NFC_WRITE_PENDING;
 end;
 
+//***************************************************************
+procedure TNFCHelper.setFormat;
+begin
+    lFormat := True;
+end;
+//***************************************************************
 
 procedure TNFCHelper.setMensagemURL(const mensagem:string; const URL:string);
 begin

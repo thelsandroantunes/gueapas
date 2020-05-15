@@ -31,7 +31,7 @@ uses
 
 type
 
-  NFC_MODOS = (NFC_NONE, NFC_LEITURA_ID, NFC_LEITURA_MSG, NFC_ESCRITA, NFC_GRAVAR_LER);
+  NFC_MODOS = (NFC_NONE, NFC_LEITURA_ID, NFC_LEITURA_MSG, NFC_ESCRITA, NFC_GRAVAR_LER, NFC_FORMAT);
 
   TfrmNfcG800 = class(TForm)
     Edit1: TEdit;
@@ -129,6 +129,10 @@ begin
       NFC.setGravaMensagemURL('GERTEC1000', 'https://www.gertec.com.br');
       NFC.setLeituraID;
       NFC.setLeituraMensagem;
+    end;
+    NFC_FORMAT:
+    begin
+       NFC.setFormat;
     end;
   end;
 
@@ -234,11 +238,9 @@ begin
   lblGravar.Visible := False;
   lblSub.Visible := False;
 
+  NFC.ClearData;
+
   contador := 0;
-
-  
-
-
 end;
 procedure TfrmNfcG800.testeCartao;
 begin
@@ -361,6 +363,7 @@ begin
 
       if(NFC.CardId = '')then begin
         timerNFC.Enabled := true;
+
       end else begin
 
         MensagemEscolhaOpcao;
@@ -463,6 +466,20 @@ begin
 
     end;
 
+
+    NFC_FORMAT:
+    begin
+       if(NFC.FormatNFC = '')then begin
+        timerNFC.Enabled := true;
+
+      end else begin
+
+        MensagemEscolhaOpcao;
+
+        ShowMessage('Teste '+ NFC.FormatNFC);
+
+      end;
+    end;
 
   end; //case
 
