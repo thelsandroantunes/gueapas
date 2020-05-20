@@ -22,9 +22,6 @@ Coordinates=333,122,53,58
 [cmdImpressao]
 Coordinates=137,258,99,36
 
-[Image5]
-Coordinates=318,10,57,58
-
 [cmdCodigoBarras]
 Coordinates=10,258,117,36
 
@@ -43,12 +40,6 @@ Coordinates=140,122,57,58
 [Label1]
 Coordinates=140,190,53,58
 
-[ImageViewer1]
-Coordinates=396,122,97,58
-
-[BitmapAnimation1]
-Coordinates=528,56,119,36
-
 [Image3]
 Coordinates=377,190,57,58
 
@@ -59,15 +50,31 @@ Coordinates=255,10,53,58
 Coordinates=10,10,235,102
 
 [cmdCodBarraV2]
-Coordinates=421,258,83,36
+Coordinates=421,258,109,36
 Visible=True
 
 [cmdNFCBc]
-Coordinates=246,258,90,36
+Coordinates=246,258,80,36
 
 [lblINFCbc]
-Coordinates=207,122,53,58
+Coordinates=207,122,71,58
 
 [imageNCFbc]
-Coordinates=203,190,97,58
+Coordinates=203,190,89,58
+
+[]
+Coordinates=396,122,97,58
+
+[Image7]
+Coordinates=0,0,57,58
+
+[Label7]
+Coordinates=76,1,53,58
+
+[Image5]
+Coordinates=168,1,57,58
+Visible=True
+
+[cmdTef]
+Coordinates=148,78,90,36
 

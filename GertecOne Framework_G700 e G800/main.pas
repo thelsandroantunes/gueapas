@@ -98,11 +98,17 @@ TBarCodes = (QRCODE);
     Label5: TLabel;
     cmdCodBarraV2: TColorButton;
     Label6: TLabel;
-    Image5: TImage;
     cmdNFCBc: TColorButton;
     lblINFCbc: TLabel;
     Image6: TImage;
-    imageNCFbc: TImageViewer;
+
+    Image7: TImage;
+    cmdTef: TColorButton;
+    Label7: TLabel;
+    Image5: TImage;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    VertScrollBox1: TVertScrollBox;
 
     procedure cmdCodigoBarrasClick(Sender: TObject);
     procedure cmdImpressaoClick(Sender: TObject);
@@ -111,6 +117,7 @@ TBarCodes = (QRCODE);
     procedure FormCreate(Sender: TObject);
     procedure cmdNFCIdClick(Sender: TObject);
     procedure cmdNFCBcClick(Sender: TObject);   //32165465
+    procedure cmdTefClick(Sender: TObject);   //
     procedure DesligaNFC;
 
 
@@ -240,6 +247,13 @@ frmNFCid.Show;
 {$ENDIF}
 end;
 
+procedure TfrmMain.cmdTefClick(Sender: TObject);
+begin
+{$IFNDEF __G800__}
+  //Teste
+{$ENDIF}
+end;
+
 procedure TfrmMain.cmdNFCBcClick(Sender: TObject);
 begin
 {$IFNDEF __G800__}
@@ -257,16 +271,19 @@ begin
 
   if(DeviceType = 'Smart G800')then begin
     //ShowMessage('Smart G800');
+
     cmdNFC.Visible := True;
     cmdNFCBc.Visible := False;
-    imageNCFbc.Visible := False;
 
     cmdNFC.Position.Y := cmdNFCBc.Position.Y;
+
 
   end else begin//'GPOS700'
     //ShowMessage('NOT Smart G800');
     cmdNFC.Visible := False;
+    cmdTef.Position.Y := cmdNFCId.Position.Y;
     cmdNFCId.Position.Y := cmdNFC.Position.Y;
+
   end;
   cmdNFCId.Visible := not cmdNFC.Visible;
 
