@@ -82,6 +82,9 @@ type
     lblMsg: TLabel;
     lblMsgCode: TLabel;
     ImageControl2: TImageControl;
+    GroupBox1: TGroupBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
 
 
     procedure cmdImpressaoGClick(Sender: TObject);

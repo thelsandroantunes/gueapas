@@ -104,7 +104,12 @@ uses
   CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2},
   FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas',
   uNFCbc in 'uNFCbc.pas' {frmNFCbc},
-  uNFC in 'uNFC.pas';
+  uNFC in 'uNFC.pas',
+  GER7TEF in 'GER7TEF.pas',
+  GEDIPrinterTEF in 'GEDIPrinterTEF.pas',
+  Unit2 in 'Unit2.pas' {Form2},
+  Unit3 in 'Unit3.pas' {Form3},
+  TEF in 'TEF.pas' {frmTEF};
 
 {$R *.res}
 
@@ -118,6 +123,9 @@ begin
   Application.CreateForm(TfrmCodBarra, frmCodBarra);
   Application.CreateForm(TfrmCodigoBarraV2, frmCodigoBarraV2);
   Application.CreateForm(TfrmNFCbc, frmNFCbc);
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TForm3, Form3);
+  Application.CreateForm(TfrmTEF, frmTEF);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.

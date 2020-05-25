@@ -33,6 +33,9 @@ uses
   CodigoDeBarraV2,
   CodigoDeBarras,
   ImpressaoG,
+ //Unit2,
+  //Unit3,
+  TEF,
 
   {$IFDEF __G800__}
   uNFC,
@@ -250,7 +253,8 @@ end;
 procedure TfrmMain.cmdTefClick(Sender: TObject);
 begin
 {$IFNDEF __G800__}
-  //Teste
+  frmTEF.CleanTextTEF(TRUE);
+  frmTEF.Show;
 {$ENDIF}
 end;
 
@@ -268,6 +272,7 @@ DeviceType :string;
 begin
 
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
+
 
   if(DeviceType = 'Smart G800')then begin
     //ShowMessage('Smart G800');
