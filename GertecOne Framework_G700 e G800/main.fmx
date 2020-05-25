@@ -1708,6 +1708,7 @@ object frmMain: TfrmMain
         Size.Height = 89.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 6
+        OnClick = cmdGerSatClick
         object lblGerSat: TLabel
           StyledSettings = [Family, Style, FontColor]
           Position.X = 160.000000000000000000

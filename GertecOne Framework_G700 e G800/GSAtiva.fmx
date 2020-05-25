@@ -1,0 +1,110 @@
+object frmGSAtiva: TfrmGSAtiva
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 651
+  ClientWidth = 503
+  StyleBook = StyleBook1
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Align = Client
+    Size.Width = 503.000000000000000000
+    Size.Height = 651.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'Panel1Style1'
+    TabOrder = 0
+    object lblCNPJ: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 185.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'CNPJ Contribuinte:'
+      TabOrder = 2
+    end
+    object lblAtivaSat: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 225.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'C'#243'digo de Ativa'#231#227'o SAT:'
+      TabOrder = 1
+    end
+    object lblCodigo: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 144.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'Confirma'#231#227'o do C'#243'digo:'
+      TabOrder = 0
+    end
+    object btnAtivaSat: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 64.000000000000000000
+      Position.Y = 208.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'ATIVAR'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+    object edtCNPJ: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 6
+      Position.X = 184.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 169.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object edtAtivaSat: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 5
+      Position.X = 224.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object edtCodigo: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Position.X = 224.000000000000000000
+      Position.Y = 144.000000000000000000
+      Size.Width = 201.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+    end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+      end
+      item
+        Platform = 'Windows 10 Desktop'
+        ResourcesBin = {
+          464D585F5354594C4520322E3501060C50616E656C315374796C653103B10000
+          545046300A5452656374616E676C6500095374796C654E616D65060C50616E65
+          6C315374796C653105416C69676E070643656E7465720A46696C6C2E436F6C6F
+          720708636C6157686974650748697454657374080A53697A652E576964746805
+          00000000000080FB07400B53697A652E48656967687405000000000000C0A208
+          401453697A652E506C6174666F726D44656661756C74080C5374726F6B652E43
+          6F6C6F7207097846464343434343430000}
+      end>
+  end
+end

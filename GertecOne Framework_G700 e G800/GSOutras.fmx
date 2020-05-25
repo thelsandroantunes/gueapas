@@ -1,0 +1,95 @@
+object frmGSOutras: TfrmGSOutras
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 640
+  ClientWidth = 441
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Align = Client
+    Size.Width = 441.000000000000000000
+    Size.Height = 640.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'Panel1Style1'
+    TabOrder = 0
+    object edtAtivaSat: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 9
+      Position.X = 232.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 177.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lblAtivaSat: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 8.000000000000000000
+      Position.Y = 32.000000000000000000
+      Size.Width = 217.000000000000000000
+      Size.Height = 41.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 18.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Text = 'C'#243'digo de Ativa'#231#227'o SAT:'
+      TabOrder = 1
+    end
+    object btnVerificaVersao: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'VERIFICAR VERS'#195'O'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+    object btnAtualSof: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 304.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'ATUALIZAR SOFTWARE'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+    object btnExtrairLog: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 232.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'EXTRAIR LOG'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+    object btnDesbSat: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 160.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'DESBLOQUEAR SAT'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+    object btnBloquearSat: TButton
+      StyledSettings = [Family, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'BLOQUEAR SAT'
+      TextSettings.Font.Size = 18.000000000000000000
+    end
+  end
+end

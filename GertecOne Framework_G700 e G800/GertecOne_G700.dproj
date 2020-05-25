@@ -327,6 +327,34 @@
             <Form>frmTEF</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="GerSat.pas">
+            <Form>frmGerSat</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSAtiva.pas">
+            <Form>frmGSAtiva</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSAssocia.pas">
+            <Form>frmGSAssocia</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSTesteSat.pas">
+            <Form>frmGSTesteSat</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSConfig.pas">
+            <Form>frmGSConfig</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSAltera.pas">
+            <Form>frmGSAltera</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="GSOutras.pas">
+            <Form>frmGSOutras</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <JavaReference Include="libs\payment-1.14.10.181016_classes.jar">
             <Disabled/>
         </JavaReference>

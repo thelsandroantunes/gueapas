@@ -36,6 +36,7 @@ uses
  //Unit2,
   //Unit3,
   TEF,
+  GerSat,
 
   {$IFDEF __G800__}
   uNFC,
@@ -125,6 +126,7 @@ TBarCodes = (QRCODE);
     procedure cmdNFCBcClick(Sender: TObject);   //32165465
     procedure cmdTefClick(Sender: TObject);   //
     procedure DesligaNFC;
+    procedure cmdGerSatClick(Sender: TObject);
 
 
   private
@@ -170,6 +172,11 @@ DesligaNFC;
 
 {$ENDIF}
 
+end;
+
+procedure TfrmMain.cmdGerSatClick(Sender: TObject);
+begin
+frmGerSat.Show;
 end;
 
 procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);

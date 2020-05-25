@@ -1,0 +1,120 @@
+object frmGerSat: TfrmGerSat
+  Left = 0
+  Top = 0
+  Caption = 'Form4'
+  ClientHeight = 636
+  ClientWidth = 375
+  StyleBook = StyleBook1
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Panel1: TPanel
+    Align = Client
+    Size.Width = 375.000000000000000000
+    Size.Height = 636.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'Panel1Style1'
+    TabOrder = 0
+    object lblTitulo: TLabel
+      Align = Top
+      StyledSettings = [Family]
+      Size.Width = 375.000000000000000000
+      Size.Height = 65.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 22.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'GERSAT - Aplicativo de Ativa'#231#227'o'
+      TabOrder = 0
+    end
+    object btnAtiva: TButton
+      StyledSettings = [Family, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 88.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      Text = 'ATIVA'#199#195'O SAT'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnAtivaClick
+    end
+    object btnAssocia: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 160.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      Text = 'ASSOCIAR ASSINATURA'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnAssociaClick
+    end
+    object btnTesteSat: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 232.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+      Text = 'TESTE SAT'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnTesteSatClick
+    end
+    object btnConfig: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 304.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      Text = 'CONFIGURA'#199#213'ES DE REDE'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnConfigClick
+    end
+    object btnAltera: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 376.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      Text = 'ALTERAR C'#211'DIGO  DE REDE'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnAlteraClick
+    end
+    object btnOutro: TButton
+      StyledSettings = [Family, Style, FontColor]
+      Position.X = 32.000000000000000000
+      Position.Y = 448.000000000000000000
+      Size.Width = 305.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      Text = 'OUTRAS FERRAMENTAS'
+      TextSettings.Font.Size = 18.000000000000000000
+      OnClick = btnOutroClick
+    end
+  end
+  object StyleBook1: TStyleBook
+    Styles = <
+      item
+      end
+      item
+        Platform = 'Windows 10 Desktop'
+        ResourcesBin = {
+          464D585F5354594C4520322E3501060C50616E656C315374796C653103B10000
+          545046300A5452656374616E676C6500095374796C654E616D65060C50616E65
+          6C315374796C653105416C69676E070643656E7465720A46696C6C2E436F6C6F
+          720708636C6157686974650748697454657374080A53697A652E576964746805
+          000000000000408208400B53697A652E4865696768740500000000000040A008
+          401453697A652E506C6174666F726D44656661756C74080C5374726F6B652E43
+          6F6C6F7207097846464343434343430000}
+      end>
+  end
+end

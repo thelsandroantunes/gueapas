@@ -109,7 +109,14 @@ uses
   GEDIPrinterTEF in 'GEDIPrinterTEF.pas',
   Unit2 in 'Unit2.pas' {Form2},
   Unit3 in 'Unit3.pas' {Form3},
-  TEF in 'TEF.pas' {frmTEF};
+  TEF in 'TEF.pas' {frmTEF},
+  GerSat in 'GerSat.pas' {frmGerSat},
+  GSAtiva in 'GSAtiva.pas' {frmGSAtiva},
+  GSAssocia in 'GSAssocia.pas' {frmGSAssocia},
+  GSTesteSat in 'GSTesteSat.pas' {frmGSTesteSat},
+  GSConfig in 'GSConfig.pas' {frmGSConfig},
+  GSAltera in 'GSAltera.pas' {frmGSAltera},
+  GSOutras in 'GSOutras.pas' {frmGSOutras};
 
 {$R *.res}
 
@@ -126,6 +133,13 @@ begin
   Application.CreateForm(TForm2, Form2);
   Application.CreateForm(TForm3, Form3);
   Application.CreateForm(TfrmTEF, frmTEF);
+  Application.CreateForm(TfrmGerSat, frmGerSat);
+  Application.CreateForm(TfrmGSAtiva, frmGSAtiva);
+  Application.CreateForm(TfrmGSAssocia, frmGSAssocia);
+  Application.CreateForm(TfrmGSTesteSat, frmGSTesteSat);
+  Application.CreateForm(TfrmGSConfig, frmGSConfig);
+  Application.CreateForm(TfrmGSAltera, frmGSAltera);
+  Application.CreateForm(TfrmGSOutras, frmGSOutras);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.
