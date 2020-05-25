@@ -112,6 +112,9 @@ TBarCodes = (QRCODE);
     Panel1: TPanel;
     Panel2: TPanel;
     VertScrollBox1: TVertScrollBox;
+    cmdGerSat: TColorButton;
+    Image8: TImage;
+    lblGerSat: TLabel;
 
     procedure cmdCodigoBarrasClick(Sender: TObject);
     procedure cmdImpressaoClick(Sender: TObject);
@@ -286,6 +289,7 @@ begin
   end else begin//'GPOS700'
     //ShowMessage('NOT Smart G800');
     cmdNFC.Visible := False;
+    cmdGerSat.Position.Y := cmdTef.Position.Y;
     cmdTef.Position.Y := cmdNFCId.Position.Y;
     cmdNFCId.Position.Y := cmdNFC.Position.Y;
 
