@@ -1,0 +1,10 @@
+﻿[lblTitulo]
+Coordinates=10,10,60,58
+
+[PanelTitulo]
+Coordinates=80,10,79,36
+Visible=True
+
+[]
+Coordinates=177,1,91,36
+

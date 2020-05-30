@@ -116,7 +116,9 @@ uses
   GSTesteSat in 'GSTesteSat.pas' {frmGSTesteSat},
   GSConfig in 'GSConfig.pas' {frmGSConfig},
   GSAltera in 'GSAltera.pas' {frmGSAltera},
-  GSOutras in 'GSOutras.pas' {frmGSOutras};
+  GSOutras in 'GSOutras.pas' {frmGSOutras},
+  Unit4 in 'Unit4.pas' {Form4},
+  JavaInterfacesNew in 'Imports NFC700\JavaInterfacesNew.pas';
 
 {$R *.res}
 
@@ -140,6 +142,7 @@ begin
   Application.CreateForm(TfrmGSConfig, frmGSConfig);
   Application.CreateForm(TfrmGSAltera, frmGSAltera);
   Application.CreateForm(TfrmGSOutras, frmGSOutras);
+  Application.CreateForm(TForm4, Form4);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.

@@ -28,15 +28,15 @@ uses
   System.JSON,               //Required
   Androidapi.JNI.OS,        //Required
 
-
   //Units do projeto
   CodigoDeBarraV2,
   CodigoDeBarras,
   ImpressaoG,
  //Unit2,
   //Unit3,
+  Unit4,
   TEF,
-  GerSat,
+  //GerSat,
 
   {$IFDEF __G800__}
   uNFC,
@@ -176,7 +176,9 @@ end;
 
 procedure TfrmMain.cmdGerSatClick(Sender: TObject);
 begin
-frmGerSat.Show;
+//frmGerSat.Show;
+Form4.teste(TRUE);
+Form4.Show;
 end;
 
 procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
