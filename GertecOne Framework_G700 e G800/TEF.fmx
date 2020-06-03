@@ -3,7 +3,7 @@ object frmTEF: TfrmTEF
   Top = 0
   Caption = 'Form4'
   ClientHeight = 786
-  ClientWidth = 425
+  ClientWidth = 817
   SystemStatusBar.BackgroundColor = claWhite
   StyleBook = StyleBook1
   FormFactor.Width = 320
@@ -13,7 +13,7 @@ object frmTEF: TfrmTEF
   DesignerMasterStyle = 0
   object PanelTitulo: TPanel
     Align = MostTop
-    Size.Width = 425.000000000000000000
+    Size.Width = 817.000000000000000000
     Size.Height = 73.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'PanelTituloStyle1'
@@ -21,7 +21,7 @@ object frmTEF: TfrmTEF
     object lblTitulo: TLabel
       Align = Client
       StyledSettings = [Family]
-      Size.Width = 425.000000000000000000
+      Size.Width = 817.000000000000000000
       Size.Height = 73.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 26.000000000000000000
@@ -43,9 +43,10 @@ object frmTEF: TfrmTEF
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 0
       KeyboardType = NumberPad
-      Text = '10.0.0.100'
+      Text = '0.0.0.0'
       Position.X = 128.000000000000000000
       Position.Y = 24.000000000000000000
+      Enabled = False
       Size.Width = 233.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
@@ -54,12 +55,13 @@ object frmTEF: TfrmTEF
       Touch.InteractiveGestures = [LongTap, DoubleTap]
       TabOrder = 1
       KeyboardType = NumberPad
-      Text = '1,00'
+      Text = '00,00'
       Position.X = 8.000000000000000000
       Position.Y = 24.000000000000000000
       Size.Width = 113.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
+      OnChangeTracking = edtValorChange
     end
     object lblValor: TLabel
       AutoSize = True
@@ -103,6 +105,7 @@ object frmTEF: TfrmTEF
       Size.Width = 353.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
+      OnExit = edtParcelasExit
     end
     object GroupBox1: TGroupBox
       StyledSettings = [Family, FontColor, Other]
@@ -115,6 +118,7 @@ object frmTEF: TfrmTEF
       TabOrder = 7
       object rdgCredito: TRadioButton
         StyledSettings = [Family, Style, FontColor]
+        IsChecked = True
         Position.X = 24.000000000000000000
         Position.Y = 24.000000000000000000
         Size.Width = 265.000000000000000000
@@ -123,6 +127,7 @@ object frmTEF: TfrmTEF
         TabOrder = 6
         Text = 'Cr'#233'dito'
         TextSettings.Font.Size = 16.000000000000000000
+        OnChange = rdgCreditoChange
       end
       object rdgDebito: TRadioButton
         StyledSettings = [Family, Style, FontColor]
@@ -134,6 +139,7 @@ object frmTEF: TfrmTEF
         TabOrder = 4
         Text = 'D'#233'bito'
         TextSettings.Font.Size = 16.000000000000000000
+        OnChange = rdgDebitoChange
       end
       object rdgTodos: TRadioButton
         StyledSettings = [Family, Style, FontColor]
@@ -171,6 +177,7 @@ object frmTEF: TfrmTEF
     TabOrder = 5
     object CheckBox1: TCheckBox
       StyledSettings = [Family, Style, FontColor]
+      IsChecked = True
       Position.X = 16.000000000000000000
       Position.Y = 24.000000000000000000
       TabOrder = 2

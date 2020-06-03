@@ -28,6 +28,10 @@ uses
   System.JSON,               //Required
   Androidapi.JNI.OS,        //Required
 
+  //
+  System.IOUtils,
+  JavaInterfacesNew,
+
   //Units do projeto
   CodigoDeBarraV2,
   CodigoDeBarras,
@@ -127,6 +131,7 @@ TBarCodes = (QRCODE);
     procedure cmdTefClick(Sender: TObject);   //
     procedure DesligaNFC;
     procedure cmdGerSatClick(Sender: TObject);
+    procedure FormActive(Sender: TObject);
 
 
   private
@@ -138,7 +143,8 @@ TBarCodes = (QRCODE);
 
 var
   frmMain: TfrmMain;
-
+  onDataReceived : JSatGerLib_OnDataReceived;
+  satLib : JSatGerLib;
 implementation
 
 {$R *.fmx}
@@ -177,6 +183,8 @@ end;
 procedure TfrmMain.cmdGerSatClick(Sender: TObject);
 begin
 //frmGerSat.Show;
+//satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
+
 Form4.teste(TRUE);
 Form4.Show;
 end;
@@ -283,6 +291,8 @@ var
 DeviceType :string;
 begin
 
+  //cmdGerSat.OnClick := ativaTeste;
+
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
 
 
@@ -306,5 +316,13 @@ begin
   cmdNFCId.Visible := not cmdNFC.Visible;
 
 end;
+
+procedure TfrmMain.FormActive(Sender: TObject);
+begin
+
+  //satLib := TJSatGerLib.JavaClass.init(SharedActivityContext.getApplicationContext, onDataReceived);
+  //satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
+end;
+
 
 end.

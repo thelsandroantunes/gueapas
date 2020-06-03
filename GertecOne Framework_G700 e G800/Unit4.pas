@@ -21,8 +21,6 @@ type
     Button1: TButton;
 
     procedure FormActivate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnConsultarSATClick(Sender: TObject);
     procedure btnConsultarStatusOperacionalClick(Sender: TObject);
     procedure btnEnviarDadosVendaClick(Sender: TObject);
@@ -54,8 +52,7 @@ implementation
 
 procedure TForm4.teste(pin: Boolean);
 begin
-  if pin then satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
-  
+     //satLib := sat;
 end;
 
 procedure TForm4.btnConsultarSATClick(Sender: TObject);
@@ -231,18 +228,6 @@ begin
 
   //satLib := TJSatGerLib.JavaClass.init(SharedActivityContext.getApplicationContext, onDataReceived);
   satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
-end;
-
-procedure TForm4.FormShow(Sender: TObject);
-begin
-  satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
-
-end;
-
-procedure TForm4.FormCreate(Sender: TObject);
-begin
-  satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
-
 end;
 
 end.
