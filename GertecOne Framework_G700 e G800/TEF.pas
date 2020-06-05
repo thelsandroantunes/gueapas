@@ -25,10 +25,12 @@ uses
   System.JSON,               //Required
   Androidapi.JNI.OS,        //Required
 
+  GER7TEF,
   G700Interface,
   GEDIPrinterTEF,
-  GER7TEF,
-  FMX.Surfaces;
+  FMX.Surfaces,
+
+  FMX.Layouts;
 
 
 const
@@ -64,6 +66,9 @@ const
   GER7_RES_TAG ='jsonResp';
   GER7_FORM_FEED = #12;
   GER7_REQ_CODE = 4713;
+  GER7_REIMPRESSAO = '18';
+  GER7_VOUCHER = '4';
+  GER7_PARCELADO_ADM = '2';
 
   API_GER7 = '0';
   API_MSITEF = '1';
@@ -73,20 +78,16 @@ type
     PanelTitulo: TPanel;
     lblTitulo: TLabel;
     StyleBook1: TStyleBook;
-    PanelValorIP: TPanel;
     edtIPServidor: TEdit;
     edtValor: TEdit;
     lblValor: TLabel;
     lblIP: TLabel;
-    PanelPagamento: TPanel;
     edtParcelas: TNumberBox;
     GroupBox1: TGroupBox;
     rdgCredito: TRadioButton;
     rdgDebito: TRadioButton;
     rdgTodos: TRadioButton;
     lblParcelas: TLabel;
-    PanelAPI: TPanel;
-    PanelFuncao: TPanel;
     cmdEnviarTransacao: TButton;
     cmdCancelarTransacao: TButton;
     cmdFuncoes: TButton;
@@ -98,6 +99,9 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     lblAPI: TLabel;
+    Label1: TLabel;
+    VertScrollBox1: TVertScrollBox;
+    Panel1: TPanel;
 
 
     procedure cmdEnviarTransacaoClick(Sender: TObject);
@@ -129,6 +133,8 @@ type
     procedure rdgDebitoChange(Sender: TObject);
     procedure rdgCreditoChange(Sender: TObject);
     procedure edtParcelasExit(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
+    procedure rdgTodosChange(Sender: TObject);
 
 
   private
@@ -297,14 +303,14 @@ begin
   end;
   Result:=strResult;
 end;
-function contapontos(texto : String) : Integer;
+function removevazio(texto : String) : Integer;
 var
 cont:Integer;
 begin
   cont := 0;
-  While pos('.', Texto) <> 0 Do
+  While pos(' ', Texto) <> 0 Do
     cont := cont + 1;
-    //delete(Texto,pos('.', Texto),1);
+    delete(Texto,pos(' ', Texto),1);
 
   Result := cont;
 end;
@@ -314,7 +320,8 @@ var
 ip:string;
 
 begin
-//  FormatarIP(edtIPServidor.Text, '999.999.999.999');
+
+
 
   //ip := trim(StringReplace(edtIPServidor.Text,'.','',[rfReplaceall]));
 
@@ -343,7 +350,7 @@ procedure TfrmTEF.FormCreate(Sender: TObject);
 begin
 
 //lblTitulo.text := 'Exemplo TEF API-Delphi '+EXAMPLE_VERSION;
-
+edtIPServidor.Hint := '192.168.0.10';
 Randomize;
 //RandomValor;
 
@@ -440,7 +447,6 @@ TDialogService.MessageDialog(
         end);
 
 end;
-
 procedure MostraNegada(Data:Jintent);
 
 begin
@@ -517,66 +523,95 @@ var
 Produto,
 Parcelas,TipoParcelamento:String;
 
+i:integer;
 begin
-     if StrToFloat(edtValor.Text) = 0.0  then
-     begin
-      ShowMessage('Insira um valor maior que R$0.0');
-     end
 
-     else if StrToInt(edtParcelas.Text) = 0 then
-     begin
-      ShowMessage('Número de parcelas deve ser maior que 0');
-     end
-
-     else
-
-     begin
-        try
-
-          if rdgTodos.IsChecked then begin
-            Produto:=PRODUTO_TODOS;
-          end else if rdgCredito.IsChecked then begin
-            Produto:=PRODUTO_CREDITO;
-          end else if rdgDebito.IsChecked then begin
-            Produto:=PRODUTO_DEBITO;
-          end;
+     //edtIPServidor.Text :=  StringReplace(edtIPServidor.Text,' ', EmptyStr, [rfReplaceAll]);
 
 
-          Parcelas:= IntToStr(StrToIntDef(edtParcelas.Text,0));
+       if StrToFloat(edtValor.Text) = 0.0  then
+       begin
+        ShowMessage('Insira um valor maior que R$0.0');
+       end
 
+       else if StrToInt(edtParcelas.Text) = 0 then
+       begin
+        ShowMessage('Número de parcelas deve ser maior que 0');
+       end
 
-          if((Parcelas='0')or(Parcelas='1'))then begin
-            TipoParcelamento :=PARCELAMENTO_NONE;
-          end else begin
-            if rdgParceladoLoja.IsChecked then begin
-              TipoParcelamento :=PARCELAMENTO_LOJA;
-            end else if rdgParceladoAdm.IsChecked then begin
-              TipoParcelamento :=PARCELAMENTO_ADM;
+       else
+
+       begin
+          try
+
+            if rdgTodos.IsChecked then
+            begin
+              if CheckBox1.IsChecked then
+              begin
+                Produto:=GER7_VOUCHER;
+              end
+              else
+              begin
+                Produto:=PRODUTO_TODOS;
+              end;
+
+            end
+            else
+            if rdgCredito.IsChecked then begin
+              Produto:=PRODUTO_CREDITO;
+            end else if rdgDebito.IsChecked then begin
+              Produto:=PRODUTO_DEBITO;
             end;
+
+
+            Parcelas:= IntToStr(StrToIntDef(edtParcelas.Text,0));
+
+
+            if((Parcelas='0')or(Parcelas='1'))then begin
+              TipoParcelamento :=PARCELAMENTO_NONE;
+            end else begin
+              if rdgParceladoLoja.IsChecked then begin
+                TipoParcelamento :=PARCELAMENTO_LOJA;
+              end
+              else
+              if rdgParceladoAdm.IsChecked then
+              begin
+                if CheckBox1.IsChecked then
+                begin
+                  TipoParcelamento :=GER7_PARCELADO_ADM;
+                end
+                else
+                begin
+                  TipoParcelamento :=PARCELAMENTO_ADM;
+                end;
+
+              end;
+            end;
+
+
+            //xxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+            if CheckBox2.IsChecked then
+            begin
+              ExecuteSiTEF(COMANDO_VENDA,'',Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
+            end
+            else
+            begin
+              IniciaTransacao;
+              //transacao.SetaDebug(true);
+
+              IncrementaId; //
+              ExecuteTEF(COMANDO_VENDA,strId,Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
+            end;
+
+          except
+            on e: exception do begin
+            ShowMessage('Erro Transacao =>'+e.Message);
           end;
 
-          //xxxxxxxxxxxxxxxxxxxxxxxxx
-
-
-          if CheckBox2.IsChecked then
-          begin
-            ExecuteSiTEF(COMANDO_VENDA,'',Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
-          end else
-          begin
-            IniciaTransacao;
-            //transacao.SetaDebug(true);
-
-            IncrementaId; //
-            ExecuteTEF(COMANDO_VENDA,strId,Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
           end;
-
-        except
-          on e: exception do begin
-          ShowMessage('Erro Transacao =>'+e.Message);
-        end;
-
-        end;
-     end;
+       end;
 
     {  }
 
@@ -654,7 +689,15 @@ end;
 //**********************************************
 procedure TfrmTEF.cmdReimpressaoClick(Sender: TObject);
 begin
-FuncoesDiversas(COMANDO_REIMPRESSAO);
+  if CheckBox1.IsChecked then
+  begin
+    FuncoesDiversas(GER7_REIMPRESSAO);
+  end
+  else
+  begin
+    FuncoesDiversas(COMANDO_REIMPRESSAO);
+  end;
+
 end;
 //************************************************
 procedure TfrmTEF.RandomValor;
@@ -676,10 +719,15 @@ end;
 
 procedure TfrmTEF.rdgDebitoChange(Sender: TObject);
 begin
-edtParcelas.Text := '';
+edtParcelas.Text := '1';
 edtParcelas.Enabled := False;
 end;
 
+
+procedure TfrmTEF.rdgTodosChange(Sender: TObject);
+begin
+
+end;
 
 //**********************************************
 function TfrmTEF.OnActivityResult(RequestCode, ResultCode: Integer; Data:
@@ -842,6 +890,11 @@ and Assigned(Data) then
 end;
 
 
+procedure TfrmTEF.Panel1Click(Sender: TObject);
+begin
+
+end;
+
 //**********************************************
 procedure TfrmTEF.HandleActivityMessage(const Sender: TObject; const M: TMessage);
 begin
@@ -855,7 +908,7 @@ procedure TfrmTEF.ExecuteSiTEF(Tipo,NotUsed,Amount,Parcelas,TipoParcelamento,Pro
 var
   Intent : JIntent;
 begin
-
+  edtIPServidor.Text :=  StringReplace(edtIPServidor.Text,' ', EmptyStr, [rfReplaceAll]);
   ExecFlag :=true;
   Intent := TJIntent.JavaClass.init(StringToJString('br.com.softwareexpress.sitef.msitef.ACTIVITY_CLISITEF'));
 
@@ -932,35 +985,34 @@ DeviceType:String;
 
 begin
 
-if(transacao = nil) then begin
-  transacao:= TGER7TEF.Create;
-end;
-
-
+  if(transacao = nil) then
+    begin
+      transacao:= TGER7TEF.Create;
+    end;
 
 
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
 
   if(Trim(DeviceType) <> 'GPOS700')and (Trim(DeviceType)<>'Smart G800')then begin
     transacao.Zera;
-    transacao.response :=2;
-    transacao.ErrorCode:='9997';
-    transacao.ErrorMsg:='Modelo nao suportado';
-    TEFExecuteFlag:= 1;
+    transacao.response := 2;
+    transacao.ErrorCode := '9997';
+    transacao.ErrorMsg := 'Modelo nao suportado';
+    TEFExecuteFlag := 1;
     exit;
   end;
 
 
-Intent := TJIntent.JavaClass.init(
-TJIntent.JavaClass.ACTION_VIEW,TJnet_Uri.JavaClass.parse(StringToJString(GER7_REQ_URI)));
+  Intent := TJIntent.JavaClass.init(
+  TJIntent.JavaClass.ACTION_VIEW,TJnet_Uri.JavaClass.parse(StringToJString(GER7_REQ_URI)));
 
-JSON:= BuildJson(Tipo,Id,Amount,Parcelas,TipoParcelamento,Product,HabilitaImpressao);
-Intent.putExtra(StringToJString(GER7_REQ_TAG), JSON);
+  JSON:= BuildJson(Tipo,Id,Amount,Parcelas,TipoParcelamento,Product,HabilitaImpressao);
+  Intent.putExtra(StringToJString(GER7_REQ_TAG), JSON);
 
-TMessageManager.DefaultManager.SubscribeToMessage(TMessageResultNotification, HandleActivityMessage);
+  TMessageManager.DefaultManager.SubscribeToMessage(TMessageResultNotification, HandleActivityMessage);
 
-TEFExecuteFlag :=0;
-TAndroidHelper.Activity.startActivityForResult(Intent, GER7_REQ_CODE);
+  TEFExecuteFlag :=0;
+  TAndroidHelper.Activity.startActivityForResult(Intent, GER7_REQ_CODE);
 
 end;
 
