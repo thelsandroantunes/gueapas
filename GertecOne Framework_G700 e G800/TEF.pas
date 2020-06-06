@@ -69,6 +69,7 @@ const
   GER7_REIMPRESSAO = '18';
   GER7_VOUCHER = '4';
   GER7_PARCELADO_ADM = '2';
+  VERSION = 'GER7TEF Api UEA';
 
   API_GER7 = '0';
   API_MSITEF = '1';
@@ -133,7 +134,7 @@ type
     procedure rdgDebitoChange(Sender: TObject);
     procedure rdgCreditoChange(Sender: TObject);
     procedure edtParcelasExit(Sender: TObject);
-    procedure Panel1Click(Sender: TObject);
+
     procedure rdgTodosChange(Sender: TObject);
 
 
@@ -233,11 +234,9 @@ begin
   end;
 end;
 //**********************************************
-procedure IniciaTransacao;
+function getVersion:string;
 begin
-if(transacao = nil) then begin
-  transacao:= TGER7TEF.Create('1.05');
-end;
+  result:=VERSION;
 end;
 Procedure SaveId;
 var Arq:textfile;
@@ -248,18 +247,6 @@ begin
   closefile(Arq);
 
 end;
-function objJsonGetValue( var objJson: TJSONObject;Parametro:string):string;
-
-begin
-try
-    result:=objJson.GetValue<String>(Parametro);
-except
-    result:='';
-end;
-
-end;
-//**********************************************
-//==========================================================
 Procedure IncrementaId;
 var Arq:textfile;
 intId:integer;
@@ -273,10 +260,13 @@ begin
 
       //Incrementa o id
       strId := IntToStr(StrToIntDef(strId,1)+1);
-    end else begin
+    end
+    else
+    begin
       //Se nao existir, inicializa em 1
       strId := '1';
     end;
+
     SaveId;
 end;
 function Numeric(strValor:string):string;
@@ -303,6 +293,24 @@ begin
   end;
   Result:=strResult;
 end;
+procedure IniciaTransacao;
+begin
+  if(transacao = nil) then begin
+    transacao:= TGER7TEF.Create('1.05');
+  end;
+end;
+function objJsonGetValue( var objJson: TJSONObject;Parametro:string):string;
+
+begin
+try
+    result:=objJson.GetValue<String>(Parametro);
+except
+    result:='';
+end;
+
+end;
+//**********************************************
+//==========================================================
 function removevazio(texto : String) : Integer;
 var
 cont:Integer;
@@ -335,11 +343,9 @@ begin
 if StrToIntDef(edtParcelas.Text,0)=1 then ShowMessage('kkkkkkk');
 
 end;
-
-procedure TfrmTEF.edtParcelasKeyUp(Sender: TObject; var Key: Word;
-  var KeyChar: Char; Shift: TShiftState);
+procedure TfrmTEF.edtParcelasKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
-grpParcelamento.Enabled := (StrToIntDef(edtParcelas.Text,0)>1);
+  grpParcelamento.Enabled := (StrToIntDef(edtParcelas.Text,0)>1);
 end;
 procedure TfrmTEF.edtValorChange(Sender: TObject);
 begin
@@ -350,41 +356,18 @@ procedure TfrmTEF.FormCreate(Sender: TObject);
 begin
 
 //lblTitulo.text := 'Exemplo TEF API-Delphi '+EXAMPLE_VERSION;
-edtIPServidor.Hint := '192.168.0.10';
-Randomize;
-//RandomValor;
 
-ExecFlag := false;
+//Randomize;
+//RandomValor;
+  strArqId:=GetHomePath+GER7_ARQ_ID;
+
+  IniciaTransacao;
+
+  ExecFlag := false;
 end;
 function GetExtraData(Data:JIntent;Campo:String):String;
 begin
     result := Campo+' = '+JStringToString(Data.getStringExtra(StringToJString(Campo)))
-end;
-//==========================================================
-function BuildJson(Tipo,Id,Amount,Parcelas,TipoParcelamento,Product,HabilitaImpressao:string): JString;
-var
-  Json: TJSONObject;
-  Res: JString;
-
-begin
-   try
-    Json := TJSONObject.Create;
-    Json.AddPair('type', Tipo);
-    Json.AddPair('id', Id);
-    Json.AddPair('amount', Amount);
-    Json.AddPair('installments', Parcelas);
-    Json.AddPair('instmode', TipoParcelamento);
-    Json.AddPair('product', Product);
-    Json.AddPair('receipt', HabilitaImpressao);
-
-    if(transacao.apiversion<>'')then
-      Json.AddPair('apiversion', transacao.apiversion);
-   finally
-    Res := StringToJString(Json.ToString);
-    Json.Free;
-   end;
-
-   Result := Res;
 end;
 //==========================================================
 function RetornaTipoParcelamento(Valor:string):string;
@@ -502,12 +485,11 @@ end;
 procedure MostraNegadaGER7;
 begin
 
-          ShowMessage('Transação negada' + #13#10 +
-          'response: ' + inttostr(transacao.response) + #13#10 +
-          'Error code: ' + transacao.ErrorCode + #13#10 +
-          'Error: ' + transacao.ErrorMsg);
+  ShowMessage('Transação negada' + #13#10 +
+  'response: ' + inttostr(transacao.response) + #13#10 +
+  'Error code: ' + transacao.ErrorCode + #13#10 +
+  'Error: ' + transacao.ErrorMsg);
 end;
-
 //==========================================================
 function TfrmTEF.fHabilitaImpressao:string;
 begin
@@ -616,7 +598,6 @@ begin
     {  }
 
 end;
-//**********************************************
 procedure TfrmTEF.cmdCancelarTransacaoClick(Sender: TObject);
 var
 HabilitaImpressao:string;
@@ -653,7 +634,6 @@ begin
   end;
 
 end;
-//**********************************************
 procedure TfrmTEF.FuncoesDiversas(Funcao:String);
 begin
 
@@ -681,12 +661,10 @@ begin
   end;
 
 end;
-//**********************************************
 procedure TfrmTEF.cmdFuncoesClick(Sender: TObject);
 begin
 FuncoesDiversas(COMANDO_FUNCOES);
 end;
-//**********************************************
 procedure TfrmTEF.cmdReimpressaoClick(Sender: TObject);
 begin
   if CheckBox1.IsChecked then
@@ -716,19 +694,15 @@ begin
 edtParcelas.Text := '1';
 edtParcelas.Enabled := True;
 end;
-
 procedure TfrmTEF.rdgDebitoChange(Sender: TObject);
 begin
 edtParcelas.Text := '1';
 edtParcelas.Enabled := False;
 end;
-
-
 procedure TfrmTEF.rdgTodosChange(Sender: TObject);
 begin
 
 end;
-
 //**********************************************
 function TfrmTEF.OnActivityResult(RequestCode, ResultCode: Integer; Data:
                   JIntent): Boolean;
@@ -744,90 +718,88 @@ begin
   TMessageManager.DefaultManager.Unsubscribe(TMessageResultNotification, FMessageSubscriptionID);
   FMessageSubscriptionID := 0;
 
-   if CheckBox2.IsChecked then
-   begin
-
-      if RequestCode = REQ_CODE then begin
-
-        if ResultCode = TJActivity.JavaClass.RESULT_OK then begin
-
-          if Assigned(Data) then begin
 
 
-            if(ExecFlag) then begin
-              ExecFlag :=false;
-                    TThread.Synchronize(nil,
-                      procedure
-                      begin
-                        MostraAprovada(Data);
-                      end);
+    if RequestCode = REQ_CODE then begin
 
-              //RandomValor;
-            end;
-          end;
-        end else if ResultCode = TJActivity.JavaClass.RESULT_CANCELED then begin
+      if ResultCode = TJActivity.JavaClass.RESULT_OK then begin
+
+        if Assigned(Data) then begin
+
+
           if(ExecFlag) then begin
-            //ShowMessage('m-SiTef Nao Executado!');
-            MostraNegada(Data);
             ExecFlag :=false;
-          end;
-        end else begin
-          if(ExecFlag) then begin
-            ShowMessage('m-SiTef Outro Codigo');
-            ExecFlag :=false;
-          end;
+                  TThread.Synchronize(nil,
+                    procedure
+                    begin
+                      MostraAprovada(Data);
+                    end);
 
-          ShowMessage('m-SiTef Outro Codigo')
+            //RandomValor;
+          end;
         end;
-        //RandomValor;
+      end else if ResultCode = TJActivity.JavaClass.RESULT_CANCELED then begin
+        if(ExecFlag) then begin
+          //ShowMessage('m-SiTef Nao Executado!');
+          MostraNegada(Data);
+          ExecFlag :=false;
+        end;
+      end else begin
+        if(ExecFlag) then begin
+          ShowMessage('m-SiTef Outro Codigo');
+          ExecFlag :=false;
+        end;
 
-        Result := True;
+        ShowMessage('m-SiTef Outro Codigo')
       end;
-   end
+      //RandomValor;
 
-   else
+      Result := True;
+    end;
 
-   begin
-      if (RequestCode = GER7_REQ_CODE) and (ResultCode = TJActivity.JavaClass.RESULT_OK)
-and Assigned(Data) then
-      begin
 
-        if(TEFExecuteFlag <>0) then exit;//Evita reentrancias
+
+    if (RequestCode = GER7_REQ_CODE) and (ResultCode = TJActivity.JavaClass.RESULT_OK)
+    and Assigned(Data) then
+    begin
+
+      if(TEFExecuteFlag <>0) then exit;//Evita reentrancias
         TEFExecuteFlag :=1;
 
         try
           transacao.Zera;
-          json := Data.getStringExtra(StringToJString(GER7_REQ_TAG));
+          json := Data.getStringExtra(StringToJString(GER7_RES_TAG));
           //Debug!! ShowMessage(inttostr(TEFExecuteFlag)+'=>'+JStringToString(json));
           objJson := TJSONObject.ParseJSONValue(JStringToString(json)) as TJSONObject;
 
           transacao.response := objJson.GetValue<Integer>('response');
 
           transacao.Versao:=objJsonGetValue(objJson,'version');
-          transacao.Status:=objJsonGetValue(objJson,'status');
-          transacao.License:=objJsonGetValue(objJson,'license');
-          transacao.Terminal:=objJsonGetValue(objJson,'terminal');
-          transacao.Merchant:=objJsonGetValue(objJson,'merchant');
-          transacao.IDTransacao:=objJsonGetValue(objJson,'id');
-          transacao.ProdutoSelecionado:=objJsonGetValue(objJson,'product');
-          transacao.Parcelas:=objJsonGetValue(objJson,'installments');
-          transacao.TipoParcela:=objJsonGetValue(objJson,'instmode');
-          transacao.STAN:=objJsonGetValue(objJson,'stan') ;
+          transacao.Status:= objJsonGetValue(objJson,'status');
+          transacao.License:= objJsonGetValue(objJson,'license');
+          transacao.Terminal:= objJsonGetValue(objJson,'terminal');
+          transacao.Merchant:= objJsonGetValue(objJson,'merchant');
+          transacao.IDTransacao:= objJsonGetValue(objJson,'id');
+          transacao.ProdutoSelecionado:= objJsonGetValue(objJson,'product');
+          transacao.Parcelas:= objJsonGetValue(objJson,'installments');
+          transacao.TipoParcela:= objJsonGetValue(objJson,'instmode');
+          transacao.STAN:= objJsonGetValue(objJson,'stan') ;
 
-          transacao.cardholder:=objJsonGetValue(objJson,'cardholder');
-          transacao.prefname:=objJsonGetValue(objJson,'prefname');
-          transacao.authorizationType:=objJsonGetValue(objJson,'authorizationType');
-          transacao.cardEntry:=objJsonGetValue(objJson,'cardEntry');
-          transacao.cvm:=objJsonGetValue(objJson,'cvm');
-          transacao.acquirer:=objJsonGetValue(objJson,'acquirer');
-          transacao.pan:=objJsonGetValue(objJson,'pan');
+          transacao.cardholder:= objJsonGetValue(objJson,'cardholder');
+          transacao.prefname:= objJsonGetValue(objJson,'prefname');
+          transacao.authorizationType:= objJsonGetValue(objJson,'authorizationType');
+          transacao.cardEntry:= objJsonGetValue(objJson,'cardEntry');
+          transacao.cvm:= objJsonGetValue(objJson,'cvm');
+          transacao.acquirer:= objJsonGetValue(objJson,'acquirer');
+          transacao.pan:= objJsonGetValue(objJson,'pan');
           //RC05
-          transacao.Tipo:=objJsonGetValue(objJson,'type');
-          transacao.Amount:=objJsonGetValue(objJson,'amount');
+          transacao.Tipo:= objJsonGetValue(objJson,'type');
+          transacao.Amount:= objJsonGetValue(objJson,'amount');
 
-          if(transacao.response = 0)then begin
-            transacao.Authorization :=objJsonGetValue(objJson,'authorization') ;
-            transacao.IDTransacao:=objJsonGetValue(objJson,'id');
+          if(transacao.response = 0)then
+          begin
+            transacao.Authorization := objJsonGetValue(objJson,'authorization') ;
+            transacao.IDTransacao:= objJsonGetValue(objJson,'id');
             //transacao.ProdutoSelecionado:=objJsonGetValue(objJson,'type');
             transacao.LabelTransacao:=objJsonGetValue(objJson,'label');
 
@@ -849,7 +821,9 @@ and Assigned(Data) then
             end;
 
 
-        end else begin
+        end
+        else
+        begin
           transacao.ErrorCode:=objJsonGetValue(objJson,'errcode');
           transacao.ErrorMsg:=objJsonGetValue(objJson,'errmsg');
         end;
@@ -864,37 +838,54 @@ and Assigned(Data) then
 
           end;
 
-        end;//try
+      end;//try
 
-        if (TEFExecuteFlag=1)and(transacao.response = 0) then begin
-            TThread.Synchronize(nil,
-            procedure
-            begin
-              MostraAprovadaGER7;
-            end);
+      if (TEFExecuteFlag=1)and(transacao.response = 0) then begin
+          TThread.Synchronize(nil,
+          procedure
+          begin
+            MostraAprovadaGER7;
+          end);
 
-        end else begin
-            TThread.Synchronize(nil,
-            procedure
-            begin
-             MostraNegadaGER7;
-            end );
-        end;
-        //TEFExecuteFlag:=0;
-        //RandomValor;
-
+      end else begin
+          TThread.Synchronize(nil,
+          procedure
+          begin
+           MostraNegadaGER7;
+          end );
       end;
+      //TEFExecuteFlag:=0;
+      //RandomValor;
 
+    end;
 
-   end;
 end;
+//==========================================================
+function BuildJson(Tipo,Id,Amount,Parcelas,TipoParcelamento,Product,HabilitaImpressao:string): JString;
+var
+  Json: TJSONObject;
+  Res: JString;
 
-
-procedure TfrmTEF.Panel1Click(Sender: TObject);
 begin
+   try
+    Json := TJSONObject.Create;
+    Json.AddPair('type', Tipo);
+    Json.AddPair('id', Id);
+    Json.AddPair('amount', Amount);
+    Json.AddPair('installments', Parcelas);
+    Json.AddPair('instmode', TipoParcelamento);
+    Json.AddPair('product', Product);
+    Json.AddPair('receipt', HabilitaImpressao);
 
+    if(transacao.apiversion<>'')then
+      Json.AddPair('apiversion', transacao.apiversion);
+   finally
+    Res := StringToJString(Json.ToString);
+    Json.Free;
+   end;
+
+   Result := Res;
 end;
-
 //**********************************************
 procedure TfrmTEF.HandleActivityMessage(const Sender: TObject; const M: TMessage);
 begin
@@ -993,12 +984,13 @@ begin
 
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
 
-  if(Trim(DeviceType) <> 'GPOS700')and (Trim(DeviceType)<>'Smart G800')then begin
+  if(Trim(DeviceType) <> 'GPOS700')and (Trim(DeviceType)<>'Smart G800')then
+  begin
     transacao.Zera;
-    transacao.response := 2;
-    transacao.ErrorCode := '9997';
-    transacao.ErrorMsg := 'Modelo nao suportado';
-    TEFExecuteFlag := 1;
+    transacao.response :=2;
+    transacao.ErrorCode:='9997';
+    transacao.ErrorMsg:='Modelo nao suportado';
+    TEFExecuteFlag:= 1;
     exit;
   end;
 
