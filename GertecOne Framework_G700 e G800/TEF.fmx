@@ -2,8 +2,8 @@ object frmTEF: TfrmTEF
   Left = 0
   Top = 0
   Caption = 'Form4'
-  ClientHeight = 806
-  ClientWidth = 366
+  ClientHeight = 804
+  ClientWidth = 365
   SystemStatusBar.BackgroundColor = claWhite
   StyleBook = StyleBook1
   FormFactor.Width = 320
@@ -13,19 +13,19 @@ object frmTEF: TfrmTEF
   DesignerMasterStyle = 0
   object Panel1: TPanel
     Align = Client
-    Size.Width = 366.000000000000000000
-    Size.Height = 733.000000000000000000
+    Size.Width = 365.000000000000000000
+    Size.Height = 731.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
     object VertScrollBox1: TVertScrollBox
       Align = Client
-      Size.Width = 366.000000000000000000
-      Size.Height = 733.000000000000000000
+      Size.Width = 365.000000000000000000
+      Size.Height = 731.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'VertScrollBox1Style1'
       TabOrder = 0
-      Viewport.Width = 366.000000000000000000
-      Viewport.Height = 733.000000000000000000
+      Viewport.Width = 365.000000000000000000
+      Viewport.Height = 731.000000000000000000
       object grpParcelamento: TGroupBox
         StyledSettings = [Family, FontColor, Other]
         Position.Y = 224.000000000000000000
@@ -39,7 +39,6 @@ object frmTEF: TfrmTEF
         object rdgParceladoLoja: TRadioButton
           StyledSettings = [Family, Style, FontColor]
           GroupName = '1'
-          IsChecked = True
           Position.X = 24.000000000000000000
           Position.Y = 19.000000000000000000
           Size.Width = 249.000000000000000000
@@ -52,6 +51,7 @@ object frmTEF: TfrmTEF
         object rdgParceladoAdm: TRadioButton
           StyledSettings = [Family, Style, FontColor]
           GroupName = '1'
+          IsChecked = True
           Position.X = 24.000000000000000000
           Position.Y = 59.000000000000000000
           Size.Width = 265.000000000000000000
@@ -164,7 +164,6 @@ object frmTEF: TfrmTEF
         Size.Width = 129.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
-        OnExit = edtParcelasExit
       end
       object GroupBox1: TGroupBox
         StyledSettings = [Family, FontColor, Other]
@@ -231,12 +230,13 @@ object frmTEF: TfrmTEF
         Touch.InteractiveGestures = [LongTap, DoubleTap]
         TabOrder = 12
         KeyboardType = NumberPad
-        Text = '192.168.0.9'
         Position.X = 152.000000000000000000
         Position.Y = 32.000000000000000000
         Size.Width = 193.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
+        TextPrompt = '192.168.0.9'
+        OnChangeTracking = edtIPServidorChangeTracking
       end
       object edtValor: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -287,6 +287,16 @@ object frmTEF: TfrmTEF
         Text = 'Valor'
         TabOrder = 16
       end
+      object Edit2: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 17
+        Position.X = 104.000000000000000000
+        Position.Y = 696.000000000000000000
+        Size.Width = 145.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+      end
     end
   end
   object StyleBook1: TStyleBook
@@ -314,7 +324,7 @@ object frmTEF: TfrmTEF
   end
   object PanelTitulo: TPanel
     Align = MostTop
-    Size.Width = 366.000000000000000000
+    Size.Width = 365.000000000000000000
     Size.Height = 73.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'PanelTituloStyle1'
@@ -322,7 +332,7 @@ object frmTEF: TfrmTEF
     object lblTitulo: TLabel
       Align = Client
       StyledSettings = [Family]
-      Size.Width = 366.000000000000000000
+      Size.Width = 365.000000000000000000
       Size.Height = 73.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 26.000000000000000000

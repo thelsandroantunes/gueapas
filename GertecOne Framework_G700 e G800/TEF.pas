@@ -30,7 +30,8 @@ uses
   GEDIPrinterTEF,
   FMX.Surfaces,
 
-  FMX.Layouts;
+  FMX.Layouts,
+  System.RegularExpressions;
 
 
 const
@@ -103,6 +104,7 @@ type
     Label1: TLabel;
     VertScrollBox1: TVertScrollBox;
     Panel1: TPanel;
+    Edit2: TEdit;
 
 
     procedure cmdEnviarTransacaoClick(Sender: TObject);
@@ -133,9 +135,9 @@ type
     procedure FormatarMoeda( Componente : TObject {;var Key: Char} );
     procedure rdgDebitoChange(Sender: TObject);
     procedure rdgCreditoChange(Sender: TObject);
-    procedure edtParcelasExit(Sender: TObject);
 
     procedure rdgTodosChange(Sender: TObject);
+    procedure edtIPServidorChangeTracking(Sender: TObject);
 
 
   private
@@ -156,12 +158,12 @@ var
   TEFExecuteFlag :integer;
   transacao:TGER7TEF;
 
+  constFunc:integer;
+  cip: integer;
 
 implementation
 
 {$R *.fmx}
-uses
-MaskUtils;
 
  //***********************************************
 Procedure TfrmTEF.FormatarMoeda( Componente : TObject {;var Key: Char} );
@@ -229,7 +231,8 @@ procedure TfrmTEF.CleanTextTEF(limpaText: Boolean);
 begin
   if limpaText then
   begin
-
+      edtParcelas.Text := '1';
+      cip := 0;
 
   end;
 end;
@@ -276,8 +279,10 @@ function Numeric(strValor:string):string;
 var
 i,iPos:integer;
 ch:char;
-strResult:string;
+strEdtValor, strResult:string;
+
 begin
+
   iPos:=Pos(',',strValor);
   iPos:=length(strValor)-iPos;
   case iPos of
@@ -324,25 +329,14 @@ begin
 end;
 //==========================================================
 procedure TfrmTEF.edtIPChange(Sender: TObject);
-var
-ip:string;
-
 begin
-
-
-
-  //ip := trim(StringReplace(edtIPServidor.Text,'.','',[rfReplaceall]));
-
- // edtIPServidor.Text:= FormatarIP(edtIPServidor.Text,'999.999.999.999');
- // edtIPServidor.SelStart := Length(edtIPServidor.Text);
-
   grpParcelamento.Enabled := (StrToIntDef(edtParcelas.Text,0)>1);
 end;
-procedure TfrmTEF.edtParcelasExit(Sender: TObject);
+procedure TfrmTEF.edtIPServidorChangeTracking(Sender: TObject);
 begin
-if StrToIntDef(edtParcelas.Text,0)=1 then ShowMessage('kkkkkkk');
-
+  cip:= 1;
 end;
+
 procedure TfrmTEF.edtParcelasKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char; Shift: TShiftState);
 begin
   grpParcelamento.Enabled := (StrToIntDef(edtParcelas.Text,0)>1);
@@ -386,8 +380,59 @@ end;//case
 end;
 procedure MostraAprovada(Data:Jintent);
 begin
+  TDialogService.MessageDialog(
+  'Transação aprovada!' + #13#10 +
+    GetExtraData(Data,'CODRESP')+#13#10+
+    GetExtraData(Data,'COMP_DADOS_CONF')+#13#10+
+    GetExtraData(Data,'CODTRANS')+#13#10+
+    GetExtraData(Data,'TIPO_PARC')+' ('+
+    RetornaTipoParcelamento(JStringToString(Data.getStringExtra(StringToJString('TIPO_PARC'))))+')'+#13#10+
+    GetExtraData(Data,'VLTROCO')+#13#10+
+    GetExtraData(Data,'REDE_AUT')+#13#10+
+    GetExtraData(Data,'BANDEIRA')+#13#10+
+    GetExtraData(Data,'NSU_SITEF')+#13#10+
+    GetExtraData(Data,'NSU_HOST')+#13#10+
+    GetExtraData(Data,'COD_AUTORIZACAO')+#13#10+
+    GetExtraData(Data,'NUM_PARC')+#13#10,
+  System.UITypes.TMsgDlgType.mtInformation,
+  [System.UITypes.TMsgDlgBtn.mbOk], System.UITypes.TMsgDlgBtn.mbOk, 0,
+   procedure(const AResult: TModalResult)
+        var CupomImpresso:string;
+        begin
 
-TDialogService.MessageDialog(
+          if(AResult = mrOk)then
+          begin
+            TDialogService.MessageDialog('Deseja realizar a impressao pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
+            [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
+             procedure(const AResult: TModalResult)
+             begin
+              if(AResult = mrYES)then
+              begin
+
+                CupomImpresso:=JStringToString(Data.getStringExtra(StringToJString('VIA_ESTABELECIMENTO')));
+                if(Trim(CupomImpresso)<>'')then begin
+                  PrintStringBold('**********[ESTABELECIMENTO]***********');
+                  printCupom2(BOLD,CupomImpresso,30);
+                end;
+
+                CupomImpresso:=JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE')));
+                if(Trim(CupomImpresso)<>'')then begin
+                  PrintString    ('**************[CLIENTE]***************');
+                  printCupom2(BOLD,CupomImpresso,150);
+                end;
+              end;
+             end
+            );
+   //       System.Close;
+          end;
+
+        end);
+
+
+
+
+
+{TDialogService.MessageDialog(
 //ShowMessage(
     'Transação aprovada!' + #13#10 +
     GetExtraData(Data,'CODRESP')+#13#10+
@@ -427,21 +472,69 @@ TDialogService.MessageDialog(
             end;
           end;
 
-        end);
+        end);     }
 
 end;
 procedure MostraNegada(Data:Jintent);
 
 begin
 
-ShowMessage(
-    'm-SiTef Nao Executado!' + #13#10 +
-    GetExtraData(Data,'CODRESP'));
+{  ShowMessage(
+      'm-SiTef Nao Executado!' + #13#10 +
+      GetExtraData(Data,'CODRESP'));}
+
 end;
 procedure MostraAprovadaGER7;
 begin
+    TDialogService.MessageDialog(
+  'Transação aprovada!' + #13#10 +
+        'Authorization: '+ transacao.Authorization + #13#10 +
+        'ID: ' + transacao.IDTransacao + #13#10 +
+        'Produto: ' + transacao.ProdutoSelecionado + #13#10 +
+        'Label: ' + transacao.LabelTransacao + #13#10 +
+        'STAN: ' + transacao.STAN + #13#10 +
+        'AID: ' + transacao.AID + #13#10 +
+        'RRN: ' + transacao.RRN + #13#10 +
+        'Horario: ' + transacao.Horario+ #13#10 +
+        'Version: ' + transacao.Versao+#13#10 +
+        'Valor: ' + transacao.Valor+#13#10 +
 
-TDialogService.MessageDialog(
+        'transacao.cardholder='+transacao.cardholder+#13#10 +
+        'transacao.prefname='+transacao.prefname+#13#10 +
+        'transacao.authorizationType='+transacao.authorizationType+#13#10 +
+        'transacao.cardEntry='+transacao.cardEntry+#13#10 +
+        'transacao.cvm='+transacao.cvm+#13#10 +
+        'transacao.acquirer='+transacao.acquirer+#13#10 +
+        'transacao.pan='+transacao.pan+#13#10,
+   System.UITypes.TMsgDlgType.mtInformation,
+   [System.UITypes.TMsgDlgBtn.mbOk], System.UITypes.TMsgDlgBtn.mbOk, 0,
+   procedure(const AResult: TModalResult)
+        var CupomImpresso:string;
+        begin
+
+          if(AResult = mrOk)then
+          begin
+            TDialogService.MessageDialog('Deseja realizar a impressao pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
+            [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
+             procedure(const AResult: TModalResult)
+             begin
+              if(AResult = mrYES)then
+              begin
+
+                  PrintStringBold('************[ESTABELECIMENTO]************');
+                  printCupom(BOLD,transacao.textoImpressoEc);
+                  PrintString    ('****************[CLIENTE]****************');
+                  printCupom(BOLD,transacao.textoImpressoCliente);
+                  printOutput;
+              end;
+             end
+            );
+   //       System.Close;
+          end;
+
+        end);
+
+{TDialogService.MessageDialog(
         'Transação aprovada!' + #13#10 +
         'Authorization: '+ transacao.Authorization + #13#10 +
         'ID: ' + transacao.IDTransacao + #13#10 +
@@ -479,16 +572,18 @@ TDialogService.MessageDialog(
             printOutput;
           end;
 
-        end);
+        end);  }
 
 end;
 procedure MostraNegadaGER7;
 begin
-
-  ShowMessage('Transação negada' + #13#10 +
-  'response: ' + inttostr(transacao.response) + #13#10 +
-  'Error code: ' + transacao.ErrorCode + #13#10 +
-  'Error: ' + transacao.ErrorMsg);
+  if constFunc <> 1 then
+  begin
+    ShowMessage('Transação negada' + #13#10 +
+    'response: ' + inttostr(transacao.response) + #13#10 +
+    'Error code: ' + transacao.ErrorCode + #13#10 +
+    'Error: ' + transacao.ErrorMsg);
+  end;
 end;
 //==========================================================
 function TfrmTEF.fHabilitaImpressao:string;
@@ -504,14 +599,17 @@ var
 
 Produto,
 Parcelas,TipoParcelamento:String;
-
-i:integer;
+i,j:integer;
 begin
 
-     //edtIPServidor.Text :=  StringReplace(edtIPServidor.Text,' ', EmptyStr, [rfReplaceAll]);
+       Edit2.Text := '';
+            for i:=1 to Length(edtValor.Text) do begin
+              if (copy(edtValor.Text,i,1) = '.') then
+              Edit2.Text := Edit2.Text
+              else Edit2.Text := Edit2.Text + (copy(edtValor.Text,i,1));
+            end;
 
-
-       if StrToFloat(edtValor.Text) = 0.0  then
+       if edtValor.Text = '0,00'  then
        begin
         ShowMessage('Insira um valor maior que R$0.0');
        end
@@ -524,6 +622,8 @@ begin
        else
 
        begin
+
+
           try
 
             if rdgTodos.IsChecked then
@@ -576,7 +676,18 @@ begin
 
             if CheckBox2.IsChecked then
             begin
-              ExecuteSiTEF(COMANDO_VENDA,'',Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
+              // Aceita enredeço de IP entre 0..255
+              if (TRegEx.IsMatch(edtIPServidor.Text, '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\' +
+                      '.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
+                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
+                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)+$\b')) then
+              begin
+
+                ExecuteSiTEF(COMANDO_VENDA,'',Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
+              end
+              else
+                ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
             end
             else
             begin
@@ -584,7 +695,8 @@ begin
               //transacao.SetaDebug(true);
 
               IncrementaId; //
-              ExecuteTEF(COMANDO_VENDA,strId,Numeric(edtValor.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
+
+              ExecuteTEF(COMANDO_VENDA,strId,Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
             end;
 
           except
@@ -652,7 +764,16 @@ begin
   end
   else begin
     try
-      ExecuteSiTEF(Funcao,'','','','','',fHabilitaImpressao);
+      if (TRegEx.IsMatch(edtIPServidor.Text, '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\' +
+                      '.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
+                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
+                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b')) then
+      begin
+        ExecuteSiTEF(Funcao,'','','','','',fHabilitaImpressao);
+      end
+      else
+        ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
     except
       on e: exception do begin
       ShowMessage('Erro Funcoes =>'+e.Message);
@@ -663,6 +784,7 @@ begin
 end;
 procedure TfrmTEF.cmdFuncoesClick(Sender: TObject);
 begin
+constFunc := 1;
 FuncoesDiversas(COMANDO_FUNCOES);
 end;
 procedure TfrmTEF.cmdReimpressaoClick(Sender: TObject);
@@ -691,13 +813,11 @@ edtValor.text := strAux;
 end;
 procedure TfrmTEF.rdgCreditoChange(Sender: TObject);
 begin
-edtParcelas.Text := '1';
 edtParcelas.Enabled := True;
 end;
 procedure TfrmTEF.rdgDebitoChange(Sender: TObject);
 begin
-edtParcelas.Text := '1';
-edtParcelas.Enabled := False;
+  edtParcelas.Enabled := False;
 end;
 procedure TfrmTEF.rdgTodosChange(Sender: TObject);
 begin
