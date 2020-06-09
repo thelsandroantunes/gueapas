@@ -99,11 +99,11 @@ var
 begin
 
   spaint:= TJPaint.Create;
-  spaint.setTextSize(15);
+  spaint.setTextSize(17);
 
   Config := TJGEDI_PRNTR_st_StringConfig.Create;
 
-  Config.lineSpace := 0;
+  Config.lineSpace := 1;
   Config.offset := 0;
   Config.paint := spaint;
 

@@ -10,6 +10,7 @@ object frmTEF: TfrmTEF
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   OnCreate = FormCreate
+  OnSaveState = FormSaveState
   DesignerMasterStyle = 0
   object Panel1: TPanel
     Align = Client
@@ -235,7 +236,7 @@ object frmTEF: TfrmTEF
         Size.Width = 193.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
-        TextPrompt = '192.168.0.9'
+        TextPrompt = '192.168.0.1'
         OnChangeTracking = edtIPServidorChangeTracking
       end
       object edtValor: TEdit
@@ -296,6 +297,25 @@ object frmTEF: TfrmTEF
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         Visible = False
+      end
+      object Button1: TButton
+        Position.X = 184.000000000000000000
+        Position.Y = 352.000000000000000000
+        Size.Width = 161.000000000000000000
+        Size.Height = 49.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 18
+        Text = 'Button1'
+        OnClick = Button1Click
+      end
+      object edtMax: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 19
+        Position.X = 168.000000000000000000
+        Position.Y = 456.000000000000000000
+        Size.Width = 169.000000000000000000
+        Size.Height = 33.000000000000000000
+        Size.PlatformDefault = False
       end
     end
   end
