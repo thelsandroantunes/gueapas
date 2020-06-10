@@ -106,8 +106,6 @@ type
     VertScrollBox1: TVertScrollBox;
     Panel1: TPanel;
     Edit2: TEdit;
-    Button1: TButton;
-    edtMax: TEdit;
 
 
     procedure cmdEnviarTransacaoClick(Sender: TObject);
@@ -384,14 +382,14 @@ begin
 
     R := TBinaryReader.Create(SaveState.Stream);
     try
-      edtMax.Text := R.ReadString;
+      //edtMax.Text := R.ReadString;
 
     finally
       R.Free;
     end;
   end
   else
-    edtMax.Text := 'No SaveState';
+   // edtMax.Text := 'No SaveState';
 //Randomize;
 //RandomValor;
   strArqId:=GetHomePath+GER7_ARQ_ID;
@@ -408,7 +406,7 @@ begin
    W:= TBinaryWriter.Create(SaveState.Stream);
 
    try
-      W.Write(edtMax.Text);
+     // W.Write(edtMax.Text);
    finally
       W.Free;
    end;
@@ -434,45 +432,33 @@ end;//case
 
 end;
 procedure MostraAprovada(Data:Jintent);
+
 begin
 
   if contR = 2 then
   begin
-    TDialogService.MessageDialog(auxMSITEF,
-      System.UITypes.TMsgDlgType.mtInformation,
-      [System.UITypes.TMsgDlgBtn.mbOk], System.UITypes.TMsgDlgBtn.mbOk, 0,
-     procedure(const AResult: TModalResult)
-          var CupomImpresso:string;
-          begin
+     TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10,
+      System.UITypes.TMsgDlgType.mtConfirmation,
+      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
+       procedure(const AResult: TModalResult)
+       begin
+        if(AResult = mrYES)then
+        begin
 
-            if(AResult = mrOk)then
-            begin
-              TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10,
-              System.UITypes.TMsgDlgType.mtConfirmation,
-              [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
-               procedure(const AResult: TModalResult)
-               begin
-                if(AResult = mrYES)then
-                begin
 
-                  CupomImpresso:=JStringToString(auxData.getStringExtra(StringToJString('VIA_ESTABELECIMENTO')));
-                  if(Trim(CupomImpresso)<>'')then begin
-                    PrintStringBold('**********[ESTABELECIMENTO]***********');
-                    printCupom2(BOLD,CupomImpresso,30);
-                  end;
+          if(Trim(JStringToString(Data.getStringExtra(StringToJString('VIA_ESTABELECIMENTO'))))<>'')then begin
+            PrintStringBold('**********[ESTABELECIMENTO]***********');
+            printCupom2(BOLD,JStringToString(Data.getStringExtra(StringToJString('VIA_ESTABELECIMENTO'))),30);
+          end;
 
-                  CupomImpresso:=JStringToString(auxData.getStringExtra(StringToJString('VIA_CLIENTE')));
-                  if(Trim(CupomImpresso)<>'')then begin
-                    PrintString    ('**************[CLIENTE]***************');
-                    printCupom2(BOLD,CupomImpresso,150);
-                  end;
-                end;
-               end
-              );
-     //       System.Close;
-            end;
 
-          end);
+          if(Trim(JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE'))))<>'')then begin
+            PrintString    ('**************[CLIENTE]***************');
+            printCupom2(BOLD,JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE'))),150);
+          end;
+        end;
+       end
+      );
   end;
 
   if contR = 3 then
@@ -605,37 +591,21 @@ begin
     //reimpressão
     if contR = 0 then
     begin
-       TDialogService.MessageDialog(
-        auxGER7,
-        System.UITypes.TMsgDlgType.mtInformation,
-     [System.UITypes.TMsgDlgBtn.mbOk], System.UITypes.TMsgDlgBtn.mbOk, 0,
-     procedure(const AResult: TModalResult)
-          var CupomImpresso:string;
-      begin
-
-        if(AResult = mrOk)then
+      TDialogService.MessageDialog('Deseja realizar a impressao pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
+      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
+       procedure(const AResult: TModalResult)
+       begin
+        if(AResult = mrYES)then
         begin
-          TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10,
-          System.UITypes.TMsgDlgType.mtConfirmation,
-          [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
-          System.UITypes.TMsgDlgBtn.mbYes, 0,
-           procedure(const AResult: TModalResult)
-           begin
-            if(AResult = mrYES)then
-            begin
 
-                PrintStringBold('************[ESTABELECIMENTO]************');
-                printCupom(BOLD,auxTransacao.textoImpressoEc);
-                PrintString    ('****************[CLIENTE]****************');
-                printCupom(BOLD,auxTransacao.textoImpressoCliente);
-                printOutput;
-            end;
-           end
-          );
-  //       System.Close;
+            PrintStringBold('************[ESTABELECIMENTO]************');
+            printCupom(BOLD,transacao.textoImpressoEc);
+            PrintString    ('****************[CLIENTE]****************');
+            printCupom(BOLD,transacao.textoImpressoCliente);
+            printOutput;
         end;
-
-      end);
+       end
+      );
     end;
 
 
@@ -666,7 +636,7 @@ begin
           'transacao.pan='+transacao.pan+#13#10;
         auxTransacao:=transacao;
 
-         frmTEF.edtMax.Text := 'A => ' + auxGER7;
+         //frmTEF.edtMax.Text := 'A => ' + auxGER7;
 
         TDialogService.MessageDialog(
     'Transação aprovada!' + #13#10 +
@@ -868,7 +838,7 @@ begin
               begin
 
 
-                contR:=3;
+                contR:=3; //R
                 ExecuteSiTEF(COMANDO_VENDA,'',Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
               end
               else
