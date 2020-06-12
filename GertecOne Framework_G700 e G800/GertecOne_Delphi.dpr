@@ -118,7 +118,9 @@ uses
   GSAltera in 'GSAltera.pas' {frmGSAltera},
   GSOutras in 'GSOutras.pas' {frmGSOutras},
   Unit4 in 'Unit4.pas' {Form4},
-  JavaInterfacesNew in 'Imports NFC700\JavaInterfacesNew.pas';
+  JavaInterfacesNew in 'Imports NFC700\JavaInterfacesNew.pas',
+  Vcl.Consts in 'Vcl.Consts.pas',
+  FMX.Consts in 'FMX.Consts.pas';
 
 {$R *.res}
 

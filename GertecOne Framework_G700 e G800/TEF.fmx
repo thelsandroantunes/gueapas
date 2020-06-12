@@ -3,7 +3,7 @@ object frmTEF: TfrmTEF
   Top = 0
   Caption = 'Form4'
   ClientHeight = 804
-  ClientWidth = 365
+  ClientWidth = 374
   SystemStatusBar.BackgroundColor = claWhite
   StyleBook = StyleBook1
   FormFactor.Width = 320
@@ -14,18 +14,18 @@ object frmTEF: TfrmTEF
   DesignerMasterStyle = 0
   object Panel1: TPanel
     Align = Client
-    Size.Width = 365.000000000000000000
+    Size.Width = 374.000000000000000000
     Size.Height = 731.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
     object VertScrollBox1: TVertScrollBox
       Align = Client
-      Size.Width = 365.000000000000000000
+      Size.Width = 374.000000000000000000
       Size.Height = 731.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'VertScrollBox1Style1'
       TabOrder = 0
-      Viewport.Width = 365.000000000000000000
+      Viewport.Width = 374.000000000000000000
       Viewport.Height = 731.000000000000000000
       object grpParcelamento: TGroupBox
         StyledSettings = [Family, FontColor, Other]
@@ -104,7 +104,7 @@ object frmTEF: TfrmTEF
         Size.Height = 19.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 4
-        Text = 'Habilita Impressao'
+        Text = 'Habilita Impress'#227'o'
         TextSettings.Font.StyleExt = {00070000000000000004000000}
       end
       object cmdCancelarTransacao: TButton
@@ -244,23 +244,12 @@ object frmTEF: TfrmTEF
         TabOrder = 13
         KeyboardType = NumberPad
         Text = '10,00'
-        Position.X = 32.000000000000000000
+        Position.X = 16.000000000000000000
         Position.Y = 32.000000000000000000
-        Size.Width = 113.000000000000000000
+        Size.Width = 129.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
         OnChangeTracking = edtValorChange
-      end
-      object Label1: TLabel
-        StyledSettings = [Family, Size, FontColor]
-        Position.X = 8.000000000000000000
-        Position.Y = 32.000000000000000000
-        Size.Width = 25.000000000000000000
-        Size.Height = 33.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.Font.StyleExt = {00070000000000000004000000}
-        Text = 'R$'
-        TabOrder = 14
       end
       object lblIP: TLabel
         AutoSize = True
@@ -273,29 +262,36 @@ object frmTEF: TfrmTEF
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
         Text = 'IP (somente para o M-Sitef)'
-        TabOrder = 15
+        TabOrder = 14
       end
       object lblValor: TLabel
         AutoSize = True
         StyledSettings = [Family, FontColor]
         Position.X = 16.000000000000000000
         Position.Y = 8.000000000000000000
-        Size.Width = 57.000000000000000000
+        Size.Width = 73.000000000000000000
         Size.Height = 22.000000000000000000
         Size.PlatformDefault = False
         TextSettings.Font.Size = 16.000000000000000000
         TextSettings.Font.StyleExt = {00070000000000000004000000}
-        Text = 'Valor'
-        TabOrder = 16
+        Text = 'Valor R$'
+        TabOrder = 15
       end
       object Edit2: TEdit
         Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 17
+        TabOrder = 16
         Position.X = 104.000000000000000000
         Position.Y = 696.000000000000000000
         Size.Width = 145.000000000000000000
         Size.Height = 25.000000000000000000
         Size.PlatformDefault = False
+        Visible = False
+      end
+      object Edit1: TEdit
+        Touch.InteractiveGestures = [LongTap, DoubleTap]
+        TabOrder = 17
+        Position.X = 448.000000000000000000
+        Position.Y = 520.000000000000000000
         Visible = False
       end
     end
@@ -325,7 +321,7 @@ object frmTEF: TfrmTEF
   end
   object PanelTitulo: TPanel
     Align = MostTop
-    Size.Width = 365.000000000000000000
+    Size.Width = 374.000000000000000000
     Size.Height = 73.000000000000000000
     Size.PlatformDefault = False
     StyleLookup = 'PanelTituloStyle1'
@@ -333,7 +329,7 @@ object frmTEF: TfrmTEF
     object lblTitulo: TLabel
       Align = Client
       StyledSettings = [Family]
-      Size.Width = 365.000000000000000000
+      Size.Width = 374.000000000000000000
       Size.Height = 73.000000000000000000
       Size.PlatformDefault = False
       TextSettings.Font.Size = 26.000000000000000000

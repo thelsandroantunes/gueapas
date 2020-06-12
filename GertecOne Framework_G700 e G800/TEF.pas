@@ -102,10 +102,10 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     lblAPI: TLabel;
-    Label1: TLabel;
     VertScrollBox1: TVertScrollBox;
     Panel1: TPanel;
     Edit2: TEdit;
+    Edit1: TEdit;
 
 
     procedure cmdEnviarTransacaoClick(Sender: TObject);
@@ -172,6 +172,7 @@ var
   auxData:JIntent;
   auxTransacao:TGER7TEF;
   contR: integer;
+  auxR:string;
 
 implementation
 
@@ -222,6 +223,69 @@ begin
         end;
 
 end;
+function IsWrongIP(ip: string): Boolean;
+var
+  z, i: byte;
+  st: array[1..3] of byte;
+const
+  ziff = ['0'..'9'];
+begin
+  st[1]  := 0;
+  st[2]  := 0;
+  st[3]  := 0;
+  z      := 0;
+  Result := False;
+  for i := 1 to Length(ip) do if ip[i] in ziff then
+  else
+  begin
+    if ip[i] = '.' then
+    begin
+      Inc(z);
+      if z < 4 then st[z] := i
+      else
+      begin
+        IsWrongIP := True;
+        Exit;
+      end;
+    end
+    else
+    begin
+      IsWrongIP := True;
+      Exit;
+    end;
+  end;
+  if (z <> 3) or (st[1] < 2) or (st[3] = Length(ip)) or (st[1] + 2 > st[2]) or
+    (st[2] + 2 > st[3]) or (st[1] > 4) or (st[2] > st[1] + 4) or (st[3] > st[2] + 4) then
+  begin
+    IsWrongIP := True;
+    Exit;
+  end;
+  z := StrToInt(Copy(ip, 1, st[1] - 1));
+  if (z > 255) or (ip[1] = '0') then
+  begin
+    IsWrongIP := True;
+    Exit;
+  end;
+  z := StrToInt(Copy(ip, st[1] + 1, st[2] - st[1] - 1));
+  if (z > 255) or ((z <> 0) and (ip[st[1] + 1] = '0')) then
+  begin
+    IsWrongIP := True;
+    Exit;
+  end;
+  z := StrToInt(Copy(ip, st[2] + 1, st[3] - st[2] - 1));
+  if (z > 255) or ((z <> 0) and (ip[st[2] + 1] = '0')) then
+  begin
+    IsWrongIP := True;
+    Exit;
+  end;
+  z := StrToInt(Copy(ip, st[3] + 1, Length(ip) - st[3]));
+  if (z > 255) or ((z <> 0) and (ip[st[3] + 1] = '0')) then
+  begin
+    IsWrongIP := True;
+    Exit;
+  end;
+end;
+
 //==========================================
 procedure TfrmTEF.Button1Click(Sender: TObject);
 begin
@@ -580,10 +644,13 @@ procedure MostraNegada(Data:Jintent);
 
 begin
 
-  {ShowMessage(
-      'm-SiTef Nao Executado!' + #13#10 +
-      GetExtraData(Data,'CODRESP'));    }
-
+  if contR = 2 then
+  else
+  begin
+    ShowMessage(
+       'm-SiTef Nao Executado!' + #13#10 +
+        GetExtraData(Data,'CODRESP'));
+  end;
 end;
 procedure MostraAprovadaGER7;
 begin
@@ -591,7 +658,7 @@ begin
     //reimpressão
     if contR = 0 then
     begin
-      TDialogService.MessageDialog('Deseja realizar a impressao pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
+      TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
       [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
        procedure(const AResult: TModalResult)
        begin
@@ -650,7 +717,7 @@ begin
           'Horario: ' + transacao.Horario+ #13#10 +
           'Version: ' + transacao.Versao+#13#10 +
           'Valor: ' + transacao.Valor+#13#10 +
-          'Parcelas' + transacao.Parcelas+#13#10 +
+          'Parcelas: ' + transacao.Parcelas+#13#10 +
 
           'transacao.cardholder='+transacao.cardholder+#13#10 +
           'transacao.prefname='+transacao.prefname+#13#10 +
@@ -667,7 +734,7 @@ begin
 
             if(AResult = mrOk)then
             begin
-              TDialogService.MessageDialog('Deseja realizar a impressao pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
+              TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação'+#13#10, System.UITypes.TMsgDlgType.mtConfirmation,
               [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
                procedure(const AResult: TModalResult)
                begin
@@ -733,7 +800,7 @@ begin
 end;
 procedure MostraNegadaGER7;
 begin
-    ShowMessage('Transação negada' + #13#10 +
+    ShowMessage('Ação executada com sucesso' + #13#10 +
     'response: ' + inttostr(transacao.response) + #13#10 +
     'Error code: ' + transacao.ErrorCode + #13#10 +
     'Error: ' + transacao.ErrorMsg);
@@ -752,16 +819,44 @@ procedure TfrmTEF.cmdEnviarTransacaoClick(Sender: TObject);
 var
 
 Produto,
-Parcelas,TipoParcelamento:String;
-i,j:integer;
+IpTxt,Parcelas,TipoParcelamento:String;
+i,j, countP:integer;
+teste : boolean;
 begin
-
+       countP := 0;
+       Edit1.Text := '';
        Edit2.Text := '';
-            for i:=1 to Length(edtValor.Text) do begin
-              if (copy(edtValor.Text,i,1) = '.') then
-              Edit2.Text := Edit2.Text
-              else Edit2.Text := Edit2.Text + (copy(edtValor.Text,i,1));
-            end;
+       IpTxt := '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
+
+        for i:=1 to Length(edtValor.Text) do begin
+          if (copy(edtValor.Text,i,1) = '.') then
+          begin
+
+            Edit2.Text := Edit2.Text
+          end
+          else Edit2.Text := Edit2.Text + (copy(edtValor.Text,i,1));
+        end;
+
+        for j:=1 to Length(edtIPServidor.Text) do begin
+          if (copy(edtIPServidor.Text,j,1) = '.') then
+          begin
+            inc(countP);
+            Edit1.Text := Edit1.Text
+          end
+          else if (copy(edtIPServidor.Text,j,1) = '-') then
+          begin
+             inc(countP);
+          end
+          else if (copy(edtIPServidor.Text,j,1) = ',') then
+          begin
+             inc(countP);
+          end
+          else Edit1.Text := Edit1.Text + (copy(edtIPServidor.Text,j,1));
+        end;
+
+        //teste := TRegEx.IsMatch(edtIPServidor.Text, IpTxt);
+
+        
 
        if edtValor.Text = '0,00'  then
        begin
@@ -831,12 +926,8 @@ begin
             if CheckBox2.IsChecked then
             begin
               // Aceita enredeço de IP entre 0..255
-              if (TRegEx.IsMatch(edtIPServidor.Text, '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\' +
-                      '.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
-                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
-                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)+$\b')) then
+              if ((TRegEx.IsMatch(edtIPServidor.Text, IpTxt)) and (countP=3)) then
               begin
-
 
                 contR:=3; //R
                 ExecuteSiTEF(COMANDO_VENDA,'',Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
@@ -877,13 +968,18 @@ begin
   if CheckBox1.IsChecked then
   begin
      try
-      if(chkImpressao.IsChecked)then
-        HabilitaImpressao:=FLAG_HABILITA_IMPRESSAO
-      else
-        HabilitaImpressao:=FLAG_DESABILITA_IMPRESSAO;
+       contR := 1;
+       if chkImpressao.IsChecked then
+        begin
+          auxR:='1';
+        end
+        else
+        begin
+          auxR:='0';
+        end;
 
         IncrementaId; //Colocar aqui o seu tratamento do Id!!
-        ExecuteTEF(COMANDO_CANCELAMENTO,strId,'','','','',HabilitaImpressao);
+        ExecuteTEF(COMANDO_CANCELAMENTO,strId,'','','','',auxR);
       except
         on e: exception do begin
         ShowMessage('ErroTr=>'+e.Message);
@@ -894,6 +990,7 @@ begin
   else
   begin
     try
+      contR := 2;
       FuncoesDiversas(COMANDO_CANCELAMENTO);
       except
         on e: exception do begin
@@ -912,7 +1009,7 @@ begin
     try
 
     IncrementaId; //Colocar aqui o seu tratamento do Id!!
-    ExecuteTEF(Funcao,strId,'','','','','1');
+    ExecuteTEF(Funcao,strId,'','','','',auxR);
 
     except
       on e: exception do begin
@@ -950,8 +1047,17 @@ begin
   if CheckBox1.IsChecked then
   begin
     contR := 0;
-    FuncoesDiversas(GER7_REIMPRESSAO);
 
+    if chkImpressao.IsChecked then
+    begin
+      auxR:='1';
+    end
+    else
+    begin
+      auxR:='0';
+    end;
+
+    FuncoesDiversas(GER7_REIMPRESSAO);
   end
   else
   begin
@@ -984,6 +1090,7 @@ end;
 procedure TfrmTEF.rdgTodosChange(Sender: TObject);
 begin
      edtParcelas.Text := '1';
+     edtParcelas.Enabled := False;
 end;
 //**********************************************
 function TfrmTEF.OnActivityResult(RequestCode, ResultCode: Integer; Data:

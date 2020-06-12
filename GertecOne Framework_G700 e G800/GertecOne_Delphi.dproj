@@ -362,6 +362,8 @@
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Imports NFC700\JavaInterfacesNew.pas"/>
+        <DCCReference Include="Vcl.Consts.pas"/>
+        <DCCReference Include="FMX.Consts.pas"/>
         <JavaReference Include="libs\payment-1.14.10.181016_classes.jar">
             <Disabled/>
         </JavaReference>
