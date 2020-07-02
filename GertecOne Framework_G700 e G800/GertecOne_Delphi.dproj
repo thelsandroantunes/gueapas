@@ -309,7 +309,6 @@
             <Form>frmCodigoBarraV2</Form>
             <FormType>fmx</FormType>
         </DCCReference>
-        <DCCReference Include="FMX.FontGlyphs.Android.pas"/>
         <DCCReference Include="uNFCbc.pas">
             <Form>frmNFCbc</Form>
             <FormType>fmx</FormType>
@@ -364,6 +363,7 @@
         <DCCReference Include="Imports NFC700\JavaInterfacesNew.pas"/>
         <DCCReference Include="Vcl.Consts.pas"/>
         <DCCReference Include="FMX.Consts.pas"/>
+        <DCCReference Include="FMX.FontGlyphs.Android.pas"/>
         <JavaReference Include="libs\payment-1.14.10.181016_classes.jar">
             <Disabled/>
         </JavaReference>
@@ -1562,6 +1562,7 @@
     <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
     <ProjectExtensions/>
     <Import Project="$(MSBuildProjectName).deployproj" Condition="Exists('$(MSBuildProjectName).deployproj')"/>
+    <ProjectExtensions/>
     <ProjectExtensions/>
     <ProjectExtensions/>
 </Project>

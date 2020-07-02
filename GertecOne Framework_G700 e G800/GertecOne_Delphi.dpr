@@ -102,7 +102,6 @@ uses
   ImpressaoG in 'ImpressaoG.pas' {frmImpressaoG},
   CodigoDeBarras in 'CodigoDeBarras.pas' {frmCodBarra},
   CodigoDeBarraV2 in 'CodigoDeBarraV2.pas' {frmCodigoBarraV2},
-  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas',
   uNFCbc in 'uNFCbc.pas' {frmNFCbc},
   uNFC in 'uNFC.pas',
   GER7TEF in 'GER7TEF.pas',
@@ -120,7 +119,8 @@ uses
   Unit4 in 'Unit4.pas' {Form4},
   JavaInterfacesNew in 'Imports NFC700\JavaInterfacesNew.pas',
   Vcl.Consts in 'Vcl.Consts.pas',
-  FMX.Consts in 'FMX.Consts.pas';
+  FMX.Consts in 'FMX.Consts.pas',
+  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas';
 
 {$R *.res}
 

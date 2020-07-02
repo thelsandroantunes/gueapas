@@ -106,6 +106,7 @@ type
     Panel1: TPanel;
     Edit2: TEdit;
     Edit1: TEdit;
+    Label1: TLabel;
 
 
     procedure cmdEnviarTransacaoClick(Sender: TObject);
@@ -115,7 +116,7 @@ type
     procedure cmdCancelarTransacaoClick(Sender: TObject);
     procedure cmdFuncoesClick(Sender: TObject);
 
-    procedure RandomValor;
+
     procedure cmdReimpressaoClick(Sender: TObject);
     procedure FuncoesDiversas(Funcao:String);
     function fHabilitaImpressao:string;
@@ -139,7 +140,8 @@ type
 
     procedure rdgTodosChange(Sender: TObject);
     procedure edtIPServidorChangeTracking(Sender: TObject);
-    procedure FormSaveState(Sender: TObject);
+    procedure VertScrollBox1Click(Sender: TObject);
+    procedure MSITEFChange(Sender: TObject);
     procedure Button1Click(Sender: TObject);
 
 
@@ -169,10 +171,10 @@ var
 
   //auxiliares
   teste, auxGER7, auxMSITEF:string;
-  auxData:JIntent;
+
   auxTransacao:TGER7TEF;
   contR: integer;
-  auxR:string;
+  auxR, contREIMP:string;
 
 implementation
 
@@ -289,7 +291,22 @@ end;
 //==========================================
 procedure TfrmTEF.Button1Click(Sender: TObject);
 begin
-  ShowMessage('tESTE' + auxGER7);
+
+
+
+     TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10,
+      System.UITypes.TMsgDlgType.mtInformation,
+      [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo], System.UITypes.TMsgDlgBtn.mbYes, 0,
+       procedure(const AResult: TModalResult)
+       begin
+        if(AResult = mrYES)then
+        begin
+
+          ShowMessage('afasdfjkhlk');
+
+        end;
+       end
+      );
 end;
 
 procedure TfrmTEF.CheckBox1Change(Sender: TObject);
@@ -301,7 +318,7 @@ begin
     edtIPServidor.Enabled := False;
      auxGER7 := auxGER7;
      auxMSITEF := auxMSITEF;
-      auxData:=auxData;
+
       auxTransacao:=auxTransacao;
   end;
 end;
@@ -434,25 +451,13 @@ begin
 end;
 //==========================================================
 procedure TfrmTEF.FormCreate(Sender: TObject);
-var
- R: TBinaryReader;
 begin
 
+
+ //   System.Classes.pidAndroid64Arm := '$ffffffff';
 //lblTitulo.text := 'Exemplo TEF API-Delphi '+EXAMPLE_VERSION;
   // Default is transient, change to make permanent
   //SaveState.StoragePath := TPath.GetHomePath;
-  if SaveState.Stream.Size > 0 then
-  begin
-
-    R := TBinaryReader.Create(SaveState.Stream);
-    try
-      //edtMax.Text := R.ReadString;
-
-    finally
-      R.Free;
-    end;
-  end
-  else
    // edtMax.Text := 'No SaveState';
 //Randomize;
 //RandomValor;
@@ -462,20 +467,6 @@ begin
 
   ExecFlag := false;
 end;
-procedure TfrmTEF.FormSaveState(Sender: TObject);
-var
-W: TBinaryWriter;
-begin
-   SaveState.Stream.Clear;
-   W:= TBinaryWriter.Create(SaveState.Stream);
-
-   try
-     // W.Write(edtMax.Text);
-   finally
-      W.Free;
-   end;
-end;
-
 function GetExtraData(Data:JIntent;Campo:String):String;
 begin
     result := Campo+' = '+JStringToString(Data.getStringExtra(StringToJString(Campo)))
@@ -499,6 +490,7 @@ procedure MostraAprovada(Data:Jintent);
 
 begin
 
+  //reimpressão
   if contR = 2 then
   begin
      TDialogService.MessageDialog('Deseja realizar a impressão pela aplicação?'+#13#10,
@@ -517,7 +509,7 @@ begin
 
 
           if(Trim(JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE'))))<>'')then begin
-            PrintString    ('**************[CLIENTE]***************');
+            PrintString    ('*************[CLIENTE]***************');
             printCupom2(BOLD,JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE'))),150);
           end;
         end;
@@ -525,6 +517,7 @@ begin
       );
   end;
 
+  //enviar
   if contR = 3 then
   begin
 
@@ -542,10 +535,10 @@ begin
       GetExtraData(Data,'COD_AUTORIZACAO')+#13#10+
       GetExtraData(Data,'NUM_PARC')+#13#10;
 
-    auxData := Data;
+
 
     TDialogService.MessageDialog(
-    'Transação aprovada!' + #13#10 +
+    'Ação executada com sucesso!' + #13#10 +
       GetExtraData(Data,'CODRESP')+#13#10+
       GetExtraData(Data,'COMP_DADOS_CONF')+#13#10+
       GetExtraData(Data,'CODTRANS')+#13#10+
@@ -582,7 +575,7 @@ begin
 
                   CupomImpresso:=JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE')));
                   if(Trim(CupomImpresso)<>'')then begin
-                    PrintString    ('**************[CLIENTE]***************');
+                    PrintString    ('*************[CLIENTE]***************');
                     printCupom2(BOLD,CupomImpresso,150);
                   end;
                 end;
@@ -594,63 +587,19 @@ begin
           end);
   end;
 
-
-
-
-{TDialogService.MessageDialog(
-//ShowMessage(
-    'Transação aprovada!' + #13#10 +
-    GetExtraData(Data,'CODRESP')+#13#10+
-    GetExtraData(Data,'COMP_DADOS_CONF')+#13#10+
-    GetExtraData(Data,'CODTRANS')+#13#10+
-    GetExtraData(Data,'TIPO_PARC')+' ('+
-    RetornaTipoParcelamento(JStringToString(Data.getStringExtra(StringToJString('TIPO_PARC'))))+')'+#13#10+
-    GetExtraData(Data,'VLTROCO')+#13#10+
-    GetExtraData(Data,'REDE_AUT')+#13#10+
-    GetExtraData(Data,'BANDEIRA')+#13#10+
-    GetExtraData(Data,'NSU_SITEF')+#13#10+
-    GetExtraData(Data,'NSU_HOST')+#13#10+
-    GetExtraData(Data,'COD_AUTORIZACAO')+#13#10+
-    GetExtraData(Data,'NUM_PARC')+#13#10+
-        'Você deseja imprimir os cupons?',
-
-        System.UITypes.TMsgDlgType.mtInformation,
-        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
-        System.UITypes.TMsgDlgBtn.mbYes, 0,
-
-      // Use an anonymous method to make sure the acknowledgment appears as expected.
-        procedure(const AResult: TModalResult)
-        var CupomImpresso:string;
-        begin
-          if(AResult = mrYES)then begin
-
-            CupomImpresso:=JStringToString(Data.getStringExtra(StringToJString('VIA_ESTABELECIMENTO')));
-            if(Trim(CupomImpresso)<>'')then begin
-              PrintStringBold('**********[ESTABELECIMENTO]***********');
-              printCupom2(BOLD,CupomImpresso,30);
-            end;
-
-            CupomImpresso:=JStringToString(Data.getStringExtra(StringToJString('VIA_CLIENTE')));
-            if(Trim(CupomImpresso)<>'')then begin
-              PrintString    ('**************[CLIENTE]***************');
-              printCupom2(BOLD,CupomImpresso,150);
-            end;
-          end;
-
-        end);     }
-
 end;
 procedure MostraNegada(Data:Jintent);
 
 begin
-
-  if contR = 2 then
+  if contREIMP = 'NOT_REIMP' then
   else
   begin
     ShowMessage(
-       'm-SiTef Nao Executado!' + #13#10 +
-        GetExtraData(Data,'CODRESP'));
+     'Ocorreu um erro durante a execução!' + #13#10 +
+      GetExtraData(Data,'CODRESP'));
   end;
+
+
 end;
 procedure MostraAprovadaGER7;
 begin
@@ -665,9 +614,9 @@ begin
         if(AResult = mrYES)then
         begin
 
-            PrintStringBold('************[ESTABELECIMENTO]************');
+            PrintStringBold('**********[ESTABELECIMENTO]***********');
             printCupom(BOLD,transacao.textoImpressoEc);
-            PrintString    ('****************[CLIENTE]****************');
+            PrintString    ('*************[CLIENTE]***************');
             printCupom(BOLD,transacao.textoImpressoCliente);
             printOutput;
         end;
@@ -680,33 +629,10 @@ begin
     if contR = 1 then
     begin
 
-
-        auxGER7 := 'Transação aprovada!' + #13#10 +
-          'Authorization: '+ transacao.Authorization + #13#10 +
-          'ID: ' + transacao.IDTransacao + #13#10 +
-          'Produto: ' + transacao.ProdutoSelecionado + #13#10 +
-          'Label: ' + transacao.LabelTransacao + #13#10 +
-          'STAN: ' + transacao.STAN + #13#10 +
-          'AID: ' + transacao.AID + #13#10 +
-          'RRN: ' + transacao.RRN + #13#10 +
-          'Horario: ' + transacao.Horario+ #13#10 +
-          'Version: ' + transacao.Versao+#13#10 +
-          'Valor: ' + transacao.Valor+#13#10 +
-          'Parcelas: ' + transacao.Parcelas+#13#10 +
-
-          'transacao.cardholder='+transacao.cardholder+#13#10 +
-          'transacao.prefname='+transacao.prefname+#13#10 +
-          'transacao.authorizationType='+transacao.authorizationType+#13#10 +
-          'transacao.cardEntry='+transacao.cardEntry+#13#10 +
-          'transacao.cvm='+transacao.cvm+#13#10 +
-          'transacao.acquirer='+transacao.acquirer+#13#10 +
-          'transacao.pan='+transacao.pan+#13#10;
-        auxTransacao:=transacao;
-
-         //frmTEF.edtMax.Text := 'A => ' + auxGER7;
+       //frmTEF.edtMax.Text := 'A => ' + auxGER7;
 
         TDialogService.MessageDialog(
-    'Transação aprovada!' + #13#10 +
+    'Ação executada com sucesso' + #13#10 +
           'Authorization: '+ transacao.Authorization + #13#10 +
           'ID: ' + transacao.IDTransacao + #13#10 +
           'Produto: ' + transacao.ProdutoSelecionado + #13#10 +
@@ -741,9 +667,9 @@ begin
                 if(AResult = mrYES)then
                 begin
 
-                    PrintStringBold('************[ESTABELECIMENTO]************');
+                    PrintStringBold('**********[ESTABELECIMENTO]***********');
                     printCupom(BOLD,transacao.textoImpressoEc);
-                    PrintString    ('****************[CLIENTE]****************');
+                    PrintString    ('*************[CLIENTE]***************');
                     printCupom(BOLD,transacao.textoImpressoCliente);
                     printOutput;
                 end;
@@ -755,52 +681,10 @@ begin
           end);
     end;
 
-
-
-{TDialogService.MessageDialog(
-        'Transação aprovada!' + #13#10 +
-        'Authorization: '+ transacao.Authorization + #13#10 +
-        'ID: ' + transacao.IDTransacao + #13#10 +
-        'Produto: ' + transacao.ProdutoSelecionado + #13#10 +
-        'Label: ' + transacao.LabelTransacao + #13#10 +
-        'STAN: ' + transacao.STAN + #13#10 +
-        'AID: ' + transacao.AID + #13#10 +
-        'RRN: ' + transacao.RRN + #13#10 +
-        'Horario: ' + transacao.Horario+ #13#10 +
-        'Version: ' + transacao.Versao+#13#10 +
-        'Valor: ' + transacao.Valor+#13#10 +
-
-        'transacao.cardholder='+transacao.cardholder+#13#10 +
-        'transacao.prefname='+transacao.prefname+#13#10 +
-        'transacao.authorizationType='+transacao.authorizationType+#13#10 +
-        'transacao.cardEntry='+transacao.cardEntry+#13#10 +
-        'transacao.cvm='+transacao.cvm+#13#10 +
-        'transacao.acquirer='+transacao.acquirer+#13#10 +
-        'transacao.pan='+transacao.pan+#13#10 +
-
-        'Você deseja imprimir os cupons?',
-
-        System.UITypes.TMsgDlgType.mtInformation,
-        [System.UITypes.TMsgDlgBtn.mbYes, System.UITypes.TMsgDlgBtn.mbNo],
-        System.UITypes.TMsgDlgBtn.mbYes, 0,
-
-      // Use an anonymous method to make sure the acknowledgment appears as expected.
-        procedure(const AResult: TModalResult)
-        begin
-          if(AResult = mrYES)then begin
-            PrintStringBold('************[ESTABELECIMENTO]************');
-            printCupom(BOLD,transacao.textoImpressoEc);
-            PrintString    ('****************[CLIENTE]****************');
-            printCupom(BOLD,transacao.textoImpressoCliente);
-            printOutput;
-          end;
-
-        end);  }
-
 end;
 procedure MostraNegadaGER7;
 begin
-    ShowMessage('Ação executada com sucesso' + #13#10 +
+    ShowMessage('Ocorreu um erro durante a execução' + #13#10 +
     'response: ' + inttostr(transacao.response) + #13#10 +
     'Error code: ' + transacao.ErrorCode + #13#10 +
     'Error: ' + transacao.ErrorMsg);
@@ -872,7 +756,6 @@ begin
 
        begin
 
-
           try
 
             if rdgTodos.IsChecked then
@@ -930,6 +813,7 @@ begin
               begin
 
                 contR:=3; //R
+                contREIMP := 'OK_REIMP';
                 ExecuteSiTEF(COMANDO_VENDA,'',Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
               end
               else
@@ -940,9 +824,7 @@ begin
             begin
               IniciaTransacao;
               //transacao.SetaDebug(true);
-
               IncrementaId; //
-
               
               contR:=1;
               ExecuteTEF(COMANDO_VENDA,strId,Numeric(Edit2.text),Parcelas,TipoParcelamento,Produto,fHabilitaImpressao);
@@ -961,9 +843,31 @@ begin
 end;
 procedure TfrmTEF.cmdCancelarTransacaoClick(Sender: TObject);
 var
-HabilitaImpressao:string;
+HabilitaImpressao,IpTxt:string;
+j, countP:integer;
 
 begin
+  IpTxt := '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
+  countP := 0;
+  Edit1.Text := '';
+
+  for j:=1 to Length(edtIPServidor.Text) do begin
+    if (copy(edtIPServidor.Text,j,1) = '.') then
+    begin
+      inc(countP);
+      Edit1.Text := Edit1.Text
+    end
+    else if (copy(edtIPServidor.Text,j,1) = '-') then
+    begin
+       inc(countP);
+    end
+    else if (copy(edtIPServidor.Text,j,1) = ',') then
+    begin
+       inc(countP);
+    end
+    else Edit1.Text := Edit1.Text + (copy(edtIPServidor.Text,j,1));
+  end;
+
 
   if CheckBox1.IsChecked then
   begin
@@ -990,8 +894,16 @@ begin
   else
   begin
     try
-      contR := 2;
-      FuncoesDiversas(COMANDO_CANCELAMENTO);
+      contR := 3; //kkkkkkkkkkkkkkk
+      contREIMP := 'OK_REIMP';
+      // Aceita enredeço de IP entre 0..255
+      if ((TRegEx.IsMatch(edtIPServidor.Text, IpTxt)) and (countP=3)) then
+      begin
+        FuncoesDiversas(COMANDO_CANCELAMENTO);
+      end
+      else
+        ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
       except
         on e: exception do begin
         ShowMessage('Erro Cancelamento =>'+e.Message);
@@ -1004,8 +916,19 @@ end;
 procedure TfrmTEF.FuncoesDiversas(Funcao:String);
 begin
 
+  if chkImpressao.IsChecked then
+    begin
+      auxR:='1';
+    end
+    else
+    begin
+      auxR:='0';
+    end;
+
+
   if CheckBox1.IsChecked then
   begin
+
     try
 
     IncrementaId; //Colocar aqui o seu tratamento do Id!!
@@ -1019,15 +942,8 @@ begin
   end
   else begin
     try
-      if (TRegEx.IsMatch(edtIPServidor.Text, '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\' +
-                      '.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
-                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.' +
-                      '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b')) then
-      begin
-        ExecuteSiTEF(Funcao,'','','','','',fHabilitaImpressao);
-      end
-      else
-        ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
+      ExecuteSiTEF(Funcao,'','','','','',auxR);
 
     except
       on e: exception do begin
@@ -1038,12 +954,80 @@ begin
 
 end;
 procedure TfrmTEF.cmdFuncoesClick(Sender: TObject);
+var
+IpTxt: string;
+countP: integer;
+j:integer;
+
 begin
-constFunc := 1;
-FuncoesDiversas(COMANDO_FUNCOES);
+  IpTxt := '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
+  countP := 0;
+  Edit1.Text := '';
+  constFunc := 1;
+
+   for j:=1 to Length(edtIPServidor.Text) do begin
+    if (copy(edtIPServidor.Text,j,1) = '.') then
+    begin
+      inc(countP);
+      Edit1.Text := Edit1.Text
+    end
+    else if (copy(edtIPServidor.Text,j,1) = '-') then
+    begin
+       inc(countP);
+    end
+    else if (copy(edtIPServidor.Text,j,1) = ',') then
+    begin
+       inc(countP);
+    end
+    else Edit1.Text := Edit1.Text + (copy(edtIPServidor.Text,j,1));
+  end;
+
+
+  if CheckBox1.IsChecked then
+  begin
+    FuncoesDiversas(COMANDO_FUNCOES);
+  end
+  else
+  begin
+
+    contREIMP := 'NOT_REIMP';
+    if ((TRegEx.IsMatch(edtIPServidor.Text, IpTxt)) and (countP=3)) then
+    begin
+      FuncoesDiversas(COMANDO_FUNCOES);
+    end
+    else
+      ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
+  end;
+
 end;
 procedure TfrmTEF.cmdReimpressaoClick(Sender: TObject);
+var
+IpTxt: string;
+countP,j:integer;
 begin
+
+  IpTxt := '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b';
+  countP := 0;
+  Edit1.Text := '';
+
+  for j:=1 to Length(edtIPServidor.Text) do begin
+    if (copy(edtIPServidor.Text,j,1) = '.') then
+    begin
+      inc(countP);
+      Edit1.Text := Edit1.Text
+    end
+    else if (copy(edtIPServidor.Text,j,1) = '-') then
+    begin
+       inc(countP);
+    end
+    else if (copy(edtIPServidor.Text,j,1) = ',') then
+    begin
+       inc(countP);
+    end
+    else Edit1.Text := Edit1.Text + (copy(edtIPServidor.Text,j,1));
+  end;
+
   if CheckBox1.IsChecked then
   begin
     contR := 0;
@@ -1062,22 +1046,20 @@ begin
   else
   begin
     contR := 2;
-    FuncoesDiversas(COMANDO_REIMPRESSAO);
+    contREIMP:= 'NOT_REIMP';
+
+    if ((TRegEx.IsMatch(edtIPServidor.Text, IpTxt)) and (countP=3)) then
+    begin
+      FuncoesDiversas(COMANDO_REIMPRESSAO);
+    end
+    else
+      ShowMessage('Erro ao Executar a função'+ #13#10#13#10 +'Digite um IP válido');
+
   end;
 
 end;
 //************************************************
-procedure TfrmTEF.RandomValor;
-var strAux:string;
-    i:integer;
-begin
-for i := 1 to 3 do begin
-    strAux:=strAux+chr(48+random(10));
-    if(i=1)then strAux:=strAux+',';
-end;
-edtValor.text := strAux;
 
-end;
 procedure TfrmTEF.rdgCreditoChange(Sender: TObject);
 begin
 edtParcelas.Enabled := True;
@@ -1092,6 +1074,11 @@ begin
      edtParcelas.Text := '1';
      edtParcelas.Enabled := False;
 end;
+procedure TfrmTEF.VertScrollBox1Click(Sender: TObject);
+begin
+
+end;
+
 //**********************************************
 function TfrmTEF.OnActivityResult(RequestCode, ResultCode: Integer; Data:
                   JIntent): Boolean;
@@ -1249,6 +1236,11 @@ begin
     end;
 
 end;
+procedure TfrmTEF.MSITEFChange(Sender: TObject);
+begin
+
+end;
+
 //==========================================================
 function BuildJson(Tipo,Id,Amount,Parcelas,TipoParcelamento,Product,HabilitaImpressao:string): JString;
 var
