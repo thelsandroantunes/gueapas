@@ -278,16 +278,8 @@
         <DCCReference Include="Lib\Filtering\ZXing.LuminanceSource.pas"/>
         <DCCReference Include="Lib\Filtering\ZXing.PlanarYUVLuminanceSource.pas"/>
         <DCCReference Include="Lib\Filtering\ZXing.RGBLuminanceSource.pas"/>
-        <DCCReference Include="Barcode.pas">
-            <Form>frmBarCode</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="Imports NFC\Androidapi.JNI.Nfc.pas"/>
         <DCCReference Include="Imports NFC\Androidapi.JNI.Nfc.Tech.pas"/>
-        <DCCReference Include="Impressao.pas">
-            <Form>frmImpressao</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="Imports NFC\NFCHelper.pas"/>
         <DCCReference Include="GEDIPrinter.pas"/>
         <DCCReference Include="G700Interface.pas"/>
@@ -316,54 +308,13 @@
         <DCCReference Include="uNFC.pas"/>
         <DCCReference Include="GER7TEF.pas"/>
         <DCCReference Include="GEDIPrinterTEF.pas"/>
-        <DCCReference Include="Unit2.pas">
-            <Form>Form2</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="Unit3.pas">
-            <Form>Form3</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
         <DCCReference Include="TEF.pas">
             <Form>frmTEF</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GerSat.pas">
-            <Form>frmGerSat</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSAtiva.pas">
-            <Form>frmGSAtiva</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSAssocia.pas">
-            <Form>frmGSAssocia</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSTesteSat.pas">
-            <Form>frmGSTesteSat</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSConfig.pas">
-            <Form>frmGSConfig</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSAltera.pas">
-            <Form>frmGSAltera</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="GSOutras.pas">
-            <Form>frmGSOutras</Form>
-            <FormType>fmx</FormType>
-        </DCCReference>
-        <DCCReference Include="Unit4.pas">
-            <Form>Form4</Form>
             <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="Imports NFC700\JavaInterfacesNew.pas"/>
         <DCCReference Include="Vcl.Consts.pas"/>
         <DCCReference Include="FMX.Consts.pas"/>
-        <DCCReference Include="FMX.FontGlyphs.Android.pas"/>
         <JavaReference Include="libs\payment-1.14.10.181016_classes.jar">
             <Disabled/>
         </JavaReference>

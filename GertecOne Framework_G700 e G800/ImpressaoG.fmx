@@ -3,7 +3,7 @@ object frmImpressaoG: TfrmImpressaoG
   Top = 0
   Caption = 'Form1'
   ClientHeight = 759
-  ClientWidth = 981
+  ClientWidth = 376
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
@@ -11,7 +11,7 @@ object frmImpressaoG: TfrmImpressaoG
   object lbTitulo: TLabel
     Align = Top
     StyledSettings = []
-    Size.Width = 981.000000000000000000
+    Size.Width = 376.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     TextSettings.Font.Family = 'Arial'

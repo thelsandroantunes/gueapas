@@ -89,10 +89,8 @@ uses
   ZXing.LuminanceSource in 'Lib\Filtering\ZXing.LuminanceSource.pas',
   ZXing.PlanarYUVLuminanceSource in 'Lib\Filtering\ZXing.PlanarYUVLuminanceSource.pas',
   ZXing.RGBLuminanceSource in 'Lib\Filtering\ZXing.RGBLuminanceSource.pas',
-  Barcode in 'Barcode.pas' {frmBarCode},
   Androidapi.JNI.Nfc in 'Imports NFC\Androidapi.JNI.Nfc.pas',
   Androidapi.JNI.Nfc.Tech in 'Imports NFC\Androidapi.JNI.Nfc.Tech.pas',
-  Impressao in 'Impressao.pas' {frmImpressao},
   NFCHelper in 'Imports NFC\NFCHelper.pas',
   GEDIPrinter in 'GEDIPrinter.pas',
   G700Interface in 'G700Interface.pas',
@@ -106,45 +104,22 @@ uses
   uNFC in 'uNFC.pas',
   GER7TEF in 'GER7TEF.pas',
   GEDIPrinterTEF in 'GEDIPrinterTEF.pas',
-  Unit2 in 'Unit2.pas' {Form2},
-  Unit3 in 'Unit3.pas' {Form3},
   TEF in 'TEF.pas' {frmTEF},
-  GerSat in 'GerSat.pas' {frmGerSat},
-  GSAtiva in 'GSAtiva.pas' {frmGSAtiva},
-  GSAssocia in 'GSAssocia.pas' {frmGSAssocia},
-  GSTesteSat in 'GSTesteSat.pas' {frmGSTesteSat},
-  GSConfig in 'GSConfig.pas' {frmGSConfig},
-  GSAltera in 'GSAltera.pas' {frmGSAltera},
-  GSOutras in 'GSOutras.pas' {frmGSOutras},
-  Unit4 in 'Unit4.pas' {Form4},
   JavaInterfacesNew in 'Imports NFC700\JavaInterfacesNew.pas',
   Vcl.Consts in 'Vcl.Consts.pas',
-  FMX.Consts in 'FMX.Consts.pas',
-  FMX.FontGlyphs.Android in 'FMX.FontGlyphs.Android.pas';
+  FMX.Consts in 'FMX.Consts.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.CreateForm(TfrmMain, frmMain);
-  Application.CreateForm(TfrmBarCode, frmBarCode);
-  Application.CreateForm(TfrmImpressao, frmImpressao);
   Application.CreateForm(TfrmNFCid, frmNFCid);
   Application.CreateForm(TfrmImpressaoG, frmImpressaoG);
   Application.CreateForm(TfrmCodBarra, frmCodBarra);
   Application.CreateForm(TfrmCodigoBarraV2, frmCodigoBarraV2);
   Application.CreateForm(TfrmNFCbc, frmNFCbc);
-  Application.CreateForm(TForm2, Form2);
-  Application.CreateForm(TForm3, Form3);
   Application.CreateForm(TfrmTEF, frmTEF);
-  Application.CreateForm(TfrmGerSat, frmGerSat);
-  Application.CreateForm(TfrmGSAtiva, frmGSAtiva);
-  Application.CreateForm(TfrmGSAssocia, frmGSAssocia);
-  Application.CreateForm(TfrmGSTesteSat, frmGSTesteSat);
-  Application.CreateForm(TfrmGSConfig, frmGSConfig);
-  Application.CreateForm(TfrmGSAltera, frmGSAltera);
-  Application.CreateForm(TfrmGSOutras, frmGSOutras);
-  Application.CreateForm(TForm4, Form4);
   //Application.CreateForm(TfrmNFC, frmNFC);
   Application.Run;
 end.
