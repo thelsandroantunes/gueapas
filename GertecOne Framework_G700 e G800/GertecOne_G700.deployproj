@@ -5,12 +5,12 @@
     </ProjectExtensions>
     <PropertyGroup>
         <DeviceId Condition="'$(Platform)'=='Android'">0123abcd</DeviceId>
-        <DeviceId Condition="'$(Platform)'=='Android64'"/>
+        <DeviceId Condition="'$(Platform)'=='Android64'">0123abcd</DeviceId>
     </PropertyGroup>
     <ItemGroup Condition="'$(Platform)'=='Win32'">
-        <DeployFile Include="Win32\Debug\GertecOne_Delphi.exe" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\</RemoteDir>
-            <RemoteName>GertecOne_Delphi.exe</RemoteName>
+        <DeployFile Include="Win32\Debug\GertecOne_G700.exe" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne_G700\</RemoteDir>
+            <RemoteName>GertecOne_G700.exe</RemoteName>
             <DeployClass>ProjectOutput</DeployClass>
             <Operation>0</Operation>
             <LocalCommand/>
@@ -22,7 +22,7 @@
     <ItemGroup Condition="'$(Platform)'=='Win64'"/>
     <ItemGroup Condition="'$(Platform)'=='Android'">
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_72x72.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon72</DeployClass>
             <Operation>1</Operation>
@@ -31,7 +31,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-large\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-large\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage640</DeployClass>
             <Operation>1</Operation>
@@ -40,7 +40,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xlarge\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xlarge\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage960</DeployClass>
             <Operation>1</Operation>
@@ -49,7 +49,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\gertec_one_48x48.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-mdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon48</DeployClass>
             <Operation>1</Operation>
@@ -58,7 +58,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-small\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
@@ -67,7 +67,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Antro Vectra.otf" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\assets\internal\</RemoteDir>
+            <RemoteDir>GertecOne_G700\assets\internal\</RemoteDir>
             <RemoteName>Antro Vectra.otf</RemoteName>
             <DeployClass>File</DeployClass>
             <Operation>0</Operation>
@@ -76,7 +76,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\gertec_one_36x36.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-ldpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon36</DeployClass>
             <Operation>1</Operation>
@@ -85,7 +85,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_36x36.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-hdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon36</DeployClass>
             <Operation>1</Operation>
@@ -94,8 +94,8 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\mips\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\library\lib\mips\</RemoteDir>
-            <RemoteName>libGertecOne_Delphi.so</RemoteName>
+            <RemoteDir>GertecOne_G700\library\lib\mips\</RemoteDir>
+            <RemoteName>libGertecOne_G700.so</RemoteName>
             <DeployClass>AndroidLibnativeMipsFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
@@ -103,7 +103,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\classes\</RemoteDir>
+            <RemoteDir>GertecOne_G700\classes\</RemoteDir>
             <RemoteName>classes.dex</RemoteName>
             <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
@@ -112,7 +112,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(NDKBasePath)\prebuilt\android-arm\gdbserver\gdbserver" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteDir>GertecOne_G700\library\lib\armeabi-v7a\</RemoteDir>
             <RemoteName>gdbserver</RemoteName>
             <DeployClass>AndroidGDBServer</DeployClass>
             <Operation>1</Operation>
@@ -121,7 +121,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\gertec_one_144x144.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
             <Operation>1</Operation>
@@ -130,7 +130,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_96x96.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xxxhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xxxhdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon96</DeployClass>
             <Operation>1</Operation>
@@ -139,7 +139,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <DeployClass>ProjectAndroidManifest</DeployClass>
             <Operation>1</Operation>
@@ -148,8 +148,8 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\lib\android\debug\armeabi\libnative-activity.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\library\lib\armeabi\</RemoteDir>
-            <RemoteName>libGertecOne_Delphi.so</RemoteName>
+            <RemoteDir>GertecOne_G700\library\lib\armeabi\</RemoteDir>
+            <RemoteName>libGertecOne_G700.so</RemoteName>
             <DeployClass>AndroidLibnativeArmeabiFile</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
@@ -157,7 +157,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\gertec_one_72x72.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-hdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
             <Operation>1</Operation>
@@ -166,7 +166,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-normal\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-normal\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage470</DeployClass>
             <Operation>1</Operation>
@@ -175,7 +175,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_24x24.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-mdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon24</DeployClass>
             <Operation>1</Operation>
@@ -184,7 +184,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\gertec_one_96x96.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
             <Operation>1</Operation>
@@ -193,7 +193,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android\Debug\colors.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\values\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\values\</RemoteDir>
             <RemoteName>colors.xml</RemoteName>
             <DeployClass>Android_Colors</DeployClass>
             <Operation>1</Operation>
@@ -202,7 +202,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_NotificationIcon_48x48.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_notification.png</RemoteName>
             <DeployClass>Android_NotificationIcon48</DeployClass>
             <Operation>1</Operation>
@@ -211,7 +211,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android\Debug\provider_paths.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\xml\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\xml\</RemoteDir>
             <RemoteName>provider_paths.xml</RemoteName>
             <DeployClass>AndroidFileProvider</DeployClass>
             <Operation>1</Operation>
@@ -219,9 +219,9 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android\Debug\libGertecOne_Delphi.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\library\lib\armeabi-v7a\</RemoteDir>
-            <RemoteName>libGertecOne_Delphi.so</RemoteName>
+        <DeployFile Include="Android\Debug\libGertecOne_G700.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne_G700\library\lib\armeabi-v7a\</RemoteDir>
+            <RemoteName>libGertecOne_G700.so</RemoteName>
             <DeployClass>ProjectOutput</DeployClass>
             <Operation>1</Operation>
             <LocalCommand/>
@@ -230,7 +230,7 @@
             <Required>True</Required>
         </DeployFile>
         <DeployFile Include="Android\Debug\styles-v21.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\values-v21\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\values-v21\</RemoteDir>
             <RemoteName>styles.xml</RemoteName>
             <DeployClass>AndroidSplashStylesV21</DeployClass>
             <Operation>1</Operation>
@@ -239,7 +239,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android\Debug\strings.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\values\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\values\</RemoteDir>
             <RemoteName>strings.xml</RemoteName>
             <DeployClass>Android_Strings</DeployClass>
             <Operation>1</Operation>
@@ -248,7 +248,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Resource\Bleep.mp3" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\assets\internal\</RemoteDir>
+            <RemoteDir>GertecOne_G700\assets\internal\</RemoteDir>
             <RemoteName>Bleep.mp3</RemoteName>
             <DeployClass>ProjectFile</DeployClass>
             <Operation>0</Operation>
@@ -259,7 +259,7 @@
     </ItemGroup>
     <ItemGroup Condition="'$(Platform)'=='Android64'">
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_960x720.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xlarge\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xlarge\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage960</DeployClass>
             <Operation>1</Operation>
@@ -268,7 +268,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_72x72.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-hdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-hdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon72</DeployClass>
             <Operation>1</Operation>
@@ -277,7 +277,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_96x96.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon96</DeployClass>
             <Operation>1</Operation>
@@ -286,7 +286,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_640x480.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-large\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-large\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage640</DeployClass>
             <Operation>1</Operation>
@@ -295,7 +295,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="..\..\..\Bleep.mp3" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\assets\internal\</RemoteDir>
+            <RemoteDir>GertecOne_G700\assets\internal\</RemoteDir>
             <RemoteName>Bleep.mp3</RemoteName>
             <DeployClass>ProjectFile</DeployClass>
             <Operation>0</Operation>
@@ -304,7 +304,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_470x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-normal\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-normal\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage470</DeployClass>
             <Operation>1</Operation>
@@ -313,7 +313,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_36x36.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-ldpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-ldpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon36</DeployClass>
             <Operation>1</Operation>
@@ -322,7 +322,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_144x144.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-xxhdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-xxhdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon144</DeployClass>
             <Operation>1</Operation>
@@ -330,18 +330,8 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
-        <DeployFile Include="Android64\Debug\libGertecOne_Delphi.so" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\library\lib\arm64-v8a\</RemoteDir>
-            <RemoteName>libGertecOne_Delphi.so</RemoteName>
-            <DeployClass>ProjectOutput</DeployClass>
-            <Operation>1</Operation>
-            <LocalCommand/>
-            <RemoteCommand/>
-            <Overwrite>True</Overwrite>
-            <Required>True</Required>
-        </DeployFile>
         <DeployFile Include="Android64\Debug\colors.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\values\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\values\</RemoteDir>
             <RemoteName>colors.xml</RemoteName>
             <DeployClass>Android_Colors</DeployClass>
             <Operation>1</Operation>
@@ -350,7 +340,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android64\Debug\AndroidManifest.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\</RemoteDir>
             <RemoteName>AndroidManifest.xml</RemoteName>
             <DeployClass>ProjectAndroidManifest</DeployClass>
             <Operation>1</Operation>
@@ -359,7 +349,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_LauncherIcon_48x48.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-mdpi\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-mdpi\</RemoteDir>
             <RemoteName>ic_launcher.png</RemoteName>
             <DeployClass>Android_LauncherIcon48</DeployClass>
             <Operation>1</Operation>
@@ -368,7 +358,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android64\Debug\classes.dex" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\classes\</RemoteDir>
+            <RemoteDir>GertecOne_G700\classes\</RemoteDir>
             <RemoteName>classes.dex</RemoteName>
             <DeployClass>AndroidClassesDexFile</DeployClass>
             <Operation>1</Operation>
@@ -377,7 +367,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android64\Debug\provider_paths.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\xml\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\xml\</RemoteDir>
             <RemoteName>provider_paths.xml</RemoteName>
             <DeployClass>AndroidFileProvider</DeployClass>
             <Operation>1</Operation>
@@ -385,8 +375,18 @@
             <RemoteCommand/>
             <Overwrite>True</Overwrite>
         </DeployFile>
+        <DeployFile Include="Android64\Debug\libGertecOne_G700.so" Condition="'$(Config)'=='Debug'">
+            <RemoteDir>GertecOne_G700\library\lib\arm64-v8a\</RemoteDir>
+            <RemoteName>libGertecOne_G700.so</RemoteName>
+            <DeployClass>ProjectOutput</DeployClass>
+            <Operation>1</Operation>
+            <LocalCommand/>
+            <RemoteCommand/>
+            <Overwrite>True</Overwrite>
+            <Required>True</Required>
+        </DeployFile>
         <DeployFile Include="$(BDS)\bin\Artwork\Android\FM_SplashImage_426x320.png" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\drawable-small\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\drawable-small\</RemoteDir>
             <RemoteName>splash_image.png</RemoteName>
             <DeployClass>Android_SplashImage426</DeployClass>
             <Operation>1</Operation>
@@ -395,7 +395,7 @@
             <Overwrite>True</Overwrite>
         </DeployFile>
         <DeployFile Include="Android64\Debug\strings.xml" Condition="'$(Config)'=='Debug'">
-            <RemoteDir>GertecOne_Delphi\res\values\</RemoteDir>
+            <RemoteDir>GertecOne_G700\res\values\</RemoteDir>
             <RemoteName>strings.xml</RemoteName>
             <DeployClass>Android_Strings</DeployClass>
             <Operation>1</Operation>

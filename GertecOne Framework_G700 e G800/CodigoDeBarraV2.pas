@@ -132,7 +132,6 @@ begin
 end;
 function TfrmCodigoBarraV2.getOKCamera(): Boolean;
  begin
-    //FinalizaLeitura;
     Result := ok;
  end;
 //***********************************************************
@@ -187,9 +186,6 @@ begin
       try
 
         TmpFile := TPath.Combine(TPath.GetDocumentsPath, 'Bleep.mp3');
-
-        //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Internal }
-        //TPath.Combine(TPath.GetSharedDocumentsPath, 'filename')  { External }
 
         ResStream.Position := 0;
         ResStream.SaveToFile(TmpFile);
@@ -272,7 +268,6 @@ begin
   fScanInProgress := False;
 
   ok := False;
-  //Toast('Leitura feita com sucesso.');
 
 end;
 procedure TfrmCodigoBarraV2.CameraSampleBufferReady(Sender: TObject;
@@ -404,8 +399,6 @@ begin
                 //
                   inc(iCount);
 
-                //Toast('Leitura com sucesso.');
-                //FinalizaLeitura;
               end;
             end;
           end);

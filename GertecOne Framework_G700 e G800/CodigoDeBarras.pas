@@ -160,9 +160,6 @@ begin
 
         TmpFile := TPath.Combine(TPath.GetDocumentsPath, 'Bleep.mp3');
 
-        //TPath.Combine(TPath.GetDocumentsPath, 'filename')  { Internal }
-        //TPath.Combine(TPath.GetSharedDocumentsPath, 'filename')  { External }
-
         ResStream.Position := 0;
         ResStream.SaveToFile(TmpFile);
 
@@ -332,7 +329,7 @@ begin
 
   ativoCamera:=False;
 
-  //Toast('Leitura feita com sucesso.');
+
 end;
 
 procedure TfrmCodBarra.CameraSampleBufferReady(Sender: TObject;
@@ -448,8 +445,6 @@ begin
             Codigo:string;
           begin
 
-//            MMSystem.PlaySound(pchar('sdafasdf'), 0, SND_ASYNC or SND_FILENAME);
-
             if (ReadResult <> nil) then
             begin
             Codigo := ReadResult.text;
@@ -469,8 +464,7 @@ begin
                 
                 inc(iCount);
                 FinalizaLeitura;
-                //Toast('Leitura com sucesso.');
-                //FinalizaLeitura;
+
               end;              
             end else if((ReadResult = nil) and (abs(time-UltimaHora)>30*SECOND))then begin
               UltimaHora:=Time;

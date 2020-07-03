@@ -140,8 +140,8 @@ type
 
     procedure rdgTodosChange(Sender: TObject);
     procedure edtIPServidorChangeTracking(Sender: TObject);
-    procedure VertScrollBox1Click(Sender: TObject);
-    procedure MSITEFChange(Sender: TObject);
+
+
     procedure Button1Click(Sender: TObject);
 
 
@@ -170,8 +170,6 @@ var
   cip: integer;
 
   //auxiliares
-  teste, auxGER7, auxMSITEF:string;
-
   auxTransacao:TGER7TEF;
   contR: integer;
   auxR, contREIMP:string;
@@ -225,68 +223,6 @@ begin
         end;
 
 end;
-function IsWrongIP(ip: string): Boolean;
-var
-  z, i: byte;
-  st: array[1..3] of byte;
-const
-  ziff = ['0'..'9'];
-begin
-  st[1]  := 0;
-  st[2]  := 0;
-  st[3]  := 0;
-  z      := 0;
-  Result := False;
-  for i := 1 to Length(ip) do if ip[i] in ziff then
-  else
-  begin
-    if ip[i] = '.' then
-    begin
-      Inc(z);
-      if z < 4 then st[z] := i
-      else
-      begin
-        IsWrongIP := True;
-        Exit;
-      end;
-    end
-    else
-    begin
-      IsWrongIP := True;
-      Exit;
-    end;
-  end;
-  if (z <> 3) or (st[1] < 2) or (st[3] = Length(ip)) or (st[1] + 2 > st[2]) or
-    (st[2] + 2 > st[3]) or (st[1] > 4) or (st[2] > st[1] + 4) or (st[3] > st[2] + 4) then
-  begin
-    IsWrongIP := True;
-    Exit;
-  end;
-  z := StrToInt(Copy(ip, 1, st[1] - 1));
-  if (z > 255) or (ip[1] = '0') then
-  begin
-    IsWrongIP := True;
-    Exit;
-  end;
-  z := StrToInt(Copy(ip, st[1] + 1, st[2] - st[1] - 1));
-  if (z > 255) or ((z <> 0) and (ip[st[1] + 1] = '0')) then
-  begin
-    IsWrongIP := True;
-    Exit;
-  end;
-  z := StrToInt(Copy(ip, st[2] + 1, st[3] - st[2] - 1));
-  if (z > 255) or ((z <> 0) and (ip[st[2] + 1] = '0')) then
-  begin
-    IsWrongIP := True;
-    Exit;
-  end;
-  z := StrToInt(Copy(ip, st[3] + 1, Length(ip) - st[3]));
-  if (z > 255) or ((z <> 0) and (ip[st[3] + 1] = '0')) then
-  begin
-    IsWrongIP := True;
-    Exit;
-  end;
-end;
 
 //==========================================
 procedure TfrmTEF.Button1Click(Sender: TObject);
@@ -316,10 +252,8 @@ begin
   begin
     CheckBox2.IsChecked := False;
     edtIPServidor.Enabled := False;
-     auxGER7 := auxGER7;
-     auxMSITEF := auxMSITEF;
 
-      auxTransacao:=auxTransacao;
+    auxTransacao:=auxTransacao;
   end;
 end;
 procedure TfrmTEF.CheckBox2Change(Sender: TObject);
@@ -521,22 +455,6 @@ begin
   if contR = 3 then
   begin
 
-    auxMSITEF := 'Transação aprovada!' + #13#10 +
-      GetExtraData(Data,'CODRESP')+#13#10+
-      GetExtraData(Data,'COMP_DADOS_CONF')+#13#10+
-      GetExtraData(Data,'CODTRANS')+#13#10+
-      GetExtraData(Data,'TIPO_PARC')+' ('+
-      RetornaTipoParcelamento(JStringToString(Data.getStringExtra(StringToJString('TIPO_PARC'))))+')'+#13#10+
-      GetExtraData(Data,'VLTROCO')+#13#10+
-      GetExtraData(Data,'REDE_AUT')+#13#10+
-      GetExtraData(Data,'BANDEIRA')+#13#10+
-      GetExtraData(Data,'NSU_SITEF')+#13#10+
-      GetExtraData(Data,'NSU_HOST')+#13#10+
-      GetExtraData(Data,'COD_AUTORIZACAO')+#13#10+
-      GetExtraData(Data,'NUM_PARC')+#13#10;
-
-
-
     TDialogService.MessageDialog(
     'Ação executada com sucesso!' + #13#10 +
       GetExtraData(Data,'CODRESP')+#13#10+
@@ -629,7 +547,6 @@ begin
     if contR = 1 then
     begin
 
-       //frmTEF.edtMax.Text := 'A => ' + auxGER7;
 
         TDialogService.MessageDialog(
     'Ação executada com sucesso' + #13#10 +
@@ -705,7 +622,7 @@ var
 Produto,
 IpTxt,Parcelas,TipoParcelamento:String;
 i,j, countP:integer;
-teste : boolean;
+
 begin
        countP := 0;
        Edit1.Text := '';
@@ -737,8 +654,6 @@ begin
           end
           else Edit1.Text := Edit1.Text + (copy(edtIPServidor.Text,j,1));
         end;
-
-        //teste := TRegEx.IsMatch(edtIPServidor.Text, IpTxt);
 
         
 
@@ -801,9 +716,6 @@ begin
 
               end;
             end;
-
-
-            //xxxxxxxxxxxxxxxxxxxxxxxxx
 
 
             if CheckBox2.IsChecked then
@@ -894,7 +806,7 @@ begin
   else
   begin
     try
-      contR := 3; //kkkkkkkkkkkkkkk
+      contR := 3;
       contREIMP := 'OK_REIMP';
       // Aceita enredeço de IP entre 0..255
       if ((TRegEx.IsMatch(edtIPServidor.Text, IpTxt)) and (countP=3)) then
@@ -931,7 +843,7 @@ begin
 
     try
 
-    IncrementaId; //Colocar aqui o seu tratamento do Id!!
+    IncrementaId;
     ExecuteTEF(Funcao,strId,'','','','',auxR);
 
     except
@@ -1073,10 +985,6 @@ procedure TfrmTEF.rdgTodosChange(Sender: TObject);
 begin
      edtParcelas.Text := '1';
      edtParcelas.Enabled := False;
-end;
-procedure TfrmTEF.VertScrollBox1Click(Sender: TObject);
-begin
-
 end;
 
 //**********************************************
@@ -1230,14 +1138,8 @@ begin
            MostraNegadaGER7;
           end );
       end;
-      //TEFExecuteFlag:=0;
-      //RandomValor;
 
     end;
-
-end;
-procedure TfrmTEF.MSITEFChange(Sender: TObject);
-begin
 
 end;
 

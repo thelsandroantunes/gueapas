@@ -38,7 +38,7 @@ uses
   ImpressaoG,
  //Unit2,
   //Unit3,
-  Unit4,
+
   TEF,
   //GerSat,
 
@@ -130,8 +130,7 @@ TBarCodes = (QRCODE);
     procedure cmdNFCBcClick(Sender: TObject);   //32165465
     procedure cmdTefClick(Sender: TObject);   //
     procedure DesligaNFC;
-    procedure cmdGerSatClick(Sender: TObject);
-    procedure FormActive(Sender: TObject);
+
 
 
   private
@@ -178,15 +177,6 @@ DesligaNFC;
 
 {$ENDIF}
 
-end;
-
-procedure TfrmMain.cmdGerSatClick(Sender: TObject);
-begin
-//frmGerSat.Show;
-//satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
-
-Form4.teste(TRUE);
-Form4.Show;
 end;
 
 procedure TfrmMain.cmdCodBarraV2Click(Sender: TObject);
@@ -291,8 +281,6 @@ var
 DeviceType :string;
 begin
 
-  //cmdGerSat.OnClick := ativaTeste;
-
   DeviceType := JStringToString(TJBuild.JavaClass.MODEL);
 
 
@@ -315,13 +303,6 @@ begin
   end;
   cmdNFCId.Visible := not cmdNFC.Visible;
 
-end;
-
-procedure TfrmMain.FormActive(Sender: TObject);
-begin
-
-  //satLib := TJSatGerLib.JavaClass.init(SharedActivityContext.getApplicationContext, onDataReceived);
-  //satLib := TJSatGerLib.JavaClass.init(TAndroidHelper.Context, onDataReceived);
 end;
 
 

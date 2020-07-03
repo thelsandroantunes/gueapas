@@ -587,22 +587,10 @@ end;
 procedure TfrmImpressaoG.STATUSClick(Sender: TObject);
 var
 result: string;
-
 begin
 
-
-
   result := GertecPrinter.StatusImpressora;
-
-
-
   ShowMessage( 'Status da Impressora'+#13#10#10 +result);
-
-//  lblMsg.Visible := True;
-//  lblMsgCode.Text:=result;
-//  lblMsgCode.Visible := True;
-//  PanelMessage.Visible := True;
-//  btnOK.Visible := True;
 
 end;
 
